@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Library", "AMLRider.Library\AMLRider.Library.csproj", "{8F4093B7-10F0-4700-9EA2-A0478F9B52A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider", "AMLRider\AMLRider.csproj", "{28BB170B-1560-4E5A-9704-4B58C0A55D1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4093B7-10F0-4700-9EA2-A0478F9B52A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4093B7-10F0-4700-9EA2-A0478F9B52A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4093B7-10F0-4700-9EA2-A0478F9B52A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4093B7-10F0-4700-9EA2-A0478F9B52A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
