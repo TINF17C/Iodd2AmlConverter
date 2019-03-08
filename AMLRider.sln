@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Library", "AMLRide
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider", "AMLRider\AMLRider.csproj", "{28BB170B-1560-4E5A-9704-4B58C0A55D1C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D7BF66A1-A507-421F-908B-E80EE03C37FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Library.Test", "Tests\AMLRider.Library.Test\AMLRider.Library.Test.csproj", "{0BE6973F-24D2-4878-B012-60F0E793ACCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28BB170B-1560-4E5A-9704-4B58C0A55D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BE6973F-24D2-4878-B012-60F0E793ACCA} = {D7BF66A1-A507-421F-908B-E80EE03C37FC}
 	EndGlobalSection
 EndGlobal
