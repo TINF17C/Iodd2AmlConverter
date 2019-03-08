@@ -9,7 +9,7 @@ namespace AMLRider.Library.Rules
     public class DocumentInfoRule : IConversionRule
     {
 
-        private XElement CreateWriterHeader()
+        private XElement CreateWriterHeader(XElement element)
         {
             var writerHeader = new XElement("WriterHeader");
 
@@ -20,7 +20,17 @@ namespace AMLRider.Library.Rules
             var writerId = XmlHelper.CreateElementWithValue("WriterID", guid);
             writerHeader.Add(writerId);
 
+            var copyrightText = GetCopyrightText(element);
+            var writerVendor = XmlHelper.CreateElementWithValue("WriterVendor", copyrightText);
+            writerHeader.Add(writerVendor);
+
             return writerHeader;
+        }
+
+        private string GetCopyrightText(XElement element)
+        {
+            var attribute = element.Attribute("copyright");
+            return attribute?.Value;
         }
 
         public bool CanApplyRule(XElement element)
@@ -33,7 +43,7 @@ namespace AMLRider.Library.Rules
             if(!CanApplyRule(element))
                 throw new InvalidOperationException("The given node is not a <DocumentInfo> node.");
 
-            return CreateWriterHeader();
+            return CreateWriterHeader(element);
         }
         
     }
