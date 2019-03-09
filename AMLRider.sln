@@ -8,6 +8,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D7BF66A1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Library.Test", "Tests\AMLRider.Library.Test\AMLRider.Library.Test.csproj", "{0BE6973F-24D2-4878-B012-60F0E793ACCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Cli", "AMLRider.Cli\AMLRider.Cli.csproj", "{61ED2B99-5D80-48B1-BE33-6219F1F55129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLRider.Cli.Test", "Tests\AMLRider.Cli.Test\AMLRider.Cli.Test.csproj", "{297689CA-B9CF-4D5F-B593-D54B656282F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +30,17 @@ Global
 		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BE6973F-24D2-4878-B012-60F0E793ACCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61ED2B99-5D80-48B1-BE33-6219F1F55129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61ED2B99-5D80-48B1-BE33-6219F1F55129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61ED2B99-5D80-48B1-BE33-6219F1F55129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61ED2B99-5D80-48B1-BE33-6219F1F55129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297689CA-B9CF-4D5F-B593-D54B656282F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297689CA-B9CF-4D5F-B593-D54B656282F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297689CA-B9CF-4D5F-B593-D54B656282F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297689CA-B9CF-4D5F-B593-D54B656282F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0BE6973F-24D2-4878-B012-60F0E793ACCA} = {D7BF66A1-A507-421F-908B-E80EE03C37FC}
+		{297689CA-B9CF-4D5F-B593-D54B656282F1} = {D7BF66A1-A507-421F-908B-E80EE03C37FC}
 	EndGlobalSection
 EndGlobal

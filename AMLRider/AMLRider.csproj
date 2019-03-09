@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AMLRider.Cli\AMLRider.Cli.csproj" />
       <ProjectReference Include="..\AMLRider.Library\AMLRider.Library.csproj" />
     </ItemGroup>
 
