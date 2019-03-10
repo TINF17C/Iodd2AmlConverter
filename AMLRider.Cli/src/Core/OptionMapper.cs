@@ -28,7 +28,7 @@ namespace AMLRider.Cli.Core
                 var optionProperty = optionProperties
                     .FirstOrDefault(prop => prop.Specification.LongName == pair.Key 
                                             || prop.Specification.ShortName.ToString() == pair.Key);
-
+                
                 if (optionProperty == null)
                     continue;
 

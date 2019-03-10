@@ -8,7 +8,7 @@ namespace AMLRider.Cli.Core
     /// <summary>
     /// Parses command line arguments as tokens.
     /// </summary>
-    public class Tokenizer
+    public static class Tokenizer
     {
 
         /// <summary>

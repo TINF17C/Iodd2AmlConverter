@@ -28,8 +28,8 @@ namespace AMLRider.Cli.Attributes
         /// <param name="name">The name of the verb.</param>
         public VerbAttribute(string name)
         {
-//            if (string.IsNullOrWhiteSpace(name))
-//                throw new ArgumentException($"The verb name is not allowed to be null or empty.", nameof(name));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"The verb name is not allowed to be null or empty.", nameof(name));
 
             Name = name;
         }
