@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 using System.Xml.Linq;
 using AMLRider.Library.Extensions;
 using AMLRider.Library.Helpers;
@@ -22,7 +21,7 @@ namespace AMLRider.Library.Rules
         /// <returns>The parsed <see cref="DocumentInfoObj"/>.</returns>
         private static DocumentInfoObj GetDocumentInfo(XElement element)
         {
-            return new DocumentInfoObj()
+            return new DocumentInfoObj
             {
                 Copyright = element.GetAttributeValue("copyright"),
                 ReleaseDate = element.GetAttributeValue("releaseDate"),

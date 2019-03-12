@@ -6,7 +6,7 @@ namespace AMLRider.Cli.Helpers
     /// <summary>
     /// Helper functions for managing type conversions.
     /// </summary>
-    public class ConversionHelper
+    public static class ConversionHelper
     {
 
         /// <summary>
