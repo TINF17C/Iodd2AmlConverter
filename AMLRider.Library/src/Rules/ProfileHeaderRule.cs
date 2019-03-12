@@ -20,7 +20,7 @@ namespace AMLRider.Library.Rules
         /// <returns>The extracted ProfileHeader information.</returns>
         private static ProfileHeaderObj ExtractHeaderInformation(XContainer root)
         {
-            var headerObj = new ProfileHeaderObj()
+            var headerObj = new ProfileHeaderObj
             {
                 ProfileIdentification = root.Element("ProfileIdentification")?.Value,
                 ProfileRevision = root.Element("ProfileRevision")?.Value,

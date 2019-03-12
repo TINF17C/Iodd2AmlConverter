@@ -1,5 +1,3 @@
-using System;
-
 namespace AMLRider.Library
 {
     /// <summary>
