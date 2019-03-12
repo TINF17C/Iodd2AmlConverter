@@ -6,6 +6,10 @@ using AMLRider.Library.Helpers;
 
 namespace AMLRider.Library.Rules
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Responsible for the conversion of the vendor logo.
+    /// </summary>
     public class VendorLogoRule : IConversionRule 
     {
         /// <summary>
