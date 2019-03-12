@@ -8,25 +8,47 @@ namespace AMLRider.Library.Rules
 {
     public class VendorLogoRule : IConversionRule 
     {
+        /// <summary>
+        /// Checks if the rule can be applied to the node.
+        /// </summary>
+        /// <param name="element">A given XML element.</param>
+        /// <returns>True, if the rule can be applied. False, if not.</returns>
         public bool CanApplyRule(XElement element)
         {
             return element.Name == "VendorLogo";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public XElement Apply(XElement element)
         {
             if(!CanApplyRule(element))
                 throw new InvalidOperationException("The given node is not a <VendorLogo> node.");
             
-            var vendorLogo = GetDocumentInfo(element);
+            var vendorLogo = GetVendorLogo(element);
             return CreateVendorLogoTag(vendorLogo);
         }
         
-        private static string GetDocumentInfo(XElement element)
+        /// <summary>
+        /// Gets the vendor logo from the IODD file.
+        /// </summary>
+        /// <param name="element">The XML element of the IODD file.</param>
+        /// <returns>The name of the vendor logo as a string.</returns>
+        private static string GetVendorLogo(XElement element)
         {
             var vendorLogo = element.GetAttributeValue("name");
             return vendorLogo;
         }
+        
+        /// <summary>
+        /// Creates the AML section for the vendor logo.
+        /// </summary>
+        /// <param name="vendorLogo">The name of the vendor logo as a string.</param>
+        /// <returns>The AML element which is created out of the IODD section.</returns>
         private static XElement CreateVendorLogoTag(string vendorLogo)
         {
             var internalElement = XmlHelper.CreateElement("InternalElement");
