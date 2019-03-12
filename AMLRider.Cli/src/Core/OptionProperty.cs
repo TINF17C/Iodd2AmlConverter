@@ -44,7 +44,7 @@ namespace AMLRider.Cli.Core
             var specification = OptionSpecification.FromProperty(property);
             return new OptionProperty(property, specification);
         }
-
+        
     }
     
 }
