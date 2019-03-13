@@ -11,6 +11,7 @@ namespace AMLRider.Library.Rules
     /// </summary>
     public class VendorLogoRule : IConversionRule 
     {
+        /// <inheritdoc />
         /// <summary>
         /// Checks if the rule can be applied to the node.
         /// </summary>
@@ -21,12 +22,13 @@ namespace AMLRider.Library.Rules
             return element.Name == "VendorLogo";
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// 
+        /// Creates the vendor logo tag.
         /// </summary>
-        /// <param name="element"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <param name="element">The given IODD element.</param>
+        /// <returns>The created AML element.</returns>
+        /// <exception cref="T:System.InvalidOperationException"></exception>
         public XElement Apply(XElement element)
         {
             if(!CanApplyRule(element))
