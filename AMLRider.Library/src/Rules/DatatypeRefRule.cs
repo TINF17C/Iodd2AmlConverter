@@ -44,7 +44,7 @@ namespace AMLRider.Library.Rules
         /// <returns>The created <see cref="XElement"/>.</returns>
         private static XElement CreateInfoHeader(DatatypeRefObj obj)
         {
-            var attributeHeader = XmlHelper.CreateElement("AdditionalInformation");
+            var attributeHeader = XmlHelper.CreateElement("Attribute");
             attributeHeader.SetAttributeValue("Name", obj.DatatypeId);
             
             var refSemantic = XmlHelper.CreateElement(attributeHeader, "RefSemantic");
@@ -55,8 +55,8 @@ namespace AMLRider.Library.Rules
             attributeINot.SetAttributeValue("AttributeDataType", "xs:string");
             
             var attributeI = XmlHelper.CreateElement(attributeHeader, "Attribute");
-            attributeINot.SetAttributeValue("Name", "Input inverted");
-            attributeINot.SetAttributeValue("AttributeDataType", "xs:string");
+            attributeI.SetAttributeValue("Name", "Input inverted");
+            attributeI.SetAttributeValue("AttributeDataType", "xs:string");
             
             return attributeHeader;
         }
