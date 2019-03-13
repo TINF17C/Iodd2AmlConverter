@@ -67,7 +67,7 @@ namespace AMLRider.Library.Rules
             refSemantic.SetAttributeValue("CorrespondingAttributePath", "ListType");
             foreach (var eventCode in eventCodes)
             {
-                var attribute = XmlHelper.CreateElement("Attribute");
+                var attribute = XmlHelper.CreateElement(internalElement, "Attribute");
                 attribute.SetAttributeValue("Name", eventCode.ToString());
                 attribute.SetAttributeValue("AttributeDataType", "xs:integer");
                 var defaultValue = XmlHelper.CreateElement(attribute, "Defaultvalue", "0");
