@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 namespace AMLRider.Library
 {
     /// <inheritdoc />
@@ -14,6 +16,16 @@ namespace AMLRider.Library
         /// <returns>Returns a string which contains the generated AML data.</returns>
         public string Convert(string ioddFileData)
         {
+            // Get XElement from the String
+            
+            // Apply RuleSelector
+            
+            // Convert to String
+            
+            // Return string
+            
+            
+            
             return "";
         }
     }
