@@ -15,10 +15,10 @@ namespace AMLRider.Library
 {
     public class RuleSelector
     {
-        public IConversionRule SelectRule(XElement element)
+        public static IConversionRule SelectRule(XElement element)
         {
             IConversionRule correctRule = null;
-            int counter = 0;
+            var counter = 0;
             if (new DatatypeRefRule().CanApplyRule(element))
             {
                 correctRule = new DatatypeRefRule();
@@ -56,9 +56,7 @@ namespace AMLRider.Library
             }
             else
             {
-                //not sure if this is the best way to handle this but it should work for debugging.
-                Console.Write(counter + " rules found that apply to " + element.Name);
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(counter + " rules found that apply to " + element.Name);
             }
         }
     }
