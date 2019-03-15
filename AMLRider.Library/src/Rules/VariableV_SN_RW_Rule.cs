@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace AMLRider.Library.src.Rules
+namespace AMLRider.Library.Rules
 {
     class VariableV_SN_RW_Rule : IConversionRule
     {
