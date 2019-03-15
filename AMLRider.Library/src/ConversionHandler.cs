@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Xml.Linq;
 
@@ -18,9 +19,14 @@ namespace AMLRider.Library
         public string Convert(string ioddFileData)
         {
             var xElement = XElement.Parse(ioddFileData);
-            RuleSelector.SelectRule(xElement);
+            var returnVal = "";
+            
+            foreach (var el in xElement.DescendantsAndSelf())
+            {
+                returnVal += RuleSelector.SelectRule(el).Apply(el);
+            }
 
-            return xElement.ToString();
+            return returnVal;
         }
     }
 }
