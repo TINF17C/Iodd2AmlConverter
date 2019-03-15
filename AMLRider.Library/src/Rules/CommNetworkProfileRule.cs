@@ -34,15 +34,17 @@ namespace AMLRider.Library.Rules
         /// <returns>The parsed <see cref="DocumentInfoObj"/>.</returns>
         private static CommNetworkProfileObj GetDocumentInfo(XElement element)
         {
+            var physicallayer = element.Descendants().FirstOrDefault(x => x.Name == "PhysicalLayer");
+            var wire1 =element.Descendants().FirstOrDefault(x => x.Name == "Wire1");
             
             return new CommNetworkProfileObj
             {
-                MinCycleTime = element.Descendants().FirstOrDefault(x => x.Name == "PhysicalLayer").GetAttributeValue("minCycleTime"),
-                SioSupported = element.Descendants().FirstOrDefault(x => x.Name == "PhysicalLayer").GetAttributeValue("sioSupported"),
-                Bitrate = element.Descendants().FirstOrDefault(x => x.Name == "PhysicalLayer").GetAttributeValue("bitrate"),
-                MSequenceCapability = element.Descendants().FirstOrDefault(x => x.Name == "PhysicalLayer").GetAttributeValue("mSequenceCapability"),
-                Function = element.Descendants().FirstOrDefault(x => x.Name == "Wire1").GetAttributeValue("function"),
-                Color = element.Descendants().FirstOrDefault(x => x.Name == "Wire1").GetAttributeValue("color"),
+                MinCycleTime = physicallayer.GetAttributeValue("minCycleTime"),
+                SioSupported = physicallayer.GetAttributeValue("sioSupported"),
+                Bitrate = physicallayer.GetAttributeValue("bitrate"),
+                MSequenceCapability = physicallayer.GetAttributeValue("mSequenceCapability"),
+                Function = wire1.GetAttributeValue("function"),
+                Color = wire1.GetAttributeValue("color"),
               
             };
         }
@@ -121,7 +123,7 @@ namespace AMLRider.Library.Rules
 
             
             
-            return attributeHeader;
+            return InternalElement;
         }
     }
 }
