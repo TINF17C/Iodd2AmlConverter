@@ -92,7 +92,7 @@ namespace AMLRider.Library.Rules
             internalElement_child.Add(CreateAttribute("localParameterization", "boolean", obj.LocalParameterization));
 
 
-            return null;
+            return internalElement;
         }
 
 
