@@ -27,37 +27,6 @@ namespace AMLRider.Cli.Core
                    select pair;
         }
 
-        /// <summary>
-        /// Partitions and determines tokens which are switches (booleans).
-        /// </summary>
-        /// <param name="tokens">The tokens to partition.</param>
-        /// <returns>The switches as key value pairs.</returns>
-        /// // TODO: If switch is no boolean, then problem ...
-        private static IEnumerable<KeyValuePair<string, string>> PartitionSwitches(IEnumerable<Token> tokens)
-        {
-            var tokenArray = tokens.ToArray();
-            for (var i = 0; i < tokenArray.Length; ++i)
-            {
-                var token = tokenArray[i];
-                if (!token.IsName())
-                    continue;
-
-                var nextIndex = i + 1;
-                if (nextIndex >= tokenArray.Length)
-                {
-                    yield return new KeyValuePair<string, string>(token.Text, true.ToString());
-                    continue;
-                }
-
-                var nextToken = tokenArray[nextIndex];
-                if (!nextToken.IsName())
-                    continue;
-
-                ++i;
-                yield return new KeyValuePair<string, string>(token.Text, true.ToString());
-            }
-        }
-
     }
     
 }
