@@ -8,9 +8,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace AMLRider.Library.Test
 {
     [TestClass]
-    public class DatatypeRefRuleTest
+    public class IoDeviceRuleTest
     {
-        private const string DataTypeId = "DT_Inversion";
+        private const string SchemaInstance = "http://www.w3.org/2001/XMLSchema-instance";
         
         private XElement XmlSampleElement { get; set; }
         
@@ -19,10 +19,10 @@ namespace AMLRider.Library.Test
         [TestInitialize]
         public void Initialize()
         {
-            var sample = $"<DatatypeRef datatypeId=\"{DataTypeId}\" />";
-            const string wrongSample = @"<SometypeRef datatypeId=""DT_Inversion"" />";
-            
-            
+            var sample = $"<IODevice xmlns=\"http://www.io-link.com/IODD/2010/10\" xmlns:xsi=\"{SchemaInstance}\" xsi:schemaLocation=\"http://www.io-link.com/IODD/2010/10 IODD1.1.xsd\"></IODevice>";
+            const string wrongSample =
+                @"<SomeDevice xmlns=""http://www.io-link.com/IODD/2010/10"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:schemaLocation=""http://www.io-link.com/IODD/2010/10 IODD1.1.xsd"" ></SomeDevice>";
+                        
             XmlSampleElement = XElement.Parse(sample);
             XmlSampleElementWrong = XElement.Parse(wrongSample);
         }
@@ -30,7 +30,7 @@ namespace AMLRider.Library.Test
         [TestMethod]
         public void CanApplyRuleReturnsTrue()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
 
             var result = rule.CanApplyRule(XmlSampleElement);
             Assert.IsTrue(result);
@@ -39,7 +39,7 @@ namespace AMLRider.Library.Test
         [TestMethod]
         public void CanApplyRuleReturnsFalse()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
             
             var result = rule.CanApplyRule(XmlSampleElementWrong);
             Assert.IsFalse(result);
@@ -49,45 +49,40 @@ namespace AMLRider.Library.Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void CanApplyRuleThrowsException()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
             rule.Apply(XmlSampleElementWrong);
         }
 
         [TestMethod]
-        public void IsRootElementAttribute()
+        public void IsRootElementCaexFile()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
 
             var element = rule.Apply(XmlSampleElement);
-            Assert.AreEqual("Attribute", element.Name);
+            Assert.AreEqual("CAEXFile", element.Name);
         }
         
         [TestMethod]
         public void HasCorrectSubElements()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
 
             var element = rule.Apply(XmlSampleElement);
             var subElementCount = element.Elements().Count();
             var subElement = element.Elements().First();
-            var subElement2 = element.Elements().Skip(1).First();
-            var subElement3 = element.Elements().Skip(2).First();
             
-            Assert.AreEqual(3, subElementCount);
-            Assert.AreEqual(subElement.Name, "RefSemantic");
-            Assert.AreEqual(subElement2.Name, "Attribute");
-            Assert.AreEqual(subElement3.Name, "Attribute");
-
+            Assert.AreEqual(1, subElementCount);
+            Assert.AreEqual(subElement.Name, "AdditionalInformation");
         }
         
         [TestMethod]
-        public void IsDataTypeIdSetCorrectly()
+        public void IsSchemaInstanceSetCorrectly()
         {
-            var rule = new DatatypeRefRule();
+            var rule = new IoDeviceRule();
 
-            var dataTypeRefName = rule.Apply(XmlSampleElement).GetAttributeValue("Name");
+            var schemaInstance = rule.Apply(XmlSampleElement).GetNamespaceOfPrefix("xsi")?.NamespaceName;
             
-            Assert.AreEqual(DataTypeId, dataTypeRefName);
+            Assert.AreEqual(SchemaInstance, schemaInstance);
         }
     }
 }
