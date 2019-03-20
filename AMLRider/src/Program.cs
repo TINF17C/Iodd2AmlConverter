@@ -105,10 +105,6 @@ namespace AMLRider
 
         public static void Main(string[] args)
         {
-            var rule = new IoDeviceRule();
-            var test =
-                "<IODevice xmlns=\"http://www.io-link.com/IODD/2010/10\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"http://www.io-link.com/IODD/2010/10 IODD1.1.xsd\" >\n</IODevice>";
-            Console.WriteLine(rule.Apply(XElement.Parse(test)).ToString());
             new CommandLineParser()
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
