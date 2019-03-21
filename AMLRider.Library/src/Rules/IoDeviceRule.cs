@@ -69,7 +69,6 @@ namespace AMLRider.Library.Rules
             var caexFileElement = new XElement("CAEXFile", new XAttribute(XNamespace.Xmlns + "xsi", xsi), new XAttribute(xsiNameSpace + "noNamespaceSchemaLocation", noNamespaceSchemaLocation));
             caexFileElement.SetAttributeValue("SchemaVersion", "2.15");
             caexFileElement.SetAttributeValue("FileName", "IODDfilename.aml");
-            //caexFileElement.SetAttributeValue("xsi:noNamespaceSchemaLocation", "CAEX_ClassModel_V2.15.xsd");
             var additionalInformation = XmlHelper.CreateElement(caexFileElement, "AdditionalInformation");
             additionalInformation.SetAttributeValue("AutomationMLVersion", "2.0");
 
