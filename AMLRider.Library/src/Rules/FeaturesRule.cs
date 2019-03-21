@@ -101,14 +101,14 @@ namespace AMLRider.Library.Rules
         /// </summary>
         /// <param name="name">The value of the Attribute "Name"</param>
         /// <param name="dataType">The value of the Attribute "AttributeDataType"</param>
-        /// <param name="value">The value of the "DefaultValue" element</param>
+        /// <param name="value">The value of the "Value" element</param>
         /// <returns>A simple attribute element.</returns>
         private static XElement CreateAttribute(string name, string dataType, string value)
         {
             var attribute = XmlHelper.CreateElement("Attribute");
             attribute.SetAttributeValue("Name", name);
             attribute.SetAttributeValue("AttributeDataType", "xs:" + dataType);
-            var valueTag = XmlHelper.CreateElement(attribute, "DefaultValue", value);
+            var valueTag = XmlHelper.CreateElement(attribute, "Value", value);
 
             return attribute;
         }
