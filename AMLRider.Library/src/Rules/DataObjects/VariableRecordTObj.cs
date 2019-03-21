@@ -16,6 +16,5 @@ namespace AMLRider.Library.Rules.DataObjects
         public string VariableName { get; set; }
         public string DescriptionId { get; set; }
         public XElement[] ChildNodes { get; set; }
-        public string RecordItemName { get; set; }
     }
 }

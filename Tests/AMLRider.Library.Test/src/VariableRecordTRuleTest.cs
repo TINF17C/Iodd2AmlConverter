@@ -101,8 +101,28 @@ namespace AMLRider.Library.Test
 
             var amlElement = rule.Apply(XmlSampleElement.Element("Variable"));
             var variableId = amlElement.GetAttributeValue("Name");
+            var index = amlElement.Element("Attribute")?.Element("Value")?.Value;
+            var subIndexAccessSupported = amlElement.Elements().Skip(3).First().Element("Value")?.Value;
+            var subIndex = amlElement.Element("InternalElement")?.Element("InternalElement")?.Element("Attribute")?.Element("Value")?.Value;
+            var accessRights = amlElement.Elements().Skip(1).First().Element("Value")?.Value;
+            var bitLength = amlElement.Elements().Skip(2).First().Element("Value")?.Value;
+            var bitOffset = amlElement.Element("InternalElement")?.Element("InternalElement")?.Elements().Skip(1).First().Element("Value")?.Value;
+            var dataTypeId = amlElement.Element("InternalElement")?.Element("InternalElement")?.Elements().Skip(2).First().GetAttributeValue("Name");
+            var name = amlElement.Element("InternalElement").GetAttributeValue("Name");
+            var variableName = amlElement.Element("InternalElement")?.Element("InternalElement").GetAttributeValue("Name");
+            var descriptionId = amlElement.Element("InternalElement")?.Element("Description").GetAttributeValue("textId");
             
             Assert.AreEqual(VariableId, variableId);
+            Assert.AreEqual(Index, index);
+            Assert.AreEqual(SubIndexAccessSupported, subIndexAccessSupported);
+            Assert.AreEqual(SubIndex, subIndex);
+            Assert.AreEqual(AccessRights, accessRights);
+            Assert.AreEqual(BitLength, bitLength);
+            Assert.AreEqual(BitOffset, bitOffset);
+            Assert.AreEqual(DataTypeId, dataTypeId);
+            Assert.AreEqual(Name, name);
+            Assert.AreEqual(VariableName, variableName);
+            Assert.AreEqual(DescriptionId, descriptionId);
         }
     }
 }

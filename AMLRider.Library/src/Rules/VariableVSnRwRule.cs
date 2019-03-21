@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace AMLRider.Library.Rules
 {
-    class VariableV_SN_RW_Rule : IConversionRule
+    public class VariableVSnRwRule : IConversionRule
     {
 
         public bool CanApplyRule(XElement element)

@@ -43,7 +43,7 @@ namespace AMLRider.Library
             yield return new ProfileHeaderRule();
             yield return new StdVariableRefRule();
             yield return new VariableRecordTRule();
-            yield return new VariableV_SN_RW_Rule();
+            yield return new VariableVSnRwRule();
             yield return new VendorLogoRule();
         }
         
