@@ -10,7 +10,8 @@ using AMLRider.Library.src.Rules.DataObjects;
 
 namespace AMLRider.Library.Rules
 {
-    class FeaturesRule : IConversionRule
+    
+    public class FeaturesRule : IConversionRule
     {
 
        
@@ -40,7 +41,7 @@ namespace AMLRider.Library.Rules
             if (!CanApplyRule(element))
                 throw new InvalidOperationException("The given node is not a <Features> node.");
 
-            var supportedAccessLocks = GetAccesLocks(element);
+            var supportedAccessLocks = GetAccessLocks(element);
             return CreateFeaturesTag(supportedAccessLocks);
         }
 
@@ -48,12 +49,12 @@ namespace AMLRider.Library.Rules
 
 
         /// <summary>
-        /// Gets the needed imformation out of the given IODD element.
+        /// Gets the needed information out of the given IODD element.
         /// </summary>
         /// <param name="element">A given IODD element.</param>
         /// <returns>A Features which contains the necessary information.</returns>
 
-        private static  Features GetAccesLocks(XElement element)
+        private static  Features GetAccessLocks(XElement element)
         {
             var supportedAccessLocksElement = element.Element("SupportedAccessLocks");
             return new Features
@@ -73,7 +74,7 @@ namespace AMLRider.Library.Rules
         /// Creates the AML FeaturesTag.
         /// </summary>
         
-        private XElement CreateFeaturesTag(Features obj)
+        private static XElement CreateFeaturesTag(Features obj)
         {
 
             var internalElement = XmlHelper.CreateElement("InternalElement");
@@ -82,14 +83,14 @@ namespace AMLRider.Library.Rules
             internalElement.Add(CreateAttribute("blockParameter", "boolean",obj.BlockParameter));
             internalElement.Add(CreateAttribute("dataStorage", "boolean", obj.DataStorageFeatures));
 
-            var internalElement_child = XmlHelper.CreateElement(internalElement, "InternalElement");
-            internalElement_child.SetAttributeValue("Name", "SupportedAccessLocks");
-            internalElement_child.SetAttributeValue("ID", Guid.NewGuid().ToString());
+            var internalElementChild = XmlHelper.CreateElement(internalElement, "InternalElement");
+            internalElementChild.SetAttributeValue("Name", "SupportedAccessLocks");
+            internalElementChild.SetAttributeValue("ID", Guid.NewGuid().ToString());
 
-            internalElement_child.Add(CreateAttribute("parameter", "boolean",obj.Parameter));
-            internalElement_child.Add(CreateAttribute("dataStorage", "boolean", obj.DataStorageAccessLocks));
-            internalElement_child.Add(CreateAttribute("localUserInterface", "boolean", obj.LocalUserInterface));
-            internalElement_child.Add(CreateAttribute("localParameterization", "boolean", obj.LocalParameterization));
+            internalElementChild.Add(CreateAttribute("parameter", "boolean",obj.Parameter));
+            internalElementChild.Add(CreateAttribute("dataStorage", "boolean", obj.DataStorageAccessLocks));
+            internalElementChild.Add(CreateAttribute("localUserInterface", "boolean", obj.LocalUserInterface));
+            internalElementChild.Add(CreateAttribute("localParameterization", "boolean", obj.LocalParameterization));
 
 
             return internalElement;
@@ -108,7 +109,7 @@ namespace AMLRider.Library.Rules
             var attribute = XmlHelper.CreateElement("Attribute");
             attribute.SetAttributeValue("Name", name);
             attribute.SetAttributeValue("AttributeDataType", "xs:" + dataType);
-            var valueTag = XmlHelper.CreateElement(attribute, "Value", value);
+            var valueTag = XmlHelper.CreateElement(attribute, "DefaultValue", value);
 
             return attribute;
         }
