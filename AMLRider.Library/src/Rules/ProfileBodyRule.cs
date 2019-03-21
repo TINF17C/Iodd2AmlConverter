@@ -9,35 +9,33 @@ using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Rules
 {
-    public class ProfileBody:IConversionRule
-
+    public class ProfileBodyRule : IConversionRule
     {
         public bool CanApplyRule(XElement element)
         {
             return element.Name == "ProfileBody";
-
         }
 
         public XElement Apply(XElement element)
         {
-            
             if (!CanApplyRule(element))
                 throw new InvalidOperationException("The given node is not a <ProfileBody> node.");
 
-            string valueTag = element.Value;
+            var valueTag = element.Value;
             return CreateProfileBodyTag(valueTag);
         }
 
-        private XElement CreateProfileBodyTag(string valueTag)
+        private static XElement CreateProfileBodyTag(string valueTag)
         {
-            var systemUnitClassLib = XmlHelper.CreateElement("SystemUnitClassLib ");
-            systemUnitClassLib.SetAttributeValue("Name","ComponentSystemUnitClassLib");
-            var systemUnitClass = XmlHelper.CreateElement(systemUnitClassLib, "SystemUnitClass ");
-            systemUnitClass.SetAttributeValue("Name","Device");
-            systemUnitClass.SetAttributeValue("Name",Guid.NewGuid().ToString());
-            systemUnitClass.Value = valueTag;
-            return systemUnitClassLib;
+            var systemUnitClassLib = XmlHelper.CreateElement("SystemUnitClassLib");
+            systemUnitClassLib.SetAttributeValue("Name", "ComponentSystemUnitClassLib");
 
+            var systemUnitClass = XmlHelper.CreateElement(systemUnitClassLib, "SystemUnitClass");
+            systemUnitClass.SetAttributeValue("Name", "Device");
+            systemUnitClass.SetAttributeValue("Name", Guid.NewGuid().ToString());
+            systemUnitClass.Value = valueTag;
+
+            return systemUnitClassLib;
         }
     }
 }
