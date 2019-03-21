@@ -43,7 +43,6 @@ namespace AMLRider.Library.Rules
                 SubIndex = recordItem?.GetAttributeValue("subindex"),
                 SubIndexAccessSupported = datatype?.GetAttributeValue("subindexAccessSupported"),
                 DataTypeId = recordItem?.Element("DatatypeRef").GetAttributeValue("datatypeId"),
-                RecordItemName = recordItem?.Element("Name").GetAttributeValue("textId"),
                 VariableName = recordItem?.Element("Name").GetAttributeValue("textId"),
                 ChildNodes = subNodes
             };
@@ -76,8 +75,8 @@ namespace AMLRider.Library.Rules
             var refSemantic = XmlHelper.CreateElement(attribute, "RefSemantic");
             refSemantic.SetAttributeValue("CorrespondingAttributePath", "ListType");
             var attribute1 = XmlHelper.CreateElement(attribute, "Attribute");
-            attribute.SetAttributeValue("Name", "Input not inverted");
-            attribute.SetAttributeValue("AttributeDataType", "xs:string");
+            attribute1.SetAttributeValue("Name", "Input not inverted");
+            attribute1.SetAttributeValue("AttributeDataType", "xs:string");
             var attribute2 = XmlHelper.CreateElement(attribute, "Attribute");
             attribute2.SetAttributeValue("Name", "Input inverted");
             attribute2.SetAttributeValue("AttributeDataType", "xs:string");
