@@ -62,17 +62,17 @@ namespace AMLRider.Library.Rules
             internalElement.Add(CreateAttribute("subindexAccessSupport", "boolean", variableRecordTObj.SubIndexAccessSupported));
 
             var internalElement2 = XmlHelper.CreateElement(internalElement, "InternalElement");
-            internalElement2.SetAttributeValue("Name", variableRecordTObj.VariableName);
+            internalElement2.SetAttributeValue("Name", variableRecordTObj.Name);
             internalElement2.SetAttributeValue("ID", Guid.NewGuid().ToString());
             var description = XmlHelper.CreateElement(internalElement2, "Description");
             description.SetAttributeValue("textId", variableRecordTObj.DescriptionId);
             var internalElement3 = XmlHelper.CreateElement(internalElement2, "InternalElement");
-            internalElement3.SetAttributeValue("Name", variableRecordTObj.RecordItemName);
+            internalElement3.SetAttributeValue("Name", variableRecordTObj.VariableName);
             internalElement3.SetAttributeValue("ID", Guid.NewGuid().ToString());
             internalElement3.Add(CreateAttribute("subindex", "integer", variableRecordTObj.SubIndex));
             internalElement3.Add(CreateAttribute("bitOffset", "integer", variableRecordTObj.BitOffset));
             var attribute = XmlHelper.CreateElement(internalElement3, "Attribute");
-            attribute.SetAttributeValue("Name", variableRecordTObj.Name);
+            attribute.SetAttributeValue("Name", variableRecordTObj.DataTypeId);
             var refSemantic = XmlHelper.CreateElement(attribute, "RefSemantic");
             refSemantic.SetAttributeValue("CorrespondingAttributePath", "ListType");
             var attribute1 = XmlHelper.CreateElement(attribute, "Attribute");
