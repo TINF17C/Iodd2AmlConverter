@@ -37,9 +37,13 @@ namespace AMLRider.Library
         {
             yield return new DatatypeRefRule();
             yield return new DeviceIdentityRule();
+            yield return new DeviceVariantCollectionRule();
             yield return new DocumentInfoRule();
             yield return new EventCollectionRule();
             yield return new FeaturesRule();
+            yield return new IoDeviceRule();
+            yield return new ProcessDataCollectionRule();
+            yield return new ProfileBodyRule();
             yield return new ProfileHeaderRule();
             yield return new StdVariableRefRule();
             yield return new VariableRecordTRule();

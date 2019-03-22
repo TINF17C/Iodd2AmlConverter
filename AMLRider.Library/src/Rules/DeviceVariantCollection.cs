@@ -11,7 +11,7 @@ using AMLRider.Library.Helpers;
 
 namespace AMLRider.Library.Rules
 {
-    class DeviceVariantCollection : IConversionRule
+    public class DeviceVariantCollectionRule : IConversionRule
     {
        
 
