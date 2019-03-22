@@ -32,20 +32,29 @@ namespace AMLRider.Library
             {
                 if (state == 0)
                 {
-                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     state++;
+                    if (ruleSelector.SelectRule(el) == null)
+                    {
+                        continue;
+                    }
+                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     continue;
                 }
 
                 if (state == 1)
                 {
-                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     state++;
+                    if (ruleSelector.SelectRule(el) == null)
+                    {
+                        continue;
+                    }
+                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     continue;
                 }
 
                 if (state == 2)
                 {
+                    state++;
                     var builder = ruleSelector.SelectRule(el).Apply(el);
 
                     foreach (var current in el.Elements())
@@ -57,7 +66,6 @@ namespace AMLRider.Library
                     }
 
                     returnVal += builder.ToString();
-                    state++;
                     continue;
                 }
 
