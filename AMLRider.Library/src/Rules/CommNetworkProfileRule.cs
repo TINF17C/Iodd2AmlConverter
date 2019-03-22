@@ -54,7 +54,7 @@ namespace AMLRider.Library.Rules
         /// </summary>
         /// <param name="obj">The <see cref="DatatypeRefRule"/> providing the necessary information.</param>
         /// <returns>The created <see cref="XElement"/>.</returns>
-        private static XElement CreateInfoHeader(DatatypeRefObj obj)
+        private static XElement CreateInfoHeader(CommNetworkProfileObj obj)
         {
             /// <InternalElement Name="IO-Link Device Port" ID="GUID0">
            
@@ -67,22 +67,22 @@ namespace AMLRider.Library.Rules
             var attribute1 = XmlHelper.CreateElement(InternalElement, "Attribute");
             attribute1.SetAttributeValue("Name", obj.MinCycleTime);
             attribute1.SetAttributeValue("AttributeDataType", "xs:integer");
-            XmlHelper.CreateElement(attribute1, "Value", obj.MinCycleTime.value); //foreach check
+            XmlHelper.CreateElement(attribute1, "Value", obj.MinCycleTime); //foreach check
 
             var attribute2 = XmlHelper.CreateElement(InternalElement, "Attribute");
             attribute2.SetAttributeValue("Name", obj.SioSupported);
             attribute2.SetAttributeValue("AttributeDataType", "xs:boolean");
-            XmlHelper.CreateElement(attribute2, "Value", obj.SioSupported.value); //foreach check
+            XmlHelper.CreateElement(attribute2, "Value", obj.SioSupported); //foreach check
 
             var attribute3 = XmlHelper.CreateElement(InternalElement, "Attribute");
             attribute3.SetAttributeValue("Name", obj.Bitrate);
             attribute3.SetAttributeValue("AttributeDataType", "xs:string");
-            XmlHelper.CreateElement(attribute3, "Value", obj.Bitrate.value); //foreach check
+            XmlHelper.CreateElement(attribute3, "Value", obj.Bitrate); //foreach check
 
             var attribute4 = XmlHelper.CreateElement(InternalElement, "Attribute");
             attribute4.SetAttributeValue("Name", obj.MSequenceCapability);
             attribute4.SetAttributeValue("AttributeDataType", "xs:integer");
-            XmlHelper.CreateElement(attribute4, "Value", obj.MSequenceCapability.value); //foreach check
+            XmlHelper.CreateElement(attribute4, "Value", obj.MSequenceCapability); //foreach check
 
             
             // <ExternalInterface Name="IO-Link Device Port" ID="GUID1"
@@ -113,15 +113,13 @@ namespace AMLRider.Library.Rules
             var attFunction = XmlHelper.CreateElement(externalInterfaceInternal, "ExternalInterface");
             attFunction.SetAttributeValue("Name", "function");
             attFunction.SetAttributeValue("AttributeDataType", "xs:string");
-            XmlHelper.CreateElement(attFunction, "Value", obj.wireFunction);
+            XmlHelper.CreateElement(attFunction, "Value", obj.Function);
 
             var attColor = XmlHelper.CreateElement(externalInterfaceInternal, "ExternalInterface");
             attColor.SetAttributeValue("Name", "color");
             attColor.SetAttributeValue("AttributeDataType", "xs:string");
-            XmlHelper.CreateElement(attColor, "Value", obj.wire1Color);
+            XmlHelper.CreateElement(attColor, "Value", obj.Color);
 
-
-            
             
             return InternalElement;
         }
