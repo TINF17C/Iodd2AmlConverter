@@ -7,13 +7,11 @@ using AMLRider.Library.Rules.DataObjects;
 
 namespace AMLRider.Library.Rules
 {
-    public class ProcessDataCollection:IConversionRule
+    public class ProcessDataCollectionRule : IConversionRule
     {
-        
         public bool CanApplyRule(XElement element)
         {
             return element.Name == "ProcessDataCollection";
-           
         }
 
         public XElement Apply(XElement element)
@@ -22,43 +20,41 @@ namespace AMLRider.Library.Rules
                 throw new InvalidOperationException("The given node is not a <ProcessDataCollection> node.");
 
             var processData = GetProcessData(element);
-            
+
             return CreateProcessDataCollectionTag(processData);
         }
 
         private XElement CreateProcessDataCollectionTag(ProcessDataCollectionObj obj)
         {
             var internalElement = XmlHelper.CreateElement("InternalElement ");
-            internalElement.SetAttributeValue("Name",obj.DataInId);
-            internalElement.SetAttributeValue("id",obj.DataInId);
-            internalElement.Add(CreateAttribute("bitLength","interger",obj.DataInBitLength.ToString()));
-            var internalElement2 = XmlHelper.CreateElement(internalElement,"InternalElement ");
-            internalElement2.SetAttributeValue("Name",obj.DataInTextId);
-            internalElement2.SetAttributeValue("ID",Guid.NewGuid().ToString());
-            internalElement2.Add(CreateAttribute("bitLength","interger",obj.DatatypeBitLength.ToString()));
-            var internalElement3 = XmlHelper.CreateElement(internalElement2,"InternalElement ");
-            internalElement3.SetAttributeValue("Name",obj.RecordItemTextId);
-            internalElement3.SetAttributeValue("ID",Guid.NewGuid().ToString());
-            internalElement3.Add(CreateAttribute("subindex","interger",obj.Subindex.ToString()));
-            internalElement3.Add(CreateAttribute("bitOffset","interger",obj.BitOffset.ToString()));
+            internalElement.SetAttributeValue("Name", obj.DataInId);
+            internalElement.SetAttributeValue("id", obj.DataInId);
+            internalElement.Add(CreateAttribute("bitLength", "interger", obj.DataInBitLength.ToString()));
+            var internalElement2 = XmlHelper.CreateElement(internalElement, "InternalElement ");
+            internalElement2.SetAttributeValue("Name", obj.DataInTextId);
+            internalElement2.SetAttributeValue("ID", Guid.NewGuid().ToString());
+            internalElement2.Add(CreateAttribute("bitLength", "interger", obj.DatatypeBitLength.ToString()));
+            var internalElement3 = XmlHelper.CreateElement(internalElement2, "InternalElement ");
+            internalElement3.SetAttributeValue("Name", obj.RecordItemTextId);
+            internalElement3.SetAttributeValue("ID", Guid.NewGuid().ToString());
+            internalElement3.Add(CreateAttribute("subindex", "interger", obj.Subindex.ToString()));
+            internalElement3.Add(CreateAttribute("bitOffset", "interger", obj.BitOffset.ToString()));
             var attribute1 = XmlHelper.CreateElement(internalElement3, "Attribute ");
-            attribute1.SetAttributeValue("Name",obj.DatatypeRefId);
+            attribute1.SetAttributeValue("Name", obj.DatatypeRefId);
             var refSemantic = XmlHelper.CreateElement(attribute1, "RefSemantic");
-            refSemantic.SetAttributeValue("CorrespondingAttributePath","ListType");
+            refSemantic.SetAttributeValue("CorrespondingAttributePath", "ListType");
             var attribute2 = XmlHelper.CreateElement(attribute1, "Attribute");
-            attribute2.SetAttributeValue("Name","false");
-            attribute2.SetAttributeValue("AttributeDataType","xs:boolean");
+            attribute2.SetAttributeValue("Name", "false");
+            attribute2.SetAttributeValue("AttributeDataType", "xs:boolean");
 
             var attribute3 = XmlHelper.CreateElement(attribute1, "Attribute");
-            attribute3.SetAttributeValue("Name","true");
-            attribute3.SetAttributeValue("AttributeDataType","xs:boolean");
+            attribute3.SetAttributeValue("Name", "true");
+            attribute3.SetAttributeValue("AttributeDataType", "xs:boolean");
 
             foreach (var childNode in obj.ChildNodes)
             {
                 internalElement2.Add(childNode);
             }
-
-
 
 
             return internalElement;
@@ -78,10 +74,10 @@ namespace AMLRider.Library.Rules
             var name2 = processDataIn.Element("Name");
             return new ProcessDataCollectionObj
             {
-                DataId =processData.GetAttributeValue("id"),
+                DataId = processData.GetAttributeValue("id"),
                 DataInId = processDataIn.GetAttributeValue("id"),
-                DataInBitLength =Convert.ToInt32(processDataIn.GetAttributeValue("bitLength")),
-                DatatypeRecordT =datatype.GetAttributeValue("xsi:type"),
+                DataInBitLength = Convert.ToInt32(processDataIn.GetAttributeValue("bitLength")),
+                DatatypeRecordT = datatype.GetAttributeValue("xsi:type"),
                 DatatypeBitLength = Convert.ToInt32(datatype.GetAttributeValue("bitLength")),
                 Subindex = Convert.ToInt32(recordItem.GetAttributeValue("subindex")),
                 BitOffset = Convert.ToInt32(recordItem.GetAttributeValue("bitOffset")),
@@ -89,11 +85,9 @@ namespace AMLRider.Library.Rules
                 RecordItemTextId = name1.GetAttributeValue("textId"),
                 DataInTextId = name2.GetAttributeValue("textId"),
                 ChildNodes = subNodes
-                
-
             };
         }
-        
+
         /// <summary>
         /// Helper method to create a simple attribute element.
         /// </summary>
