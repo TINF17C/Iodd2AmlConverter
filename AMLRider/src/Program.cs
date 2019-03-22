@@ -99,7 +99,7 @@ namespace AMLRider
                 if (!ShouldOverride(outputFile))
                     return;
 
-                File.WriteAllText(options.Output, convertedXml);
+                File.WriteAllText(outputFile, convertedXml);
             }
         }
 
