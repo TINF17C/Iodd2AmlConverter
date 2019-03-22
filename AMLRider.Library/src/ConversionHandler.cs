@@ -19,6 +19,8 @@ namespace AMLRider.Library
         /// <returns>Returns a string which contains the generated AML data.</returns>
         public string Convert(string ioddFileData)
         {
+            var ruleSelector = new RuleSelector();
+            
             var xElement = XElement.Parse(ioddFileData);
 
             var state = 0;
@@ -30,27 +32,27 @@ namespace AMLRider.Library
             {
                 if (state == 0)
                 {
-                    returnVal += RuleSelector.SelectRule(el).Apply(el).ToString();
+                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     state++;
                     continue;
                 }
 
                 if (state == 1)
                 {
-                    returnVal += RuleSelector.SelectRule(el).Apply(el).ToString();
+                    returnVal += ruleSelector.SelectRule(el).Apply(el).ToString();
                     state++;
                     continue;
                 }
 
                 if (state == 2)
                 {
-                    var builder = RuleSelector.SelectRule(el).Apply(el);
+                    var builder = ruleSelector.SelectRule(el).Apply(el);
 
                     foreach (var current in el.Elements())
                     {
-                        if (RuleSelector.SelectRule(current) != null)
+                        if (ruleSelector.SelectRule(current) != null)
                         {
-                            builder.Add(RuleSelector.SelectRule(current).Apply(current));
+                            builder.Add(ruleSelector.SelectRule(current).Apply(current));
                         }
                     }
 
@@ -61,7 +63,7 @@ namespace AMLRider.Library
 
                 if (state == 3)
                 {
-                    returnVal += RuleSelector.SelectRule(el).Apply(el);
+                    returnVal += ruleSelector.SelectRule(el).Apply(el);
                 }
 
         }
