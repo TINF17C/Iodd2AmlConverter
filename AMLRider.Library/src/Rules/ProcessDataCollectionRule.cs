@@ -28,7 +28,7 @@ namespace AMLRider.Library.Rules
         {
             var internalElement = XmlHelper.CreateElement("InternalElement");
             internalElement.SetAttributeValue("Name", obj.DataInId);
-            internalElement.SetAttributeValue("id", obj.DataInId);
+            internalElement.SetAttributeValue("ID", obj.DataInId);
             
             internalElement.Add(CreateAttribute("bitLength", "integer", obj.DataInBitLength));
             
@@ -85,7 +85,7 @@ namespace AMLRider.Library.Rules
                 DataId = processData.GetAttributeValue("id"),
                 DataInId = processDataIn.GetAttributeValue("id"),
                 DataInBitLength = processDataIn.GetAttributeValue("bitLength"),
-                DatatypeRecordT = datatype.GetAttributeValue("xsi:type"),
+                DatatypeRecordT = datatype.GetAttributeValue("type"),
                 DatatypeBitLength = datatype.GetAttributeValue("bitLength"),
                 SubIndex = recordItem.GetAttributeValue("subindex"),
                 BitOffset = recordItem.GetAttributeValue("bitOffset"),
