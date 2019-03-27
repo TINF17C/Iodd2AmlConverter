@@ -9,7 +9,6 @@ namespace AMLRider.Library.src.Rules.DataObjects
         public string VariableId { get; set; }
         public string VariableIndex { get; set; }
         public string AccessRights { get; set; }
-        public string Datatype { get; set; }
         public string FixedLength { get; set; }
         public string EncodingType { get; set; }
         public string NameTextId { get; set; }
