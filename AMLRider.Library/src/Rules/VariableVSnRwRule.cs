@@ -19,7 +19,7 @@ namespace AMLRider.Library.Rules
         /// <returns>True, if the rule can be applied. False if not.</returns>
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "Variable";
+            return element.Name.LocalName == "Variable";
             // TODO: Identify which variable rule
         }
 

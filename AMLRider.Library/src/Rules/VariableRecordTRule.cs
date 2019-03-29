@@ -11,7 +11,7 @@ namespace AMLRider.Library.Rules
     {
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "Variable";
+            return element.Name.LocalName == "Variable";
             // TODO: Change CanApplyRule for the different VariableTags
         }
 

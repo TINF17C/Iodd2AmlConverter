@@ -90,7 +90,7 @@ namespace AMLRider.Library.Rules
         /// <inheritdoc />
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "ProfileHeader";
+            return element.Name.LocalName == "ProfileHeader";
         }
 
         /// <inheritdoc />

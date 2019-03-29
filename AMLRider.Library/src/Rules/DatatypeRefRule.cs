@@ -11,7 +11,7 @@ namespace AMLRider.Library.Rules
         /// <inheritdoc />
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "DatatypeRef";
+            return element.Name.LocalName == "DatatypeRef";
         }
         
         /// <inheritdoc />

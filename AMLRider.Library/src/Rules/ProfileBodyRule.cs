@@ -13,7 +13,7 @@ namespace AMLRider.Library.Rules
     {
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "ProfileBody";
+            return element.Name.LocalName == "ProfileBody";
         }
 
         public XElement Apply(XElement element)

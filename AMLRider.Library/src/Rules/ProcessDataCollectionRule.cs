@@ -11,7 +11,7 @@ namespace AMLRider.Library.Rules
     {
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "ProcessDataCollection";
+            return element.Name.LocalName == "ProcessDataCollection";
         }
 
         public XElement Apply(XElement element)
@@ -51,7 +51,6 @@ namespace AMLRider.Library.Rules
             var refSemantic = XmlHelper.CreateElement(attribute1, "RefSemantic");
             refSemantic.SetAttributeValue("CorrespondingAttributePath", "ListType");
             
-            // TODO: fix
             var attribute2 = XmlHelper.CreateElement(attribute1, "Attribute");
             attribute2.SetAttributeValue("Name", "false");
             attribute2.SetAttributeValue("AttributeDataType", "xs:boolean");
