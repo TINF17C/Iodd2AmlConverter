@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using AMLRider.Library.Extensions;
 using AMLRider.Library.Rules;
@@ -12,6 +13,9 @@ namespace AMLRider.Library.Test
     {
 
         private const string ProcessDataInIdText = "V_Pd_InT";
+        private const string TextIdText = "TI_PD";
+        private const string SubIndexText = "1";
+        private const string BitOffsetText = "8";
         
         private XElement XmlSampleElement { get; set; }
         
@@ -20,7 +24,7 @@ namespace AMLRider.Library.Test
         [TestInitialize]
         public void Initialize()
         {
-            var sample = $"<TestWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><ProcessDataCollection>\n\t<ProcessData id=\"V_PdT\">\n\t\t<ProcessDataIn id=\"{ProcessDataInIdText}\" bitLength=\"16\">\n\t\t\t<Datatype xsi:type=\"RecordT\" bitLength=\"16\">\n\t\t\t\t<RecordItem subindex=\"1\" bitOffset=\"8\">\n\t\t\t\t\t<DatatypeRef datatypeId=\"DT_DigitalIn\" />\n\t\t\t\t\t<Name textId=\"TI_PD_Switchstate_01\" />\n\t\t\t\t</RecordItem>\n\t\t\t</Datatype>\n\t\t\t<Name textId=\"TI_PD\" />\n\t\t</ProcessDataIn>\n\t</ProcessData>\n</ProcessDataCollection>\n</TestWrapper>";
+            var sample = $"<TestWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><ProcessDataCollection>\n\t<ProcessData id=\"V_PdT\">\n\t\t<ProcessDataIn id=\"{ProcessDataInIdText}\" bitLength=\"16\">\n\t\t\t<Datatype xsi:type=\"RecordT\" bitLength=\"16\">\n\t\t\t\t<RecordItem subindex=\"{SubIndexText}\" bitOffset=\"{BitOffsetText}\">\n\t\t\t\t\t<DatatypeRef datatypeId=\"DT_DigitalIn\" />\n\t\t\t\t\t<Name textId=\"TI_PD_Switchstate_01\" />\n\t\t\t\t</RecordItem>\n\t\t\t</Datatype>\n\t\t\t<Name textId=\"{TextIdText}\" />\n\t\t</ProcessDataIn>\n\t</ProcessData>\n</ProcessDataCollection>\n</TestWrapper>";
             const string wrongSample = "<TestWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n<SomeDataCollection>\n\t<ProcessData id=\"V_PdT\">\n\t\t<ProcessDataIn id=\"V_Pd_InT\" bitLength=\"16\">\n\t\t\t<Datatype xsi:type=\"RecordT\" bitLength=\"16\">\n\t\t\t\t<RecordItem subindex=\"1\" bitOffset=\"8\">\n\t\t\t\t\t<DatatypeRef datatypeId=\"DT_DigitalIn\" />\n\t\t\t\t\t<Name textId=\"TI_PD_Switchstate_01\" />\n\t\t\t\t</RecordItem>\n\t\t\t</Datatype>\n\t\t\t<Name textId=\"TI_PD\" />\n\t\t</ProcessDataIn>\n\t</ProcessData>\n</SomeDataCollection>\n</TestWrapper>";
             
             
@@ -74,6 +78,55 @@ namespace AMLRider.Library.Test
             
             Assert.AreEqual(ProcessDataInIdText, nameValue);
             Assert.AreEqual(ProcessDataInIdText, idValue);
+        }
+        
+        [TestMethod]
+        public void IsTextIdSetCorrectly()
+        {
+            var rule = new ProcessDataCollectionRule();
+
+            var element = rule.Apply(XmlSampleElement);
+            var subElement = element.Element("InternalElement");
+            var nameValue = subElement.GetAttributeValue("Name");
+            
+            Assert.AreEqual(TextIdText, nameValue);
+        }
+
+        [TestMethod]
+        public void IsRecordItemSubIndexSetCorrectly()
+        {
+            var rule = new ProcessDataCollectionRule();
+
+            var element = rule.Apply(XmlSampleElement);
+            var subElement = element
+                .Element("InternalElement")?
+                .Element("InternalElement");
+
+            var value = GetAttributeValue(subElement, "subindex");
+            Assert.AreEqual(SubIndexText, value);
+        }
+
+        [TestMethod]
+        public void IsRecordItemBitOffsetSetCorrectly()
+        {
+            var rule = new ProcessDataCollectionRule();
+
+            var element = rule.Apply(XmlSampleElement);
+            var subElement = element
+                .Element("InternalElement")?
+                .Element("InternalElement");
+
+            var value = GetAttributeValue(subElement, "bitOffset");
+            Assert.AreEqual(BitOffsetText, value);
+        }
+        
+        private static string GetAttributeValue(XContainer element, string attributeName)
+        {
+            return element
+                .Elements("Attribute")
+                .FirstOrDefault(x => x.Attribute("Name")?.Value == attributeName)?
+                .Element("Value")?
+                .Value;
         }
         
     }
