@@ -12,7 +12,7 @@ namespace AMLRider.Library.Rules
         /// <inheritdoc />
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "CommNetworkProfile";
+            return element.Name.LocalName == "CommNetworkProfile";
         }
         
         /// <inheritdoc />

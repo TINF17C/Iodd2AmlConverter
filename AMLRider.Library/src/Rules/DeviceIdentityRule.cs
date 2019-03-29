@@ -20,7 +20,7 @@ namespace AMLRider.Library.Rules
         /// <returns>True, if the rule can be applied. No, if not.</returns>
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "DeviceIdentity";
+            return element.Name.LocalName == "DeviceIdentity";
         }
 
         /// <summary>

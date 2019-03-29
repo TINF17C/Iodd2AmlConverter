@@ -53,7 +53,7 @@ namespace AMLRider.Library.Rules
         /// <inheritdoc />
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "DocumentInfo";
+            return element.Name.LocalName == "DocumentInfo";
         }
 
         /// <inheritdoc />

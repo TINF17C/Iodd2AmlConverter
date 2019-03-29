@@ -21,7 +21,7 @@ namespace AMLRider.Library.Rules
         /// <returns>True, if the rule can be applied. False if not.</returns>
         public bool CanApplyRule(XElement element)
         {
-            return element.Name.ToString().Contains("IODevice");
+            return element.Name.LocalName == "IODevice";
         }
 
         /// <inheritdoc />
@@ -33,9 +33,9 @@ namespace AMLRider.Library.Rules
         /// <exception cref="T:System.InvalidOperationException"></exception>
         public XElement Apply(XElement element)
         {
-            if(!CanApplyRule(element))
+            if (!CanApplyRule(element))
                 throw new InvalidOperationException("The given node is not a <IODevice> node.");
-            
+
             var ioDeviceDataObj = GetIoDeviceData(element);
             return CreateCaexFileTag(ioDeviceDataObj);
         }
@@ -66,7 +66,8 @@ namespace AMLRider.Library.Rules
             var xsi = ioDeviceDataObj.SchemaInstance;
             var xsiNameSpace = ioDeviceDataObj.NameSpace;
             const string noNamespaceSchemaLocation = "CAEX_ClassModel_V2.15.xsd";
-            var caexFileElement = new XElement("CAEXFile", new XAttribute(XNamespace.Xmlns + "xsi", xsi), new XAttribute(xsiNameSpace + "noNamespaceSchemaLocation", noNamespaceSchemaLocation));
+            var caexFileElement = new XElement("CAEXFile", new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XAttribute(xsiNameSpace + "noNamespaceSchemaLocation", noNamespaceSchemaLocation));
             caexFileElement.SetAttributeValue("SchemaVersion", "2.15");
             caexFileElement.SetAttributeValue("FileName", "IODDfilename.aml");
             var additionalInformation = XmlHelper.CreateElement(caexFileElement, "AdditionalInformation");

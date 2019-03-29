@@ -24,7 +24,7 @@ namespace AMLRider.Library.Rules
 
         public bool CanApplyRule(XElement element)
         {
-            return element.Name == "DeviceVariantCollection";
+            return element.Name.LocalName == "DeviceVariantCollection";
         }
         
         
