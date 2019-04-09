@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using AMLRider.Library.Iodd.DataTypes;
 
 namespace AMLRider.Library.Iodd
 {
     
-    public class DataTypeCollection : IEnumerable<DataType>
+    public class DataTypeCollection : IEnumerable<DataType>, IIoddElement
     {
         
         private List<DataType> DataTypes { get; }
@@ -32,6 +34,11 @@ namespace AMLRider.Library.Iodd
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

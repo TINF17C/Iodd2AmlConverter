@@ -1,6 +1,8 @@
+using System.Xml.Linq;
+using AMLRider.Library.Extensions;
 using AMLRider.Library.Utils;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.DataTypes
 {
     
     /// <summary>
@@ -17,6 +19,7 @@ namespace AMLRider.Library.Iodd
         public Optional<string> Id { get; set; }
         
         #endregion
+
         
     }
     

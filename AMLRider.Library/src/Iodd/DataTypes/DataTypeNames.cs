@@ -1,7 +1,7 @@
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.DataTypes
 {
     
-    public enum DataTypes
+    public enum DataTypeNames
     {
         
         #region SimpleDataTypes

@@ -1,4 +1,4 @@
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.DataTypes
 {
     public class DataTypeRef
     {
