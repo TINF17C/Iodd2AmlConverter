@@ -1,6 +1,6 @@
 namespace AMLRider.Library.Iodd.DataTypes
 {
-    public class OctetStringT : DataType
+    public class OctetStringT : SimpleDataType
     {
         
         #region Attributes

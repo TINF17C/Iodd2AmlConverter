@@ -1,6 +1,6 @@
 namespace AMLRider.Library.Iodd.DataTypes
 {
-    public class StringT : DataType
+    public class StringT : SimpleDataType
     {
 
         #region Attributes

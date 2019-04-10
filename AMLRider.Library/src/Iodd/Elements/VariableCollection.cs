@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
     
-    public class VariableCollection : IEnumerable<Variable>
+    public class VariableCollection : IoddElement, IEnumerable<Variable>
     {
         
         public StdVariableRef StdVariableRef { get; set; }
@@ -36,6 +37,17 @@ namespace AMLRider.Library.Iodd
         {
             return GetEnumerator();
         }
+
+        public override void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
+        
     }
     
 }

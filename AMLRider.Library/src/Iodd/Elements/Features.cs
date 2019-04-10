@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
 using AMLRider.Library.Utils;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
     
     /// <summary>
     /// Describes features supported by a device.
     /// </summary>
-    public class Features
+    public class Features : IoddElement
     {
     
         #region Attributes
@@ -25,7 +27,8 @@ namespace AMLRider.Library.Iodd
         /// <summary>
         /// List of Profile Identifiers (PID) which are supported by this device
         /// </summary>
-        public Optional<List<ushort>> ProfileCharacteristics { get; set; }
+        [Optional]
+        public List<ushort> ProfileCharacteristics { get; set; }
         
         #endregion
 
@@ -34,9 +37,20 @@ namespace AMLRider.Library.Iodd
         /// <summary>
         /// The supported access locks.
         /// </summary>
-        public Optional<SupportedAccessLocks> SupportedAccessLocks { get; set; }
+        [Optional]
+        public SupportedAccessLocks SupportedAccessLocks { get; set; }
 
         #endregion
+
+        public override void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
         
     }
     

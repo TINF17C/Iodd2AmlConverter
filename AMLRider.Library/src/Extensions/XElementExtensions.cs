@@ -11,6 +11,11 @@ namespace AMLRider.Library.Extensions
             var attribute = element.Attribute(attributeName);
             return attribute?.Value;
         }
+
+        public static bool HasAttribute(this XElement element, string attributeName)
+        {
+            return element.Attribute(attributeName) != null;
+        }
         
     }
     

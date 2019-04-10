@@ -1,7 +1,10 @@
-namespace AMLRider.Library.Iodd
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
+
+namespace AMLRider.Library.Iodd.Elements
 {
     
-    public class SupportedAccessLocks
+    public class SupportedAccessLocks : IoddElement
     {
         
         /// <summary>
@@ -23,7 +26,16 @@ namespace AMLRider.Library.Iodd
         /// Specifies whether local user interface access lock is supported.
         /// </summary>
         public bool LocalUserInterface { get; set; }
-        
+
+        public override void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
 }

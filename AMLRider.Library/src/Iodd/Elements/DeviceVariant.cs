@@ -1,10 +1,11 @@
 using System.Xml.Linq;
+using AMLRider.Library.Aml;
 using AMLRider.Library.Extensions;
 using AMLRider.Library.Utils;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
-    public class DeviceVariant : IIoddElement
+    public class DeviceVariant : IoddElement
     {
 
         #region Attributes
@@ -14,9 +15,11 @@ namespace AMLRider.Library.Iodd
         /// </summary>
         public int ProductId { get; set; }
         
-        public Optional<string> DeviceSymbol { get; set; }
+        [Optional]
+        public string DeviceSymbol { get; set; }
         
-        public Optional<string> DeviceIcon { get; set; }
+        [Optional]
+        public string DeviceIcon { get; set; }
 
         #endregion
 
@@ -34,15 +37,19 @@ namespace AMLRider.Library.Iodd
             Description = new Description();
         }
 
-        public void Deserialize(XElement element)
+        public override void Deserialize(XElement element)
         {
             ProductId = int.Parse(element.GetAttributeValue("productId"));
-            DeviceSymbol = Optional<string>.OfNullable(element.GetAttributeValue("deviceSymbol"));
-            DeviceIcon = Optional<string>.OfNullable(element.GetAttributeValue("deviceIcon"));
+            DeviceSymbol = element.GetAttributeValue("deviceSymbol");
+            DeviceIcon = element.GetAttributeValue("deviceIcon");
             
             Name.Deserialize(element.Element("Name"));            
             Description.Deserialize(element.Element("Description"));
         }
-        
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

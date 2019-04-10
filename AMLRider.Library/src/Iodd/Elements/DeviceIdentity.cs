@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
     
-    public class DeviceIdentity
+    public class DeviceIdentity : IoddElement
     {
         
         #region Attributes
@@ -64,7 +65,16 @@ namespace AMLRider.Library.Iodd
         private List<DeviceVariant> DeviceVariantCollection { get; set; } = new List<DeviceVariant>();
         
         #endregion
-        
+
+        public override void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
 }

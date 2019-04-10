@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
     
-    public class ProcessDataCollection : IEnumerable<ProcessData>
+    public class ProcessDataCollection : IoddElement, IEnumerable<ProcessData>
     {
         
         private List<ProcessData> ProcessDataList { get; }
@@ -32,6 +34,16 @@ namespace AMLRider.Library.Iodd
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public override void Deserialize(XElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
         }
     }
     

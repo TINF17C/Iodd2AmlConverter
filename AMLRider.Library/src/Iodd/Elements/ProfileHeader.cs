@@ -1,12 +1,14 @@
 using System.ComponentModel;
+using System.Xml.Linq;
+using AMLRider.Library.Aml;
 
-namespace AMLRider.Library.Iodd
+namespace AMLRider.Library.Iodd.Elements
 {
     
     /// <summary>
     /// Provider for constant vendor information.
     /// </summary>
-    public class ProfileHeader
+    public class ProfileHeader : IoddElement
     {
         [DefaultValue("IO Device Profile")]
         public string ProfileIdentification { get; set; } = "IO Device Profile";
@@ -24,6 +26,16 @@ namespace AMLRider.Library.Iodd
         public string ProfileClassId { get; set; } = "Device";
         
         public Iso15745Reference Iso15745Reference { get; set; } = new Iso15745Reference();
+
+        public override void Deserialize(XElement element)
+        {
+            // Do nothing
+        }
+
+        public override AmlElement ToAml()
+        {
+            throw new System.NotImplementedException();
+        }
         
     }
 }
