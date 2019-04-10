@@ -1,5 +1,5 @@
 using AMLRider.Library.Iodd.Elements;
-using AMLRider.Library.Utils;
+
 
 namespace AMLRider.Library.Iodd.DataTypes
 {
@@ -8,7 +8,8 @@ namespace AMLRider.Library.Iodd.DataTypes
         
         #region Attributes
         
-        public Optional<SingleValue> Value { get; set; }
+        [Optional]
+        public SingleValue Value { get; set; }
 
         #endregion
         

@@ -1,7 +1,7 @@
+using System;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
 using AMLRider.Library.Extensions;
-using AMLRider.Library.Utils;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -40,7 +40,7 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            
+            throw new NotImplementedException();
         }
         
     }

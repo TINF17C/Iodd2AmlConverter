@@ -1,5 +1,3 @@
-using AMLRider.Library.Utils;
-
 namespace AMLRider.Library.Iodd.DataTypes
 {
     
@@ -14,7 +12,8 @@ namespace AMLRider.Library.Iodd.DataTypes
         /// <summary>
         /// The data type ID.
         /// </summary>
-        public Optional<string> Id { get; set; }
+        [Optional]
+        public string Id { get; set; }
         
         #endregion
 
