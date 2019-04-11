@@ -1,12 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Xml.Linq;
 using AMLRider.Cli;
 using AMLRider.Cli.Attributes;
 using AMLRider.Cli.Extensions;
-using AMLRider.Cli.Helpers;
 using AMLRider.Library;
-using AMLRider.Library.Rules;
 
 namespace AMLRider
 {
@@ -23,6 +20,14 @@ namespace AMLRider
     public static class Program
     {
 
+        public static readonly string AmlRiderLogo =
+            @"  ___            _______ _     _           @" +
+            @" / _ \          | | ___ (_)   | |          @" +
+            @"/ /_\ \_ __ ___ | | |_/ /_  __| | ___ _ __ @" +
+            @"|  _  | '_ ` _ \| |    /| |/ _` |/ _ \ '__|@" +
+            @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
+            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @";
+        
         private static bool ShouldOverride(string file)
         {
             var shouldOverride = true;
@@ -105,6 +110,8 @@ namespace AMLRider
 
         public static void Main(string[] args)
         {
+            Console.WriteLine(AmlRiderLogo.Replace("@", Environment.NewLine));
+            
             new CommandLineParser()
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
