@@ -1,7 +1,11 @@
+using System.Xml.Linq;
+
 namespace AMLRider.Library.Aml
 {
-    public class AmlElement
+    public abstract class AmlElement : IAmlSerializable
     {
+        
+        public abstract XElement Serialize();
         
     }
 }

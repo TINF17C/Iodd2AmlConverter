@@ -33,7 +33,10 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new NotImplementedException();
+            return new AdditionalInformation()
+            {
+                WriterVendor = Copyright
+            };
         }
     }
     
