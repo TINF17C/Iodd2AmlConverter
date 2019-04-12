@@ -15,15 +15,21 @@ namespace AMLRider.Library.Iodd.Elements
         {
             ProcessDataList = new List<ProcessData>();
         }
-
-        public void Add(ProcessData processData)
+        
+        public override void Deserialize(XElement element)
         {
-            ProcessDataList.Add(processData);
+            foreach (var processDataElement in element.Elements("ProcessData"))
+            {
+                var processData = new ProcessData();
+                processData.Deserialize(processDataElement);
+                
+                ProcessDataList.Add(processData);
+            }
         }
 
-        public ProcessData Get(int index)
+        public override AmlElement ToAml()
         {
-            return ProcessDataList[index];
+            throw new System.NotImplementedException();
         }
 
         public IEnumerator<ProcessData> GetEnumerator()
@@ -34,16 +40,6 @@ namespace AMLRider.Library.Iodd.Elements
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        public override void Deserialize(XElement element)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override AmlElement ToAml()
-        {
-            throw new System.NotImplementedException();
         }
     }
     

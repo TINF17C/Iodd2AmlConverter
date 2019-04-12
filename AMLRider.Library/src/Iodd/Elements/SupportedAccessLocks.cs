@@ -1,5 +1,7 @@
+using System;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -29,7 +31,10 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            Parameter = bool.Parse(element.GetAttributeValue("parameter"));
+            DataStorage = bool.Parse(element.GetAttributeValue("dataStorage"));
+            LocalParameterization = bool.Parse(element.GetAttributeValue("localParameterization"));
+            LocalUserInterface = bool.Parse(element.GetAttributeValue("localUserInterface"));
         }
 
         public override AmlElement ToAml()

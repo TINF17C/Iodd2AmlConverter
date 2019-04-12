@@ -5,27 +5,45 @@ using AMLRider.Library.Aml;
 
 namespace AMLRider.Library.Iodd.Elements
 {
-    
-    public class VariableCollection : IoddElement, IEnumerable<Variable>
+    public class VariableCollection : IoddElement, IEnumerable<Variable>, IEnumerable<StdVariableRef>
     {
-        
-        public StdVariableRef StdVariableRef { get; set; }
-        
         private List<Variable> Variables { get; }
+
+        private List<StdVariableRef> StdVariableRefs { get; set; }
 
         public VariableCollection()
         {
             Variables = new List<Variable>();
+            StdVariableRefs = new List<StdVariableRef>();
         }
 
-        public void Add(Variable variable)
+        public override void Deserialize(XElement element)
         {
-            Variables.Add(variable);
+            foreach (var variableElement in element.Elements("Variable"))
+            {
+                var variable = new Variable();
+                variable.Deserialize(variableElement);
+                
+                Variables.Add(variable);
+            }
+            
+            foreach (var variableRefElement in element.Elements("StdVariableRef"))
+            {
+                var variableRef = new StdVariableRef();
+                variableRef.Deserialize(variableRefElement);
+                
+                StdVariableRefs.Add(variableRef);
+            }
         }
 
-        public Variable Get(int index)
+        public override AmlElement ToAml()
         {
-            return Variables[index];
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerator<StdVariableRef> IEnumerable<StdVariableRef>.GetEnumerator()
+        {
+            throw new System.NotImplementedException();
         }
 
         public IEnumerator<Variable> GetEnumerator()
@@ -37,17 +55,5 @@ namespace AMLRider.Library.Iodd.Elements
         {
             return GetEnumerator();
         }
-
-        public override void Deserialize(XElement element)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override AmlElement ToAml()
-        {
-            throw new System.NotImplementedException();
-        }
-        
     }
-    
 }

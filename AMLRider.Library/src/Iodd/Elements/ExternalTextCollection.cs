@@ -9,11 +9,21 @@ namespace AMLRider.Library.Iodd.Elements
         
         public Language PrimaryLanguage { get; set; }
         
+        [Optional]
         public List<Language> Languages { get; set; }
         
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            PrimaryLanguage = new Language();
+            PrimaryLanguage.Deserialize(element.Element("PrimaryLanguage"));
+
+            foreach (var languageElement in element.Elements("Language"))
+            {
+                var language = new Language();
+                language.Deserialize(languageElement);
+                
+                Languages.Add(language);
+            }
         }
 
         public override AmlElement ToAml()

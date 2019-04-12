@@ -30,19 +30,16 @@ namespace AMLRider.Library.Iodd.Elements
 
         #endregion
 
-        public DeviceVariant()
-        {
-            Name = new Name();
-            Description = new Description();
-        }
-
         public override void Deserialize(XElement element)
         {
             ProductId = int.Parse(element.GetAttributeValue("productId"));
             DeviceSymbol = element.GetAttributeValue("deviceSymbol");
             DeviceIcon = element.GetAttributeValue("deviceIcon");
             
-            Name.Deserialize(element.Element("Name"));            
+            Name = new Name();
+            Name.Deserialize(element.Element("Name"));  
+                      
+            Description = new Description();
             Description.Deserialize(element.Element("Description"));
         }
 

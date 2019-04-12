@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -43,7 +44,16 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            BlockParameter = bool.Parse(element.GetAttributeValue("blockParameter"));
+            DataStorage = bool.Parse(element.GetAttributeValue("dataStorage"));
+            
+            // TODO: ProfileCharacteristics
+
+            if (element.Element("SupportedAccessLocks") == null)
+                return;
+            
+            SupportedAccessLocks = new SupportedAccessLocks();
+            SupportedAccessLocks.Deserialize(element.Element("SupportedAccessLocks"));
         }
 
         public override AmlElement ToAml()

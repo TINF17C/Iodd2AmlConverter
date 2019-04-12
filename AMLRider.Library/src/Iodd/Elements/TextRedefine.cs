@@ -4,31 +4,21 @@ using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
-    
-    public class SingleValue : IoddElement
+    public class TextRedefine : IoddElement
     {
-        
+
         #region Attributes
+
+        public string Id { get; set; }
         
         public string Value { get; set; }
-        
-        #endregion
-        
-        #region Elements
-        
-        [Optional]
-        public Name Name { get; set; }
-        
+
         #endregion
 
         public override void Deserialize(XElement element)
         {
+            Id = element.GetAttributeValue("id");
             Value = element.GetAttributeValue("value");
-            if (element.Element("Name") == null)
-                return;
-            
-            Name = new Name();
-            Name.Deserialize(element.Element("Name"));
         }
 
         public override AmlElement ToAml()
@@ -36,5 +26,4 @@ namespace AMLRider.Library.Iodd.Elements
             throw new System.NotImplementedException();
         }
     }
-    
 }

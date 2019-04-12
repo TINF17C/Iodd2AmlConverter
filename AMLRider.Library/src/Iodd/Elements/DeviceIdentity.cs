@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -25,12 +26,13 @@ namespace AMLRider.Library.Iodd.Elements
         /// </summary>
         public string DeviceId { get; set; }
         
-        #endregion
-        
         /// <summary>
         /// Additional device IDs given by the vendor.
         /// </summary>
-        public List<string> AdditionalDeviceIds { get; set; } = new List<string>();
+        [Optional]
+        public List<string> AdditionalDeviceIds { get; set; }
+        
+        #endregion
 
         #region Elements
 
@@ -47,6 +49,7 @@ namespace AMLRider.Library.Iodd.Elements
         /// <summary>
         /// The vendor logo. This is optional.
         /// </summary>
+        [Optional]
         public string VendorLogo { get; set; }
         
         /// <summary>
@@ -62,13 +65,29 @@ namespace AMLRider.Library.Iodd.Elements
         /// <summary>
         /// The list of device variants.
         /// </summary>
-        private List<DeviceVariant> DeviceVariantCollection { get; set; } = new List<DeviceVariant>();
+        private DeviceVariantCollection DeviceVariantCollection { get; set; }
         
         #endregion
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            VendorId = ushort.Parse(element.GetAttributeValue("vendorId"));
+            VendorName = element.GetAttributeValue("vendorName");
+            DeviceId = element.GetAttributeValue("deviceId");
+            
+            // TODO: AdditionalDeviceIds
+            
+            VendorText = element.Element("VendorText")?.GetAttributeValue("textId");
+            VendorUrl = element.Element("VendorLogo")?.GetAttributeValue("textId");
+
+            if (element.Element("VendorLogo") != null)
+                VendorLogo = element.Element("VendorLogo").GetAttributeValue("name");
+
+            DeviceName = element.Element("DeviceName")?.GetAttributeValue("textId");
+            DeviceFamily = element.Element("DeviceFamily")?.GetAttributeValue("textId");
+            
+            DeviceVariantCollection = new DeviceVariantCollection();
+            DeviceVariantCollection.Deserialize(element.Element("DeviceVariantCollection"));
         }
 
         public override AmlElement ToAml()

@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -12,7 +13,7 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            Value = element.GetAttributeValue("value");
         }
 
         public override AmlElement ToAml()

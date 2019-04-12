@@ -15,7 +15,17 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            Features = new Features();
+            Features.Deserialize(element.Element("Features"));
+            
+            Variables = new VariableCollection();
+            Variables.Deserialize(element.Element("VariableCollection"));
+
+            if (element.Element("DatatypeCollection") == null) 
+                return;
+            
+            DataTypes = new DataTypeCollection();
+            DataTypes.Deserialize(element.Element("DatatypeCollection"));
         }
 
         public override AmlElement ToAml()

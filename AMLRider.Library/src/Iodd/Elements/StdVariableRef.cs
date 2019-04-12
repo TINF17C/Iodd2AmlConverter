@@ -1,25 +1,25 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
     public class StdVariableRef : IoddElement
     {
-        
         #region Attributes
-        
+
         public string Id { get; set; }
-        
+
         [Optional]
         public string DefaultValue { get; set; }
-        
+
         [Optional]
         public int FixedLengthRestriction { get; set; }
-        
+
         [Optional]
         public bool ExcludeFromDataStorage { get; set; }
-        
+
         #endregion
 
         #region Elements
@@ -27,21 +27,67 @@ namespace AMLRider.Library.Iodd.Elements
         public List<StdSingleValueRef> SingleValueRefs { get; set; }
 
         public List<SingleValue> SingleValues { get; set; }
-        
+
         public List<ValueRange> ValueRanges { get; set; }
-        
+
         [Optional]
         public StdRecordItemRef RecordItemRef { get; set; }
-        
-        #endregion
 
-        public StdVariableRef()
-        {
-        }
+        #endregion
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            Id = element.GetAttributeValue("id");
+            if (element.HasAttribute("defaultValue"))
+                DefaultValue = element.GetAttributeValue("defaultValue");
+
+            if (element.HasAttribute("fixedLengthRestriction"))
+                FixedLengthRestriction = int.Parse(element.GetAttributeValue("fixedLengthRestriction"));
+
+            if (element.HasAttribute("excludeFromDataStorage"))
+                ExcludeFromDataStorage = bool.Parse(element.GetAttributeValue("excludeFromDataStorage"));
+
+            if (element.Element("StdSingleValueRef") != null)
+            {
+                SingleValueRefs = new List<StdSingleValueRef>();
+                foreach (var singleValueRefElement in element.Elements("StdSingleValueRef"))
+                {
+                    var singleValueRef = new StdSingleValueRef();
+                    singleValueRef.Deserialize(singleValueRefElement);
+
+                    SingleValueRefs.Add(singleValueRef);
+                }
+            }
+
+            if (element.Element("SingleValue") != null)
+            {
+                SingleValues = new List<SingleValue>();
+                foreach (var singleValueElement in element.Elements("SingleValue"))
+                {
+                    var singleValue = new SingleValue();
+                    singleValue.Deserialize(singleValueElement);
+
+                    SingleValues.Add(singleValue);
+                }
+            }
+
+            if (element.Element("ValueRange") != null)
+            {
+                ValueRanges = new List<ValueRange>();
+                foreach (var valueRangeElement in element.Elements("ValueRange"))
+                {
+                    var valueRange = new ValueRange();
+                    valueRange.Deserialize(valueRangeElement);
+
+                    ValueRanges.Add(valueRange);
+                }
+            }
+
+            if (element.Element("StdRecordItemRef") == null)
+                return;
+
+            RecordItemRef = new StdRecordItemRef();
+            RecordItemRef.Deserialize(element.Element("StdRecordItemRef"));
         }
 
         public override AmlElement ToAml()
