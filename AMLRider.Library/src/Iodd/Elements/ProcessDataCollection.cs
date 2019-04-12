@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -18,7 +19,7 @@ namespace AMLRider.Library.Iodd.Elements
         
         public override void Deserialize(XElement element)
         {
-            foreach (var processDataElement in element.Elements("ProcessData"))
+            foreach (var processDataElement in element.SubElements("ProcessData"))
             {
                 var processData = new ProcessData();
                 processData.Deserialize(processDataElement);

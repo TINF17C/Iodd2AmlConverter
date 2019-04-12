@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -21,10 +22,18 @@ namespace AMLRider.Library.Iodd.Elements
         public List<TextRedefine> TextRedefines { get; set; }
 
         #endregion
+
+        public Language()
+        {
+            Texts = new List<Text>();
+            TextRedefines = new List<TextRedefine>();
+        }
         
         public override void Deserialize(XElement element)
         {
-            foreach (var textElement in element.Elements("Text"))
+            Lang = element.GetAttributeValue("lang");
+            
+            foreach (var textElement in element.SubElements("Text"))
             {
                 var text = new Text();
                 text.Deserialize(textElement);
@@ -32,7 +41,7 @@ namespace AMLRider.Library.Iodd.Elements
                 Texts.Add(text);
             }
             
-            foreach (var textElement in element.Elements("TextRedefine"))
+            foreach (var textElement in element.SubElements("TextRedefine"))
             {
                 var text = new TextRedefine();
                 text.Deserialize(textElement);

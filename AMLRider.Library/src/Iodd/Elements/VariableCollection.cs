@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -19,7 +20,7 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            foreach (var variableElement in element.Elements("Variable"))
+            foreach (var variableElement in element.SubElements("Variable"))
             {
                 var variable = new Variable();
                 variable.Deserialize(variableElement);
@@ -27,7 +28,7 @@ namespace AMLRider.Library.Iodd.Elements
                 Variables.Add(variable);
             }
             
-            foreach (var variableRefElement in element.Elements("StdVariableRef"))
+            foreach (var variableRefElement in element.SubElements("StdVariableRef"))
             {
                 var variableRef = new StdVariableRef();
                 variableRef.Deserialize(variableRefElement);

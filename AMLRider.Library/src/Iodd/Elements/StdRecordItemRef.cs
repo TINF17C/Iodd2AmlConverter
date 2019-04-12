@@ -32,10 +32,10 @@ namespace AMLRider.Library.Iodd.Elements
             if (element.HasAttribute("defaultValue"))
                 DefaultValue = element.GetAttributeValue("defaultValue");
 
-            if (element.Element("StdSingleValueRef") != null)
+            if (element.SubElement("StdSingleValueRef") != null)
             {
                 SingleValueRefs = new List<StdSingleValueRef>();
-                foreach (var singleValueRefElement in element.Elements("StdSingleValueRef"))
+                foreach (var singleValueRefElement in element.SubElements("StdSingleValueRef"))
                 {
                     var singleValueRef = new StdSingleValueRef();
                     singleValueRef.Deserialize(singleValueRefElement);
@@ -44,10 +44,10 @@ namespace AMLRider.Library.Iodd.Elements
                 }
             }
             
-            if (element.Element("SingleValue") != null)
+            if (element.SubElement("SingleValue") != null)
             {
                 SingleValues = new List<SingleValue>();
-                foreach (var singleValueElement in element.Elements("SingleValue"))
+                foreach (var singleValueElement in element.SubElements("SingleValue"))
                 {
                     var singleValue = new SingleValue();
                     singleValue.Deserialize(singleValueElement);
@@ -56,11 +56,11 @@ namespace AMLRider.Library.Iodd.Elements
                 }
             }
 
-            if (element.Element("ValueRange") == null) 
+            if (element.SubElement("ValueRange") == null) 
                 return;
             
             ValueRanges = new List<ValueRange>();
-            foreach (var valueRangeElement in element.Elements("ValueRange"))
+            foreach (var valueRangeElement in element.SubElements("ValueRange"))
             {
                 var valueRange = new ValueRange();
                 valueRange.Deserialize(valueRangeElement);

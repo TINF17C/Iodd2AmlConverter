@@ -24,11 +24,11 @@ namespace AMLRider.Library.Iodd.Elements
         public override void Deserialize(XElement element)
         {
             Value = element.GetAttributeValue("value");
-            if (element.Element("Name") == null)
+            if (element.SubElement("Name") == null)
                 return;
             
             Name = new Name();
-            Name.Deserialize(element.Element("Name"));
+            Name.Deserialize(element.SubElement("Name"));
         }
 
         public override AmlElement ToAml()

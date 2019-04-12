@@ -6,17 +6,13 @@ namespace AMLRider.Library.Iodd.Elements
 {
     public class DeviceVariant : IoddElement
     {
-
         #region Attributes
-        
-        /// <summary>
-        /// The product ID.
-        /// </summary>
-        public int ProductId { get; set; }
-        
+
+        public string ProductId { get; set; }
+
         [Optional]
         public string DeviceSymbol { get; set; }
-        
+
         [Optional]
         public string DeviceIcon { get; set; }
 
@@ -25,22 +21,28 @@ namespace AMLRider.Library.Iodd.Elements
         #region Elements
 
         public Name Name { get; set; }
-        
+
         public Description Description { get; set; }
 
         #endregion
 
         public override void Deserialize(XElement element)
         {
-            ProductId = int.Parse(element.GetAttributeValue("productId"));
+            ProductId = element.GetAttributeValue("productId");
             DeviceSymbol = element.GetAttributeValue("deviceSymbol");
             DeviceIcon = element.GetAttributeValue("deviceIcon");
+
+            if (element.SubElement("Name") != null)
+            {
+                Name = new Name();
+                Name.Deserialize(element.SubElement("Name"));
+            }
+
+            if (element.SubElement("Description") == null)
+                return;
             
-            Name = new Name();
-            Name.Deserialize(element.Element("Name"));  
-                      
             Description = new Description();
-            Description.Deserialize(element.Element("Description"));
+            Description.Deserialize(element.SubElement("Description"));
         }
 
         public override AmlElement ToAml()

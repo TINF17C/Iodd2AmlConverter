@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -11,13 +12,18 @@ namespace AMLRider.Library.Iodd.Elements
         
         [Optional]
         public List<Language> Languages { get; set; }
+
+        public ExternalTextCollection()
+        {
+            Languages = new List<Language>();
+        }
         
         public override void Deserialize(XElement element)
         {
             PrimaryLanguage = new Language();
-            PrimaryLanguage.Deserialize(element.Element("PrimaryLanguage"));
+            PrimaryLanguage.Deserialize(element.SubElement("PrimaryLanguage"));
 
-            foreach (var languageElement in element.Elements("Language"))
+            foreach (var languageElement in element.SubElements("Language"))
             {
                 var language = new Language();
                 language.Deserialize(languageElement);

@@ -24,11 +24,11 @@ namespace AMLRider.Library.Iodd.Elements
             LowerValue = int.Parse(element.GetAttributeValue("lowerValue"));
             UpperValue = int.Parse(element.GetAttributeValue("upperValue"));
 
-            if (element.Element("Name") == null)
+            if (element.SubElement("Name") == null)
                 return;
 
             Name = new Name();
-            Name.Deserialize(element.Element("Name"));
+            Name.Deserialize(element.SubElement("Name"));
         }
 
         public override AmlElement ToAml()

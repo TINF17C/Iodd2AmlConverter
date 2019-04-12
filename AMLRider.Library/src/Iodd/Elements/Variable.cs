@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 using AMLRider.Library.Iodd.DataTypes;
 
 namespace AMLRider.Library.Iodd.Elements
@@ -16,13 +17,13 @@ namespace AMLRider.Library.Iodd.Elements
         public string AccessRights { get; set; }
         
         [Optional]
-        public bool Dynamic { get; set; }
+        public bool? Dynamic { get; set; }
         
         [Optional]
-        public bool ModifiesOtherVariables { get; set; }
+        public bool? ModifiesOtherVariables { get; set; }
         
         [Optional]
-        public bool ExcludedFromDataStorage { get; set; }
+        public bool? ExcludedFromDataStorage { get; set; }
         
         public ushort Index { get; set; }
         
@@ -49,7 +50,41 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            Id = element.GetAttributeValue("id");
+            AccessRights = element.GetAttributeValue("accessRights");
+
+            if (element.HasAttribute("dynamic"))
+                Dynamic = bool.Parse(element.GetAttributeValue("dynamic"));
+
+            if (element.HasAttribute("modifiesOtherVariables"))
+                ModifiesOtherVariables = bool.Parse(element.GetAttributeValue("modifiesOtherVariables"));
+
+            if (element.HasAttribute("excludedFromDataStorage"))
+                ExcludedFromDataStorage = bool.Parse(element.GetAttributeValue("excludedFromDataStorage"));
+            
+            Index = ushort.Parse(element.GetAttributeValue("index"));
+
+            if (element.HasAttribute("defaultValue"))
+                DefaultValue = element.GetAttributeValue("defaultValue");
+            
+
+            if (element.SubElement("RecordItemInfo") != null)
+            {
+                RecordItemInfo = new RecordItemInfo();
+                RecordItemInfo.Deserialize(element.SubElement("RecordItemInfo"));
+            }
+
+            if (element.SubElement("Name") != null)
+            {
+                Name = new Name();
+                Name.Deserialize(element.SubElement("Name"));
+            }
+
+            if (element.SubElement("Description") == null)
+                return;
+            
+            Description = new Description();
+            Description.Deserialize(element.SubElement("Description"));
         }
 
         public override AmlElement ToAml()

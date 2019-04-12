@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -15,18 +17,18 @@ namespace AMLRider.Library.Iodd.Elements
         public ExternalTextCollection ExternalTextCollection { get; set; }
         
         public override void Deserialize(XElement element)
-        {
+        {         
             DocumentInfo = new DocumentInfo();
-            DocumentInfo.Deserialize(element.Element("DocumentInfo"));
+            DocumentInfo.Deserialize(element.SubElement("DocumentInfo"));
             
             ProfileHeader = new ProfileHeader();
-            ProfileHeader.Deserialize(element.Element("ProfileHeader"));
+            ProfileHeader.Deserialize(element.SubElement("ProfileHeader"));
             
             ProfileBody = new ProfileBody();
-            ProfileBody.Deserialize(element.Element("ProfileBody"));
+            ProfileBody.Deserialize(element.SubElement("ProfileBody"));
             
             ExternalTextCollection = new ExternalTextCollection();
-            ExternalTextCollection.Deserialize(element.Element("ExternalTextCollection"));
+            ExternalTextCollection.Deserialize(element.SubElement("ExternalTextCollection"));
         }
 
         public override AmlElement ToAml()

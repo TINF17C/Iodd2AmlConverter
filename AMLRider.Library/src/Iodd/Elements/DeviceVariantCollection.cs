@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
+using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -17,7 +18,7 @@ namespace AMLRider.Library.Iodd.Elements
         
         public override void Deserialize(XElement element)
         {
-            foreach (var deviceVariantElement in element.Elements("DeviceVariant"))
+            foreach (var deviceVariantElement in element.SubElements("DeviceVariant"))
             {
                 var deviceVariant = new DeviceVariant();
                 deviceVariant.Deserialize(deviceVariantElement);

@@ -27,11 +27,11 @@ namespace AMLRider.Library.Iodd.Elements
         {
             Id = element.GetAttributeValue("id");
 
-            if (element.Element("Condition") == null) 
+            if (element.SubElement("Condition") == null) 
                 return;
             
             Condition = new Condition();
-            Condition.Deserialize(element.Element("Condition"));
+            Condition.Deserialize(element.SubElement("Condition"));
         }
 
         public override AmlElement ToAml()

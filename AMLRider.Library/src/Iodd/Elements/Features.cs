@@ -53,7 +53,7 @@ namespace AMLRider.Library.Iodd.Elements
                 return;
             
             SupportedAccessLocks = new SupportedAccessLocks();
-            SupportedAccessLocks.Deserialize(element.Element("SupportedAccessLocks"));
+            SupportedAccessLocks.Deserialize(element.SubElement("SupportedAccessLocks"));
         }
 
         public override AmlElement ToAml()

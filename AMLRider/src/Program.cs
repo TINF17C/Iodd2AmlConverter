@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Xml.Linq;
 using AMLRider.Cli;
 using AMLRider.Cli.Attributes;
 using AMLRider.Cli.Extensions;
 using AMLRider.Library;
+using AMLRider.Library.Iodd.Elements;
 
 namespace AMLRider
 {
@@ -67,12 +69,18 @@ namespace AMLRider
                 return;
             }
 
-            var handler = new ConversionHandler();
-            string convertedXml;
+            // var handler = new ConversionHandler();
+            // string convertedXml;
             
             try
             {
-                convertedXml = handler.Convert(fileText);
+                // convertedXml = handler.Convert(fileText);
+                var root = XElement.Parse(fileText);
+                
+                var device = new IODevice();
+                device.Deserialize(root);
+
+                int dummy;
             }
             catch (Exception)
             {
@@ -87,7 +95,7 @@ namespace AMLRider
                     if (!ShouldOverride(options.Output))
                         return;
 
-                    File.WriteAllText(options.Output, convertedXml);
+                    // File.WriteAllText(options.Output, convertedXml);
                 }
                 catch (IOException)
                 {
@@ -104,7 +112,7 @@ namespace AMLRider
                 if (!ShouldOverride(outputFile))
                     return;
 
-                File.WriteAllText(outputFile, convertedXml);
+                // File.WriteAllText(outputFile, convertedXml);
             }
         }
 

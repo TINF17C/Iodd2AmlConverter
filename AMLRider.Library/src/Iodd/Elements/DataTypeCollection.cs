@@ -39,7 +39,7 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            throw new System.NotImplementedException();
+            // TODO:
         }
 
         public override AmlElement ToAml()

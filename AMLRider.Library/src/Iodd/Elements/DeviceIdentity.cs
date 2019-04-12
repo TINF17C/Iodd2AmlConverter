@@ -77,17 +77,17 @@ namespace AMLRider.Library.Iodd.Elements
             
             // TODO: AdditionalDeviceIds
             
-            VendorText = element.Element("VendorText")?.GetAttributeValue("textId");
-            VendorUrl = element.Element("VendorLogo")?.GetAttributeValue("textId");
+            VendorText = element.SubElement("VendorText")?.GetAttributeValue("textId");
+            VendorUrl = element.SubElement("VendorLogo")?.GetAttributeValue("textId");
 
-            if (element.Element("VendorLogo") != null)
-                VendorLogo = element.Element("VendorLogo").GetAttributeValue("name");
+            if (element.SubElement("VendorLogo") != null)
+                VendorLogo = element.SubElement("VendorLogo").GetAttributeValue("name");
 
-            DeviceName = element.Element("DeviceName")?.GetAttributeValue("textId");
-            DeviceFamily = element.Element("DeviceFamily")?.GetAttributeValue("textId");
+            DeviceName = element.SubElement("DeviceName")?.GetAttributeValue("textId");
+            DeviceFamily = element.SubElement("DeviceFamily")?.GetAttributeValue("textId");
             
             DeviceVariantCollection = new DeviceVariantCollection();
-            DeviceVariantCollection.Deserialize(element.Element("DeviceVariantCollection"));
+            DeviceVariantCollection.Deserialize(element.SubElement("DeviceVariantCollection"));
         }
 
         public override AmlElement ToAml()
