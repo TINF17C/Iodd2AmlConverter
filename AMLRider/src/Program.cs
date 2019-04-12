@@ -4,9 +4,8 @@ using System.Xml.Linq;
 using AMLRider.Cli;
 using AMLRider.Cli.Attributes;
 using AMLRider.Cli.Extensions;
-using AMLRider.Cli.Helpers;
 using AMLRider.Library;
-using AMLRider.Library.Rules;
+using AMLRider.Library.Iodd.Elements;
 
 namespace AMLRider
 {
@@ -23,6 +22,14 @@ namespace AMLRider
     public static class Program
     {
 
+        public static readonly string AmlRiderLogo =
+            @"  ___            _______ _     _           @" +
+            @" / _ \          | | ___ (_)   | |          @" +
+            @"/ /_\ \_ __ ___ | | |_/ /_  __| | ___ _ __ @" +
+            @"|  _  | '_ ` _ \| |    /| |/ _` |/ _ \ '__|@" +
+            @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
+            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @";
+        
         private static bool ShouldOverride(string file)
         {
             var shouldOverride = true;
@@ -62,12 +69,18 @@ namespace AMLRider
                 return;
             }
 
-            var handler = new ConversionHandler();
-            string convertedXml;
+            // var handler = new ConversionHandler();
+            // string convertedXml;
             
             try
             {
-                convertedXml = handler.Convert(fileText);
+                // convertedXml = handler.Convert(fileText);
+                var root = XElement.Parse(fileText);
+                
+                var device = new IODevice();
+                device.Deserialize(root);
+
+                int dummy;
             }
             catch (Exception)
             {
@@ -82,7 +95,7 @@ namespace AMLRider
                     if (!ShouldOverride(options.Output))
                         return;
 
-                    File.WriteAllText(options.Output, convertedXml);
+                    // File.WriteAllText(options.Output, convertedXml);
                 }
                 catch (IOException)
                 {
@@ -99,12 +112,14 @@ namespace AMLRider
                 if (!ShouldOverride(outputFile))
                     return;
 
-                File.WriteAllText(outputFile, convertedXml);
+                // File.WriteAllText(outputFile, convertedXml);
             }
         }
 
         public static void Main(string[] args)
         {
+            Console.WriteLine(AmlRiderLogo.Replace("@", Environment.NewLine));
+            
             new CommandLineParser()
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
