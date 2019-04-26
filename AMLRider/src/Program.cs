@@ -12,9 +12,11 @@ using NAudio.Wave;
 
 namespace AMLRider
 {
+
     [Verb("convert", HelpText = "Converts an IODD file to an AML file.")]
     public class ConvertOptions
     {
+
         [Option('f', "file", IsRequired = true, HelpText = "The IODD file to convert.")]
         public string File { get; set; }
 
@@ -23,18 +25,20 @@ namespace AMLRider
 
         [Option('d', "dude", IsRequired = false, HelpText = "Surprise.")]
         public bool Dude { get; set; }
+
     }
 
     public static class Program
     {
-        public static readonly string AmlRiderLogo =
+
+        private const string AmlRiderLogo =
             @"  ___            _______ _     _           @" +
             @" / _ \          | | ___ (_)   | |          @" +
             @"/ /_\ \_ __ ___ | | |_/ /_  __| | ___ _ __ @" +
             @"|  _  | '_ ` _ \| |    /| |/ _` |/ _ \ '__|@" +
             @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
             @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @";
-        
+
         private static Thread AvengersThread { get; set; }
 
         private static bool ShouldOverride(string file)
@@ -44,7 +48,7 @@ namespace AMLRider
                 return true;
 
             Console.WriteLine($"The file {file} does exist already.");
-            Console.Write("Do you want to override it?[Y/n]");
+            Console.Write("Do you want to override it? [Y/n]");
             var key = Console.ReadKey().KeyChar;
 
             if (key != 'y' || key != 'Y')
@@ -79,19 +83,12 @@ namespace AMLRider
                 return;
             }
 
-            // var handler = new ConversionHandler();
-            // string convertedXml;
-
-
             try
             {
-                // convertedXml = handler.Convert(fileText);
                 var root = XElement.Parse(fileText);
 
                 var device = new IODevice();
                 device.Deserialize(root);
-
-                int dummy;
             }
             catch (Exception)
             {
@@ -132,8 +129,8 @@ namespace AMLRider
             void Run()
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                const string resourceName = "AMLRider.Resources.AvengersTheme.mp3";
 
+                const string resourceName = "AMLRider.Resources.AvengersTheme.mp3";
                 var stream = assembly.GetManifestResourceStream(resourceName);
 
                 var mp3FileReader = new Mp3FileReader(stream);
@@ -160,7 +157,9 @@ namespace AMLRider
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
 
-            AvengersThread.Join();
+            AvengersThread?.Join();
         }
+
     }
+
 }
