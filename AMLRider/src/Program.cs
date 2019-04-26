@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Xml.Linq;
 using AMLRider.Cli;
 using AMLRider.Cli.Attributes;
 using AMLRider.Cli.Extensions;
 using AMLRider.Library;
 using AMLRider.Library.Iodd.Elements;
+using NAudio.Wave;
 
 namespace AMLRider
 {
@@ -17,11 +20,13 @@ namespace AMLRider
 
         [Option('o', "output", IsRequired = false, HelpText = "Specifies the output file path.")]
         public string Output { get; set; }
+
+        [Option('d', "dude", IsRequired = false, HelpText = "Surprise.")]
+        public bool Dude { get; set; }
     }
 
     public static class Program
     {
-
         public static readonly string AmlRiderLogo =
             @"  ___            _______ _     _           @" +
             @" / _ \          | | ___ (_)   | |          @" +
@@ -30,12 +35,14 @@ namespace AMLRider
             @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
             @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @";
         
+        private static Thread AvengersThread { get; set; }
+
         private static bool ShouldOverride(string file)
         {
             var shouldOverride = true;
-            if (!File.Exists(file)) 
+            if (!File.Exists(file))
                 return true;
-            
+
             Console.WriteLine($"The file {file} does exist already.");
             Console.Write("Do you want to override it?[Y/n]");
             var key = Console.ReadKey().KeyChar;
@@ -45,9 +52,12 @@ namespace AMLRider
 
             return shouldOverride;
         }
-        
+
         private static void OnConvertOptionsParsed(ConvertOptions options)
         {
+            if (options.Dude)
+                RunAvengersThemeAudioThread();
+
             Console.WriteLine(options.File);
             Console.WriteLine(options.Output);
 
@@ -71,12 +81,13 @@ namespace AMLRider
 
             // var handler = new ConversionHandler();
             // string convertedXml;
-            
+
+
             try
             {
                 // convertedXml = handler.Convert(fileText);
                 var root = XElement.Parse(fileText);
-                
+
                 var device = new IODevice();
                 device.Deserialize(root);
 
@@ -116,13 +127,40 @@ namespace AMLRider
             }
         }
 
+        private static void RunAvengersThemeAudioThread()
+        {
+            void Run()
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                const string resourceName = "AMLRider.Resources.AvengersTheme.mp3";
+
+                var stream = assembly.GetManifestResourceStream(resourceName);
+
+                var mp3FileReader = new Mp3FileReader(stream);
+                var waveStream = WaveFormatConversionStream.CreatePcmStream(mp3FileReader);
+                var blockAlignReductionStream = new BlockAlignReductionStream(waveStream);
+
+                var directOut = new DirectSoundOut(20);
+                directOut.Init(blockAlignReductionStream);
+
+                directOut.Play();
+                while (directOut.PlaybackState == PlaybackState.Playing)
+                    Thread.Sleep(100);
+            }
+
+            AvengersThread = new Thread(Run) {IsBackground = true};
+            AvengersThread.Start();
+        }
+
         public static void Main(string[] args)
         {
             Console.WriteLine(AmlRiderLogo.Replace("@", Environment.NewLine));
-            
+
             new CommandLineParser()
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
+
+            AvengersThread.Join();
         }
     }
 }
