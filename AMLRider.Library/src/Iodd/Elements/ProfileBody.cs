@@ -22,7 +22,14 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            return new SystemUnitClassLib
+            {
+                Name = "ComponentSystemUnitClassLib",
+                SystemUnitClass = new SystemUnitClass
+                {
+                    Name = "Device"
+                }
+            };
         }
     }
 }
