@@ -33,7 +33,15 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var file = new CaexFile
+            {
+                AdditionalInformation = DocumentInfo.ToAml() as AdditionalInformation
+            };
+
+            file.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
+            file.InternalElements.Add(ProfileBody.ToAml() as InternalElement);
+
+            return file;
         }
     }
 }

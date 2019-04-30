@@ -92,7 +92,33 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = "DeviceIdentity",
+                Id = "DeviceIdentity"
+            };
+            
+            element.Attributes.Add(CreateAttribute("vendorId", "integer", VendorId.ToString()));
+            element.Attributes.Add(CreateAttribute("vendorName", "string", VendorName));
+            element.Attributes.Add(CreateAttribute("deviceId", "integer", DeviceId));
+            element.Attributes.Add(CreateAttribute("VendorText", "string", VendorText));
+            element.Attributes.Add(CreateAttribute("VendorUrl", "anyURI", VendorUrl));
+            element.Attributes.Add(CreateAttribute("DeviceFamily", "string", DeviceFamily));
+
+            return element;
+        }
+
+        private static Attribute CreateAttribute(string name, string type, string value)
+        {
+            return new Attribute
+            {
+                Name = name,
+                AttributeDataType = type,
+                Value = new Value
+                {
+                    Content = value
+                }
+            };
         }
     }
     
