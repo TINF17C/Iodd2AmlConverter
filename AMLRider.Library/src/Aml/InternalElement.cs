@@ -14,11 +14,14 @@ namespace AMLRider.Library.Aml
         
         public SupportedRoleClass SupportedRoleClass { get; set; }
         
+        public List<Attribute> Attributes { get; set; }
+        
         public List<ExternalInterface> ExternalInterfaces { get; set; }
 
         public InternalElement()
         {
             ExternalInterfaces = new List<ExternalInterface>();
+            Attributes = new List<Attribute>();
         }
 
         public override XElement Serialize()
@@ -29,6 +32,12 @@ namespace AMLRider.Library.Aml
 
             var roleClassElement = SupportedRoleClass.Serialize();
             element.Add(roleClassElement);
+
+            foreach (var attribute in Attributes)
+            {
+                var attributeElement = attribute.Serialize();
+                element.Add(attribute);
+            }
             
             foreach (var externalInterface in ExternalInterfaces)
             {
