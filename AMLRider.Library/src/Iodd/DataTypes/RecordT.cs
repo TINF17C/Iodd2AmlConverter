@@ -13,7 +13,7 @@ namespace AMLRider.Library.Iodd.DataTypes
         public List<RecordItem> RecordItems { get; set; }
         public override void Deserialize(XElement element)
         {
-            base.Deserialize();
+            base.Deserialize(element);
             BitLength = int.Parse(element.GetAttributeValue("bitLength"));
             foreach (var recordItem in element.SubElements("RecordItem"))
             {
