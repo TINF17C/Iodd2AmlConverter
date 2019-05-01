@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
 
@@ -8,12 +9,12 @@ namespace AMLRider.Library.Iodd.Elements
         public PhysicalLayer PhysicalLayer { get; set; }
         public override void Deserialize(XElement element)
         {
-            PhysicalLayer.Deserialize();
+            PhysicalLayer.Deserialize(element);
         }
 
         public override AmlElement ToAml()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
