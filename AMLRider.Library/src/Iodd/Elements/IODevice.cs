@@ -40,6 +40,8 @@ namespace AMLRider.Library.Iodd.Elements
             };
 
             file.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
+            file.InternalElements.Add(ExternalTextCollection.ToAml() as InternalElement);
+            
             return file;
         }
     }

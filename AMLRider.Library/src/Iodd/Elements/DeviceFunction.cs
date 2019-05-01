@@ -12,6 +12,8 @@ namespace AMLRider.Library.Iodd.Elements
         public DataTypeCollection DataTypeCollection { get; set; }
 
         public VariableCollection VariableCollection { get; set; }
+        
+        public ProcessDataCollection ProcessDataCollection { get; set; }
 
         public override void Deserialize(XElement element)
         {
@@ -33,7 +35,20 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = "DeviceFunction",
+                Id = "DeviceFunction"
+            };
+            
+            if(Features != null)
+                element.InternalElements.Add(Features.ToAml() as InternalElement);
+            
+            element.InternalElements.Add(VariableCollection.ToAml() as InternalElement);
+            element.InternalElements.Add(DataTypeCollection.ToAml() as InternalElement);
+            element.InternalElements.Add(ProcessDataCollection.ToAml() as InternalElement);
+
+            return element;
         }
     }
 }
