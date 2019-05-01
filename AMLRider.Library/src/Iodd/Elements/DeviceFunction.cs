@@ -4,15 +4,17 @@ using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
+
     public class DeviceFunction : IoddElement
     {
+
         public Features Features { get; set; }
 
         [Optional]
         public DataTypeCollection DataTypeCollection { get; set; }
 
         public VariableCollection VariableCollection { get; set; }
-        
+
         public ProcessDataCollection ProcessDataCollection { get; set; }
 
         public override void Deserialize(XElement element)
@@ -25,10 +27,10 @@ namespace AMLRider.Library.Iodd.Elements
 
             VariableCollection = new VariableCollection();
             VariableCollection.Deserialize(element.SubElement("VariableCollection"));
-            
+
             ProcessDataCollection = new ProcessDataCollection();
             ProcessDataCollection.Deserialize(element.SubElement("ProcessDataCollection"));
-            
+
             if (element.SubElement("DatatypeCollection") == null)
                 return;
 
@@ -43,15 +45,22 @@ namespace AMLRider.Library.Iodd.Elements
                 Name = "DeviceFunction",
                 Id = "DeviceFunction"
             };
-            
-            if(Features != null)
+
+            if (Features != null)
                 element.InternalElements.Add(Features.ToAml() as InternalElement);
-            
-            element.InternalElements.Add(VariableCollection.ToAml() as InternalElement);
-            element.InternalElements.Add(DataTypeCollection.ToAml() as InternalElement);
-            element.InternalElements.Add(ProcessDataCollection.ToAml() as InternalElement);
+
+            if (VariableCollection != null)
+                element.InternalElements.Add(VariableCollection.ToAml() as InternalElement);
+
+            if (DataTypeCollection != null)
+                element.InternalElements.Add(DataTypeCollection.ToAml() as InternalElement);
+
+            if (ProcessDataCollection != null)
+                element.InternalElements.Add(ProcessDataCollection.ToAml() as InternalElement);
 
             return element;
         }
+
     }
+
 }

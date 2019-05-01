@@ -1,12 +1,15 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
 using AMLRider.Library.Extensions;
 
 namespace AMLRider.Library.Iodd.Elements
 {
+
     public class ProcessData : IoddElement
     {
-        
+
         #region Attributes
 
         public string Id { get; set; }
@@ -16,8 +19,8 @@ namespace AMLRider.Library.Iodd.Elements
         #region Elements
 
         [Optional]
-        public ProcessDataIn ProcessDataIn { get; set; }
-        
+        public List<ProcessDataIn> ProcessDataIns { get; set; }
+
         /// <summary>
         /// This is optional.
         /// </summary>
@@ -26,19 +29,27 @@ namespace AMLRider.Library.Iodd.Elements
 
         #endregion
 
+        public ProcessData()
+        {
+            ProcessDataIns = new List<ProcessDataIn>();
+        }
+
         public override void Deserialize(XElement element)
         {
             Id = element.GetAttributeValue("id");
 
-            if (element.SubElement("ProcessDataIn") != null)
+            foreach (var processDataElement in element.SubElements("ProcessDataIn")
+                .Concat(element.SubElements("ProcessDataOut")))
             {
-                ProcessDataIn = new ProcessDataIn();
-                ProcessDataIn.Deserialize(element.SubElement("ProcessDataIn"));
+                var processDataIn = new ProcessDataIn();
+                processDataIn.Deserialize(processDataElement);
+
+                ProcessDataIns.Add(processDataIn);
             }
-            
-            if (element.SubElement("Condition") == null) 
+
+            if (element.SubElement("Condition") == null)
                 return;
-            
+
             Condition = new Condition();
             Condition.Deserialize(element.SubElement("Condition"));
         }
@@ -50,9 +61,9 @@ namespace AMLRider.Library.Iodd.Elements
                 Name = Id
             };
 
-            if (ProcessDataIn != null)
+            foreach (var processDataIn in ProcessDataIns)
             {
-                var amlElement = ProcessDataIn.ToAml() as InternalElement;
+                var amlElement = processDataIn.ToAml() as InternalElement;
                 element.InternalElements.Add(amlElement);
             }
 
@@ -64,5 +75,7 @@ namespace AMLRider.Library.Iodd.Elements
 
             return element;
         }
+
     }
+
 }

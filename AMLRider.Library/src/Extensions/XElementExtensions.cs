@@ -22,7 +22,7 @@ namespace AMLRider.Library.Extensions
         {
             return element.Element(element.GetDefaultNamespace() + elementName);
         }
-
+        
         public static IEnumerable<XElement> SubElements(this XElement element, string elementName)
         {
             return element.Elements(element.GetDefaultNamespace() + elementName);

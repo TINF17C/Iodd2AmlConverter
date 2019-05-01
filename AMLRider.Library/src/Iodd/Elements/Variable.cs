@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
 using AMLRider.Library.Extensions;
 using AMLRider.Library.Iodd.DataTypes;
+using Attribute = AMLRider.Library.Aml.Attribute;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -68,6 +70,14 @@ namespace AMLRider.Library.Iodd.Elements
                 DefaultValue = element.GetAttributeValue("defaultValue");
 
 
+            if (element.SubElement("Datatype") != null)
+            {
+                var subElement = element.SubElement("Datatype");
+
+                var id = subElement.Attribute(subElement.GetNamespaceOfPrefix("xsi") + "type")?.Value;
+                DataType = DataType.CreateDataTypeBasedOnId(id, subElement);
+            }
+
             if (element.SubElement("RecordItemInfo") != null)
             {
                 RecordItemInfo = new RecordItemInfo();
@@ -98,10 +108,14 @@ namespace AMLRider.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("index", "xs:integer", Index.ToString()));
             element.Attributes.Add(CreateAttribute("accessRights", "xs:string", AccessRights ?? string.Empty));
 
-            element.Attributes.Add(DataType.ToAml() as Attribute);
+            if (DataType != null)
+                element.Attributes.Add(DataType.ToAml() as Attribute);
 
-            element.AmlName = new AmlName {Content = Name?.TextId};
-            element.AmlDescription = new AmlDescription {Content = Description?.TextId};
+            if (Name != null)
+                element.AmlName = new AmlName {Content = Name.TextId};
+
+            if (Description != null)
+                element.AmlDescription = new AmlDescription {Content = Description.TextId};
 
             return element;
         }

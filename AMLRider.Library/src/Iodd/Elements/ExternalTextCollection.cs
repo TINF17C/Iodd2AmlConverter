@@ -34,11 +34,21 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            return new InternalElement
+            var element = new InternalElement
             {
-                Name = "ExternalTextCollection",
-                Id = "ExternalTextCollection"
+                Name = "aml-text=TI_TextCollection"
             };
+
+            var primaryLanguageAml = PrimaryLanguage.ToAml() as InternalElement;
+            element.InternalElements.Add(primaryLanguageAml);
+
+            foreach (var language in Languages)
+            {
+                var languageAml = language.ToAml() as InternalElement;
+                element.InternalElements.Add(languageAml);
+            }
+
+            return element;
         }
     }
 }
