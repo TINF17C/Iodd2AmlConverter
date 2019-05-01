@@ -33,9 +33,10 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            return new AdditionalInformation()
+            return new AdditionalInformation
             {
-                WriterVendor = Copyright
+                WriterVendor = Copyright,
+                LastWritingDateTime = DateTime.Now
             };
         }
     }

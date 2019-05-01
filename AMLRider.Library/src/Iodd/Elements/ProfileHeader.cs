@@ -35,7 +35,7 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            var internalElement = new InternalElement()
+            var internalElement = new InternalElement
             {
                 Name = "IODD",
                 SupportedRoleClass = new SupportedRoleClass()

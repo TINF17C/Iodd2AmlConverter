@@ -16,6 +16,8 @@ namespace AMLRider.Library.Aml
 
         public AdditionalInformation AdditionalInformation { get; set; }
 
+        public SystemUnitClassLib SystemUnitClassLib { get; set; }
+
         public List<InternalElement> InternalElements { get; set; }
 
         public CaexFile()
@@ -38,6 +40,18 @@ namespace AMLRider.Library.Aml
             {
                 var infoElement = AdditionalInformation.Serialize();
                 element.Add(infoElement);
+            }
+
+            if (SystemUnitClassLib != null)
+            {
+                var classElement = SystemUnitClassLib.Serialize();
+                element.Add(classElement);
+            }
+
+            foreach (var internalElement in InternalElements)
+            {
+                var xmlElement = internalElement.Serialize();
+                element.Add(xmlElement);
             }
 
             return element;

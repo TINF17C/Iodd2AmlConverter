@@ -98,12 +98,14 @@ namespace AMLRider.Library.Iodd.Elements
                 Id = "DeviceIdentity"
             };
             
-            element.Attributes.Add(CreateAttribute("vendorId", "integer", VendorId.ToString()));
-            element.Attributes.Add(CreateAttribute("vendorName", "string", VendorName));
-            element.Attributes.Add(CreateAttribute("deviceId", "integer", DeviceId));
-            element.Attributes.Add(CreateAttribute("VendorText", "string", VendorText));
-            element.Attributes.Add(CreateAttribute("VendorUrl", "anyURI", VendorUrl));
-            element.Attributes.Add(CreateAttribute("DeviceFamily", "string", DeviceFamily));
+            element.Attributes.Add(CreateAttribute("vendorId", "xs:integer", VendorId.ToString()));
+            element.Attributes.Add(CreateAttribute("vendorName", "xs:string", VendorName));
+            element.Attributes.Add(CreateAttribute("deviceId", "xs:integer", DeviceId));
+            element.Attributes.Add(CreateAttribute("VendorText", "xs:string", VendorText));
+            element.Attributes.Add(CreateAttribute("VendorUrl", "xs:anyURI", VendorUrl));
+            element.Attributes.Add(CreateAttribute("DeviceFamily", "xs:string", DeviceFamily));
+            
+            element.Attributes.Add(CreateAttribute("DeviceName", "xs:string", DeviceName));
 
             return element;
         }

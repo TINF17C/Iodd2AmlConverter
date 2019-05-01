@@ -22,13 +22,18 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
+            var systemClass = new SystemUnitClass
+            {
+                Name = "Device"
+            };
+
+            var identityElement = DeviceIdentity.ToAml() as InternalElement;
+            systemClass.InternalElements.Add(identityElement);
+            
             return new SystemUnitClassLib
             {
                 Name = "ComponentSystemUnitClassLib",
-                SystemUnitClass = new SystemUnitClass
-                {
-                    Name = "Device"
-                }
+                SystemUnitClass = systemClass
             };
         }
     }

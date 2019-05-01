@@ -35,12 +35,11 @@ namespace AMLRider.Library.Iodd.Elements
         {
             var file = new CaexFile
             {
-                AdditionalInformation = DocumentInfo.ToAml() as AdditionalInformation
+                AdditionalInformation = DocumentInfo.ToAml() as AdditionalInformation,
+                SystemUnitClassLib = ProfileBody.ToAml() as SystemUnitClassLib
             };
 
             file.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
-            file.InternalElements.Add(ProfileBody.ToAml() as InternalElement);
-
             return file;
         }
     }
