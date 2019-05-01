@@ -25,7 +25,10 @@ namespace AMLRider.Library.Iodd.Elements
 
             VariableCollection = new VariableCollection();
             VariableCollection.Deserialize(element.SubElement("VariableCollection"));
-
+            
+            ProcessDataCollection = new ProcessDataCollection();
+            ProcessDataCollection.Deserialize(element.SubElement("ProcessDataCollection"));
+            
             if (element.SubElement("DatatypeCollection") == null)
                 return;
 

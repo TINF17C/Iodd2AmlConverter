@@ -15,6 +15,9 @@ namespace AMLRider.Library.Iodd.Elements
 
         #region Elements
 
+        [Optional]
+        public ProcessDataIn ProcessDataIn { get; set; }
+        
         /// <summary>
         /// This is optional.
         /// </summary>
@@ -27,6 +30,12 @@ namespace AMLRider.Library.Iodd.Elements
         {
             Id = element.GetAttributeValue("id");
 
+            if (element.SubElement("ProcessDataIn") != null)
+            {
+                ProcessDataIn = new ProcessDataIn();
+                ProcessDataIn.Deserialize(element.SubElement("ProcessDataIn"));
+            }
+            
             if (element.SubElement("Condition") == null) 
                 return;
             
@@ -36,7 +45,24 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = Id
+            };
+
+            if (ProcessDataIn != null)
+            {
+                var amlElement = ProcessDataIn.ToAml() as InternalElement;
+                element.InternalElements.Add(amlElement);
+            }
+
+            if (Condition != null)
+            {
+                var amlElement = Condition.ToAml() as InternalElement;
+                element.InternalElements.Add(amlElement);
+            }
+
+            return element;
         }
     }
 }
