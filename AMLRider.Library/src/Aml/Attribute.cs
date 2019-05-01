@@ -16,6 +16,8 @@ namespace AMLRider.Library.Aml
         public Value Value { get; set; }
 
         public List<Attribute> Attributes { get; set; }
+        
+        public RefSemantic RefSemantic { get; set; }
 
         public Attribute()
         {
@@ -28,6 +30,12 @@ namespace AMLRider.Library.Aml
             element.SetAttributeValue("Name", Name);
             element.SetAttributeValue("AttributeDataType", AttributeDataType);
 
+            if (RefSemantic != null)
+            {
+                var refElement = RefSemantic.Serialize();
+                element.Add(refElement);
+            }
+            
             if (DefaultValue != null)
             {
                 var defaultValueElement = DefaultValue.Serialize();

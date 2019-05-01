@@ -30,7 +30,19 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = "ProcessDataCollection",
+                Id = "ProcessDataCollection"
+            };
+
+            foreach (var processData in ProcessDataList)
+            {
+                var amlElement = processData.ToAml() as InternalElement;
+                element.InternalElements.Add(amlElement);
+            }
+
+            return element;
         }
 
         public IEnumerator<ProcessData> GetEnumerator()
