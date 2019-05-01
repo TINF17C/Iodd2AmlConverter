@@ -39,12 +39,12 @@ namespace AMLRider.Library.Iodd.Elements
 
             foreach (var @event in Events)
             {
-                //internalElement.InternalElements.Add(@event.ToAml() as InternalElement);
+                internalElement.InternalElements.Add(@event.ToAml() as InternalElement);
             }
 
             foreach (var stdEventRef in StdEventRefs)
             {
-                //internalElement.InternalElements.Add(stdEventRef.ToAml() as InternalElement);
+                internalElement.InternalElements.Add(stdEventRef.ToAml() as InternalElement);
             }
 
             return internalElement;
