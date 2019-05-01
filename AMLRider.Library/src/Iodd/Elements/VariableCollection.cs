@@ -39,12 +39,30 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = "VariableCollection",
+                Id = "VariableCollection"
+            };
+
+            foreach (var variable in Variables)
+            {
+                var amlElement = variable.ToAml() as InternalElement;
+                element.InternalElements.Add(amlElement);
+            }
+
+            foreach (var variableRef in StdVariableRefs)
+            {
+                var amlElement = variableRef.ToAml() as InternalElement;
+                element.InternalElements.Add(amlElement);
+            }
+
+            return element;
         }
 
         IEnumerator<StdVariableRef> IEnumerable<StdVariableRef>.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return StdVariableRefs.GetEnumerator();
         }
 
         public IEnumerator<Variable> GetEnumerator()

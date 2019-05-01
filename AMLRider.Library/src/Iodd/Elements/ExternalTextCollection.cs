@@ -34,7 +34,11 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            return new InternalElement
+            {
+                Name = "ExternalTextCollection",
+                Id = "ExternalTextCollection"
+            };
         }
     }
 }

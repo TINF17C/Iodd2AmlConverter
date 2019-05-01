@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using AMLRider.Library.Iodd.Elements;
 
 namespace AMLRider.Library.Aml
 {
@@ -15,7 +16,9 @@ namespace AMLRider.Library.Aml
         public SupportedRoleClass SupportedRoleClass { get; set; }
 
         public List<Attribute> Attributes { get; set; }
-
+        
+        public List<InternalElement> InternalElements { get; set; }
+        
         public List<ExternalInterface> ExternalInterfaces { get; set; }
         
         public AmlName AmlName { get; set; }
@@ -24,8 +27,9 @@ namespace AMLRider.Library.Aml
 
         public InternalElement()
         {
-            ExternalInterfaces = new List<ExternalInterface>();
             Attributes = new List<Attribute>();
+            InternalElements = new List<InternalElement>();
+            ExternalInterfaces = new List<ExternalInterface>();
         }
 
         public override XElement Serialize()
@@ -44,6 +48,12 @@ namespace AMLRider.Library.Aml
             {
                 var attributeElement = attribute.Serialize();
                 element.Add(attributeElement);
+            }
+
+            foreach (var internalElement in InternalElements)
+            {
+                var xmlElement = internalElement.Serialize();
+                element.Add(xmlElement);
             }
 
             foreach (var externalInterface in ExternalInterfaces)

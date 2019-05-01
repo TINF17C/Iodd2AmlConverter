@@ -39,8 +39,32 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var element = new InternalElement
+            {
+                Name = "SupportedAccessLocks"
+            };
+            
+            element.Attributes.Add(CreateAttribute("parameter", Parameter));
+            element.Attributes.Add(CreateAttribute("dataStorage", DataStorage));
+            element.Attributes.Add(CreateAttribute("localUserInterface", LocalUserInterface));
+            element.Attributes.Add(CreateAttribute("localParameterization", LocalParameterization));
+
+            return element;
         }
+        
+        private static Aml.Attribute CreateAttribute(string name, bool value)
+        {
+            return new Aml.Attribute
+            {
+                Name = name,
+                AttributeDataType = "xs:boolean",
+                Value = new Value
+                {
+                    Content = value.ToString()
+                }
+            };
+        }
+        
     }
     
 }

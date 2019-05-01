@@ -29,6 +29,9 @@ namespace AMLRider.Library.Iodd.Elements
 
             var identityElement = DeviceIdentity.ToAml() as InternalElement;
             systemClass.InternalElements.Add(identityElement);
+
+            var functionElement = DeviceFunction.ToAml() as InternalElement;
+            systemClass.InternalElements.Add(functionElement);
             
             return new SystemUnitClassLib
             {

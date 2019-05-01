@@ -7,8 +7,10 @@ using Attribute = AMLRider.Library.Aml.Attribute;
 
 namespace AMLRider.Library.Iodd.Elements
 {
+
     public class StdVariableRef : IoddElement
     {
+
         #region Attributes
 
         public string Id { get; set; }
@@ -94,46 +96,83 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            var stdVariableRef = new InternalElement();
-            stdVariableRef.Name = Id;
-            stdVariableRef.Id = Id;
-            var defaultValue = new Attribute();
-            defaultValue.Value = new Value
+            var stdVariableRef = new InternalElement
             {
-                Content = DefaultValue
+                Name = Id,
+                Id = Id
             };
-            var fixedLengthRestriction = new Attribute();
-            fixedLengthRestriction.Value = new Value
+
+            if (DefaultValue != null)
             {
-                Content = FixedLengthRestriction.ToString()
-            };
-            var excludeFromDataStorage = new Attribute();
-            excludeFromDataStorage.Value = new Value
+                var defaultValue = new Attribute
+                {
+                    Name = "defaultValue",
+                    AttributeDataType = "xs:integer",
+                    Value = new Value
+                    {
+                        Content = DefaultValue
+                    }
+                };
+                
+                stdVariableRef.Attributes.Add(defaultValue);
+            }
+            
+            var fixedLengthRestriction = new Attribute
             {
-                Content = ExcludeFromDataStorage.ToString()
+                Name = "fixedLengthRestriction",
+                AttributeDataType = "xs:integer",
+                Value = new Value
+                {
+                    Content = FixedLengthRestriction.ToString()
+                }
             };
-            stdVariableRef.Attributes.Add(defaultValue);
+
+            var excludeFromDataStorage = new Attribute
+            {
+                Name = "excludeFromDataStorage",
+                AttributeDataType = "xs:boolean",
+                Value = new Value
+                {
+                    Content = ExcludeFromDataStorage.ToString()
+                }
+            };
+            
             stdVariableRef.Attributes.Add(fixedLengthRestriction);
             stdVariableRef.Attributes.Add(excludeFromDataStorage);
-            foreach (var singleValueRef in SingleValueRefs)
+
+            if (SingleValueRefs != null)
             {
-                var amlElement = singleValueRef.ToAml();
-                stdVariableRef.Attributes.Add(amlElement as Attribute);
+                foreach (var singleValueRef in SingleValueRefs)
+                {
+                    var amlElement = singleValueRef.ToAml();
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                }
             }
-            foreach (var singleValue in SingleValues)
+
+            if (SingleValues != null)
             {
-                var amlElement = singleValue.ToAml();
-                stdVariableRef.Attributes.Add(amlElement as Attribute);
+                foreach (var singleValue in SingleValues)
+                {
+                    var amlElement = singleValue.ToAml();
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                }
             }
-            foreach (var valueRange in ValueRanges)
+
+            if (ValueRanges != null)
             {
-                var amlElement = valueRange.ToAml();
-                stdVariableRef.Attributes.Add(amlElement as Attribute);
+                foreach (var valueRange in ValueRanges)
+                {
+                    var amlElement = valueRange.ToAml();
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                }
             }
+
             if (RecordItemRef != null)
                 stdVariableRef.Attributes.Add(RecordItemRef.ToAml() as Attribute);
-            
+
             return stdVariableRef;
         }
+
     }
+
 }
