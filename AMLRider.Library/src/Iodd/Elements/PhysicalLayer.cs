@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Xml.Linq;
@@ -12,7 +13,7 @@ namespace AMLRider.Library.Iodd.Elements
         public int MinCycleTime { get; set; }
         public bool SioSupported { get; set; }
         public byte MSequenceCapability { get; set; }
-        public List<Connection> Connections { get; set; }
+        //public List<Connection> Connections { get; set; }
         
         public override void Deserialize(XElement element)
         {
@@ -22,15 +23,15 @@ namespace AMLRider.Library.Iodd.Elements
             MSequenceCapability = byte.Parse(element.GetAttributeValue("mSequenceCapability"));
             foreach (var connection in element.SubElements("Connection"))
             {
-                var connectionVar = new Connection();
-                connectionVar.Deserialize(connection);
-                Connections.Add(connectionVar);
+                //var connectionVar = new Connection();
+                //connectionVar.Deserialize(connection);
+                //Connections.Add(connectionVar);
             }
         }
 
         public override AmlElement ToAml()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

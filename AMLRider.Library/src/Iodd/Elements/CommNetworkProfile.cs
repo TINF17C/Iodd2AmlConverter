@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
@@ -18,13 +19,13 @@ namespace AMLRider.Library.Iodd.Elements
             IOLinkRevision = "V1.1";
             if (element.Attribute("compatibleWith") != null)
                 CompatibleWith = "V1.0";
-            TransportLayers.Deserialize();
-            Test.Deserialize();
+            //TransportLayers.Deserialize();
+            //Test.Deserialize();
         }
 
         public override AmlElement ToAml()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
