@@ -9,13 +9,13 @@ namespace AMLRider.Library.Aml
     {
 
         public string Name { get; set; }
-        
+
         public string Id { get; set; }
-        
+
         public SupportedRoleClass SupportedRoleClass { get; set; }
-        
+
         public List<Attribute> Attributes { get; set; }
-        
+
         public List<ExternalInterface> ExternalInterfaces { get; set; }
 
         public InternalElement()
@@ -30,15 +30,18 @@ namespace AMLRider.Library.Aml
             element.SetAttributeValue("Name", Name);
             element.SetAttributeValue("ID", Id ?? Guid.NewGuid().ToString());
 
-            var roleClassElement = SupportedRoleClass.Serialize();
-            element.Add(roleClassElement);
+            if (SupportedRoleClass != null)
+            {
+                var roleClassElement = SupportedRoleClass.Serialize();
+                element.Add(roleClassElement);
+            }
 
             foreach (var attribute in Attributes)
             {
                 var attributeElement = attribute.Serialize();
-                element.Add(attribute);
+                element.Add(attributeElement);
             }
-            
+
             foreach (var externalInterface in ExternalInterfaces)
             {
                 var interfaceElement = externalInterface.Serialize();

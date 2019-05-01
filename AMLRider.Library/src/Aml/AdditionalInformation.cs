@@ -37,15 +37,15 @@ namespace AMLRider.Library.Aml
             var root = XmlHelper.CreateElement("AdditionalInformation");
             var writerHeader = XmlHelper.CreateElement(root, "WriterHeader");
 
-            XmlHelper.CreateElement(writerHeader, "WriterName", WriterName);
-            XmlHelper.CreateElement(writerHeader, "WriterID", WriterId);
-            XmlHelper.CreateElement(writerHeader, "WriterVendor", WriterVendor);
-            XmlHelper.CreateElement(writerHeader, "WriterVendorURL", WriterVendorUrl);
-            XmlHelper.CreateElement(writerHeader, "WriterVersion", WriterVersion);
-            XmlHelper.CreateElement(writerHeader, "WriterRelease", WriterRelease);
+            XmlHelper.CreateElement(writerHeader, "WriterName", WriterName ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterID", WriterId ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterVendor", WriterVendor ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterVendorURL", WriterVendorUrl ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterVersion", WriterVersion ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterRelease", WriterRelease ?? string.Empty);
             XmlHelper.CreateElement(writerHeader, "LastWritingDateTime", LastWritingDateTime.ToString(CultureInfo.InvariantCulture));
-            XmlHelper.CreateElement(writerHeader, "WriterProjectTitle", WriterProjectTitle);
-            XmlHelper.CreateElement(writerHeader, "WriterProjectID", WriterProjectId);
+            XmlHelper.CreateElement(writerHeader, "WriterProjectTitle", WriterProjectTitle ?? string.Empty);
+            XmlHelper.CreateElement(writerHeader, "WriterProjectID", WriterProjectId ?? string.Empty);
 
             return root;
         }

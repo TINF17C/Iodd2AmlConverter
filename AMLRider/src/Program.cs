@@ -51,10 +51,10 @@ namespace AMLRider
                 return true;
 
             Console.WriteLine($"The file {file} does exist already.");
-            Console.Write("Do you want to override it? [Y/n]");
-            var key = Console.ReadKey().KeyChar;
+            Console.Write("Do you want to override it? [Y/n]: ");
+            var key = Console.ReadKey().Key;
 
-            if (key != 'y' || key != 'Y')
+            if (key != ConsoleKey.Y)
                 shouldOverride = false;
 
             return shouldOverride;
@@ -84,8 +84,8 @@ namespace AMLRider
             }
 
             XElement amlRoot;
-            try
-            {
+            //try
+            //{
                 var root = XElement.Parse(fileText);
 
                 var device = new IODevice();
@@ -93,12 +93,12 @@ namespace AMLRider
 
                 var aml = device.ToAml();
                 amlRoot = aml.Serialize();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("An error occurred during conversion. The file has probably an invalid format.");
-                return;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    Console.WriteLine("An error occurred during conversion. The file has probably an invalid format.");
+            //    return;
+            //}
 
             if (options.Output != null)
             {
