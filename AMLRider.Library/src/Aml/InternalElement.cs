@@ -17,6 +17,10 @@ namespace AMLRider.Library.Aml
         public List<Attribute> Attributes { get; set; }
 
         public List<ExternalInterface> ExternalInterfaces { get; set; }
+        
+        public AmlName AmlName { get; set; }
+        
+        public AmlDescription AmlDescription { get; set; }
 
         public InternalElement()
         {
@@ -46,6 +50,18 @@ namespace AMLRider.Library.Aml
             {
                 var interfaceElement = externalInterface.Serialize();
                 element.Add(interfaceElement);
+            }
+
+            if (AmlName != null)
+            {
+                var nameElement = AmlName.Serialize();
+                element.Add(nameElement);
+            }
+            
+            if (AmlDescription != null)
+            {
+                var descriptionElement = AmlDescription.Serialize();
+                element.Add(descriptionElement);
             }
 
             return element;
