@@ -18,8 +18,15 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var singleValueRef = new Attribute();
+            var value = new Value
+            {
+                Content = Value
+            };
+            singleValueRef.Value = value;
+            singleValueRef.AttributeDataType = "xs:integer";
+
+            return singleValueRef;
         }
-        
     }
 }
