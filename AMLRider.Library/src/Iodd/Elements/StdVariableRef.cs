@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AMLRider.Library.Aml;
 using AMLRider.Library.Extensions;
+using Attribute = AMLRider.Library.Aml.Attribute;
 
 namespace AMLRider.Library.Iodd.Elements
 {
@@ -92,7 +94,46 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            var stdVariableRef = new InternalElement();
+            stdVariableRef.Name = Id;
+            stdVariableRef.Id = Id;
+            var defaultValue = new Attribute();
+            defaultValue.Value = new Value
+            {
+                Content = DefaultValue
+            };
+            var fixedLengthRestriction = new Attribute();
+            fixedLengthRestriction.Value = new Value
+            {
+                Content = FixedLengthRestriction.ToString()
+            };
+            var excludeFromDataStorage = new Attribute();
+            excludeFromDataStorage.Value = new Value
+            {
+                Content = ExcludeFromDataStorage.ToString()
+            };
+            stdVariableRef.Attributes.Add(defaultValue);
+            stdVariableRef.Attributes.Add(fixedLengthRestriction);
+            stdVariableRef.Attributes.Add(excludeFromDataStorage);
+            foreach (var singleValueRef in SingleValueRefs)
+            {
+                var amlElement = singleValueRef.ToAml();
+                stdVariableRef.Attributes.Add(amlElement as Attribute);
+            }
+            foreach (var singleValue in SingleValues)
+            {
+                var amlElement = singleValue.ToAml();
+                stdVariableRef.Attributes.Add(amlElement as Attribute);
+            }
+            foreach (var valueRange in ValueRanges)
+            {
+                var amlElement = valueRange.ToAml();
+                stdVariableRef.Attributes.Add(amlElement as Attribute);
+            }
+            if (RecordItemRef != null)
+                stdVariableRef.Attributes.Add(RecordItemRef.ToAml() as Attribute);
+            
+            return stdVariableRef;
         }
     }
 }
