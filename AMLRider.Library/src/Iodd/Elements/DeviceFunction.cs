@@ -9,9 +9,9 @@ namespace AMLRider.Library.Iodd.Elements
         public Features Features { get; set; }
 
         [Optional]
-        public DataTypeCollection DataTypes { get; set; }
+        public DataTypeCollection DataTypeCollection { get; set; }
 
-        public VariableCollection Variables { get; set; }
+        public VariableCollection VariableCollection { get; set; }
 
         public override void Deserialize(XElement element)
         {
@@ -21,14 +21,14 @@ namespace AMLRider.Library.Iodd.Elements
                 Features.Deserialize(element.SubElement("Features"));
             }
 
-            Variables = new VariableCollection();
-            Variables.Deserialize(element.SubElement("VariableCollection"));
+            VariableCollection = new VariableCollection();
+            VariableCollection.Deserialize(element.SubElement("VariableCollection"));
 
             if (element.SubElement("DatatypeCollection") == null)
                 return;
 
-            DataTypes = new DataTypeCollection();
-            DataTypes.Deserialize(element.SubElement("DatatypeCollection"));
+            DataTypeCollection = new DataTypeCollection();
+            DataTypeCollection.Deserialize(element.SubElement("DatatypeCollection"));
         }
 
         public override AmlElement ToAml()

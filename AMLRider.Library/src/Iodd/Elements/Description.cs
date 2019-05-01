@@ -16,7 +16,11 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            // TODO: Resolve TextId from ExternalTextCollection
+            return new AmlDescription
+            {
+                Content = TextId
+            };
         }
         
     }
