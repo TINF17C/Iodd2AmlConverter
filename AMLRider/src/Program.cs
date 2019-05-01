@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -39,7 +40,7 @@ namespace AMLRider
             @"/ /_\ \_ __ ___ | | |_/ /_  __| | ___ _ __ @" +
             @"|  _  | '_ ` _ \| |    /| |/ _` |/ _ \ '__|@" +
             @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
-            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @" + 
+            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @" +
             @"    powered by The Avengers©@";
 
         private static Thread AvengersThread { get; set; }
@@ -86,13 +87,13 @@ namespace AMLRider
             XElement amlRoot;
             //try
             //{
-                var root = XElement.Parse(fileText);
+            var root = XElement.Parse(fileText);
 
-                var device = new IODevice();
-                device.Deserialize(root);
+            var device = new IODevice();
+            device.Deserialize(root);
 
-                var aml = device.ToAml();
-                amlRoot = aml.Serialize();
+            var aml = device.ToAml();
+            amlRoot = aml.Serialize();
             //}
             //catch (Exception)
             //{
@@ -120,7 +121,7 @@ namespace AMLRider
             {
                 var fileName = Path.GetFileNameWithoutExtension(options.File);
                 var targetDir = Directory.GetParent(options.File).FullName;
-                
+
                 var outputFile = Path.Combine(targetDir, fileName + ".aml");
                 if (!ShouldOverride(outputFile))
                     return;
@@ -162,7 +163,7 @@ namespace AMLRider
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
 
-            if(AvengersThread != null && AvengersThread != Thread.CurrentThread)
+            if (AvengersThread != null && AvengersThread != Thread.CurrentThread)
                 AvengersThread.Join();
         }
 

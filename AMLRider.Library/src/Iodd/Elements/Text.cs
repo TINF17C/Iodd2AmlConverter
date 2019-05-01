@@ -23,7 +23,14 @@ namespace AMLRider.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            throw new System.NotImplementedException();
+            return new Attribute
+            {
+                Name = Id,
+                Value = new Value
+                {
+                    Content = Value
+                }
+            };
         }
     }
 }
