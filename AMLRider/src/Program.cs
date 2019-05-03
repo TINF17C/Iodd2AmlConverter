@@ -26,8 +26,8 @@ namespace AMLRider
         [Option('o', "output", IsRequired = false, HelpText = "Specifies the output file path.")]
         public string Output { get; set; }
 
-        [Option('d', "dude", IsRequired = false, HelpText = "Surprise.")]
-        public bool Dude { get; set; }
+//        [Option('d', "dude", IsRequired = false, HelpText = "Surprise.")]
+//        public bool Dude { get; set; }
 
     }
 
@@ -40,8 +40,8 @@ namespace AMLRider
             @"/ /_\ \_ __ ___ | | |_/ /_  __| | ___ _ __ @" +
             @"|  _  | '_ ` _ \| |    /| |/ _` |/ _ \ '__|@" +
             @"| | | | | | | | | | |\ \| | (_| |  __/ |   @" +
-            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @" +
-            @"    powered by The Avengers©@";
+            @"\_| |_/_| |_| |_|_\_| \_|_|\__,_|\___|_|   @";
+            // @"    powered by The Avengers©@";
 
         private static Thread AvengersThread { get; set; }
 
@@ -63,8 +63,8 @@ namespace AMLRider
 
         private static void OnConvertOptionsParsed(ConvertOptions options)
         {
-            if (options.Dude)
-                RunAvengersThemeAudioThread();
+//            if (options.Dude)
+//                RunAvengersThemeAudioThread();
 
             if (!File.Exists(options.File))
             {
