@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml.Linq;
 using AMLRider.Library.Rules;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Bson;
 
 namespace AMLRider.Library.Test
 {
