@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="NAudio" Version="1.9.0-preview1" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="Resources\AvengersTheme.mp3" />
     </ItemGroup>
 
