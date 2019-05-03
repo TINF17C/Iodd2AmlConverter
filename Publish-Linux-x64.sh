@@ -1,1 +1,0 @@
-dotnet publish "AMLRider/AMLRider.csproj" -c Release -r linux-x64 --output "../Publish/"

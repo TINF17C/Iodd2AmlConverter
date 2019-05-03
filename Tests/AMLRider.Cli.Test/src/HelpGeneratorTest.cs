@@ -33,7 +33,7 @@ namespace AMLRider.Cli.Test
             
             Assert.IsTrue(text.Contains(VerbName));
             Assert.IsTrue(text.Contains(VerbHelpText));
-            Assert.IsTrue(text.Contains(ShortOptionName));
+            Assert.IsTrue(text.Contains(ShortOptionName.ToString()));
             Assert.IsTrue(text.Contains(LongOptionName));
             Assert.IsTrue(text.Contains(OptionHelpText));
         }
