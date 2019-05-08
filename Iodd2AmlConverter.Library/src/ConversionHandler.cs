@@ -1,15 +1,16 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Iodd2AmlConverter.Library.Aml.Elements;
 using Iodd2AmlConverter.Library.Iodd.Elements;
 
 namespace Iodd2AmlConverter.Library
 {
     public class ConversionHandler
     {
-        public static string Convert(string ioddText)
+        public static string Convert(string ioddText, string filePath)
         {
-            XElement amlRoot;
             try
             {
                 var root = XElement.Parse(ioddText);
@@ -18,8 +19,13 @@ namespace Iodd2AmlConverter.Library
                 device.Deserialize(root);
 
                 var amlCollection = device.ToAml();
-                amlRoot = amlCollection.First().Serialize();
+                var caexFile = amlCollection.First() as CaexFile;
+                if (caexFile == null)
+                    return null;
+
+                caexFile.FileName = Path.GetFileName(filePath);
                 
+                var amlRoot = caexFile.Serialize();
                 return amlRoot.ToString();
             }
             catch (Exception)
