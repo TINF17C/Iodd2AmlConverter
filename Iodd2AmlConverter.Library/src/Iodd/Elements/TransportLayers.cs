@@ -12,7 +12,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             PhysicalLayer.Deserialize(element);
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new NotImplementedException();
         }

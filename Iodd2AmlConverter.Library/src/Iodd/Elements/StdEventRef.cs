@@ -14,7 +14,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Code = int.Parse(element.GetAttributeValue("code"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var stdEventRef = new Attribute();
             stdEventRef.Name = Code.ToString();
@@ -24,7 +24,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Content = "0"
             };
 
-            return stdEventRef;
+            return AmlCollection.Of(stdEventRef);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -95,7 +96,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             RecordItemRef.Deserialize(element.SubElement("StdRecordItemRef"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var stdVariableRef = new InternalElement
             {
@@ -146,7 +147,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var singleValueRef in SingleValueRefs)
                 {
                     var amlElement = singleValueRef.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                    stdVariableRef.Attributes.AddRange(amlElement.Cast<Attribute>());
                 }
             }
 
@@ -155,7 +156,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var singleValue in SingleValues)
                 {
                     var amlElement = singleValue.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                    stdVariableRef.Attributes.AddRange(amlElement.Cast<Attribute>());
                 }
             }
 
@@ -164,14 +165,14 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var valueRange in ValueRanges)
                 {
                     var amlElement = valueRange.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Attribute);
+                    stdVariableRef.Attributes.AddRange(amlElement.Cast<Attribute>());
                 }
             }
 
             if (RecordItemRef != null)
-                stdVariableRef.Attributes.Add(RecordItemRef.ToAml() as Attribute);
+                stdVariableRef.Attributes.AddRange(RecordItemRef.ToAml().Cast<Attribute>());
 
-            return stdVariableRef;
+            return AmlCollection.Of(stdVariableRef);
         }
 
     }

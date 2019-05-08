@@ -37,7 +37,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 ExcludedFromDataStorage = bool.Parse(element.GetAttributeValue("excludedFromDataStorage"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new System.NotImplementedException();
         }

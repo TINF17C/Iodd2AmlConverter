@@ -21,7 +21,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             DeviceFunction.Deserialize(element.SubElement("DeviceFunction"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var systemClass = new SystemUnitClass
             {

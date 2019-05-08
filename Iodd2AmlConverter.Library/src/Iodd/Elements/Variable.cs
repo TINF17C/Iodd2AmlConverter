@@ -98,7 +98,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Description.Deserialize(element.SubElement("Description"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -113,7 +113,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             if (DataType != null)
                 element.Attributes.Add(DataType.ToAml() as Attribute);
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
         private static Attribute CreateAttribute(string name, string type, string value)

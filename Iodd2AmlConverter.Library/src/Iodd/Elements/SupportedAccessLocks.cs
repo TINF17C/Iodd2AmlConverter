@@ -39,7 +39,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             LocalUserInterface = bool.Parse(element.GetAttributeValue("localUserInterface"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -51,7 +51,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("localUserInterface", LocalUserInterface));
             element.Attributes.Add(CreateAttribute("localParameterization", LocalParameterization));
 
-            return element;
+            return AmlCollection.Of(element);
         }
         
         private static Attribute CreateAttribute(string name, bool value)
