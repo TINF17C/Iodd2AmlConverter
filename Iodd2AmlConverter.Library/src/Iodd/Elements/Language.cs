@@ -33,7 +33,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            Lang = element.GetAttributeValue("lang");
+            Lang = element.Attribute(element.GetNamespaceOfPrefix("xml") + "lang")?.Value;
 
             foreach (var textElement in element.SubElements("Text"))
             {
