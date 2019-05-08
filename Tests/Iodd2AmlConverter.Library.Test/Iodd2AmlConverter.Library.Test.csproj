@@ -16,4 +16,8 @@
       <ProjectReference Include="..\..\Iodd2AmlConverter.Library\Iodd2AmlConverter.Library.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="src" />
+    </ItemGroup>
+
 </Project>
