@@ -20,8 +20,6 @@ namespace Iodd2AmlConverter.Library.Aml.Elements
         
         public List<ExternalInterface> ExternalInterfaces { get; set; }
         
-        public AmlName AmlName { get; set; }
-        
         public AmlDescription AmlDescription { get; set; }
 
         public InternalElement()
@@ -59,12 +57,6 @@ namespace Iodd2AmlConverter.Library.Aml.Elements
             {
                 var roleClassElement = SupportedRoleClass.Serialize();
                 element.Add(roleClassElement);
-            }
-
-            if (AmlName != null)
-            {
-                var nameElement = AmlName.Serialize();
-                element.Add(nameElement);
             }
             
             if (AmlDescription != null)

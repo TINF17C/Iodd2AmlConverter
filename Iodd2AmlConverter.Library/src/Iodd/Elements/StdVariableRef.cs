@@ -99,7 +99,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
         {
             var stdVariableRef = new InternalElement
             {
-                Name = Id,
+                Name = Id ?? string.Empty,
                 Id = Id
             };
 

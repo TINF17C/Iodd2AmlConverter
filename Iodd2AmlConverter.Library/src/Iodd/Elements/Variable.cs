@@ -102,21 +102,16 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
         {
             var element = new InternalElement
             {
-                Name = Id,
-                Id = Id
+                Name = Id
             };
 
             element.Attributes.Add(CreateAttribute("index", "xs:integer", Index.ToString()));
             element.Attributes.Add(CreateAttribute("accessRights", "xs:string", AccessRights ?? string.Empty));
-
+            element.Attributes.Add(CreateAttribute(Name?.TextId ?? string.Empty, "xs:string", null));
+            element.Attributes.Add(CreateAttribute("Description", "xs:string", Description?.TextId ?? string.Empty));
+            
             if (DataType != null)
                 element.Attributes.Add(DataType.ToAml() as Attribute);
-
-            if (Name != null)
-                element.AmlName = new AmlName {Content = Name.TextId};
-
-            if (Description != null)
-                element.AmlDescription = new AmlDescription {Content = Description.TextId};
 
             return element;
         }

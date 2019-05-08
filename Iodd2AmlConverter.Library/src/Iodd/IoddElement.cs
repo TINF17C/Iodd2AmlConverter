@@ -8,7 +8,7 @@ namespace Iodd2AmlConverter.Library.Iodd
         
         public abstract void Deserialize(XElement element);
 
-        public abstract AmlElement ToAml();
+        public abstract AmlCollection ToAml();
         
     }
 }
