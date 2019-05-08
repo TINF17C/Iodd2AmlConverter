@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using Iodd2AmlConverter.Cli;
 using Iodd2AmlConverter.Cli.Attributes;
 using Iodd2AmlConverter.Cli.Extensions;
+using Iodd2AmlConverter.Library.Aml.Elements;
 using Iodd2AmlConverter.Library.Iodd.Elements;
 
 namespace Iodd2AmlConverter
@@ -49,36 +50,53 @@ namespace Iodd2AmlConverter
             return shouldOverride;
         }
 
-        private static void OnConvertOptionsParsed(ConvertOptions options)
-        {
-            if (!File.Exists(options.File))
-            {
-                Console.WriteLine($"The file {options.File} does not exist.");
-                return;
-            }
+        private static bool IsDragAndDrop { get; set; }
 
+        private static string ReadFile(string path)
+        {
             string fileText;
             try
             {
-                fileText = File.ReadAllText(options.File);
+                fileText = File.ReadAllText(path);
             }
             catch (IOException)
             {
                 Console.WriteLine(
                     "Unable to read file. Maybe you are missing permissions or the file is opened in another software.");
+                return null;
+            }
+
+            return fileText;
+        }
+        
+        private static string ConstructOutputFilePath(string path)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            var targetDir = Directory.GetParent(path).FullName;
+
+            return Path.Combine(targetDir, fileName + ".aml");
+        }
+        
+        private static void OnConvertOptionsParsed(ConvertOptions options)
+        {
+            if (!File.Exists(options.File))
+            {
+                IsDragAndDrop = true;
+                Console.WriteLine($"The file {options.File} does not exist.");
+                
                 return;
             }
 
-            XElement amlRoot;
+            var fileText = ReadFile(options.File);
+            string amlRoot;
+
+            var outputFile = options.Output;
+            if (string.IsNullOrWhiteSpace(outputFile))
+                outputFile = ConstructOutputFilePath(options.File);
+            
             try
             {
-                var root = XElement.Parse(fileText);
-
-                var device = new IODevice();
-                device.Deserialize(root);
-
-                var amlCollection = device.ToAml();
-                amlRoot = amlCollection.First().Serialize();
+                amlRoot = ConversionHandler.Convert(fileText, outputFile);
             }
             catch (Exception)
             {
@@ -86,34 +104,22 @@ namespace Iodd2AmlConverter
                 return;
             }
 
-            if (options.Output != null)
+            try
             {
-                try
-                {
-                    if (!ShouldOverride(options.Output))
-                        return;
-
-                    File.WriteAllText(options.Output, amlRoot.ToString());
-                }
-                catch (IOException)
-                {
-                    Console.WriteLine(
-                        "Unable to write output file. Maybe you are missing permissions or the file is opened in another software");
-                    return;
-                }
-            }
-            else
-            {
-                var fileName = Path.GetFileNameWithoutExtension(options.File);
-                var targetDir = Directory.GetParent(options.File).FullName;
-
-                var outputFile = Path.Combine(targetDir, fileName + ".aml");
                 if (!ShouldOverride(outputFile))
                     return;
 
-                File.WriteAllText(outputFile, amlRoot.ToString());
+                File.WriteAllText(outputFile, amlRoot);
+            }
+            catch (IOException)
+            {
+                Console.WriteLine(
+                    "Unable to write output file. Maybe you are missing permissions or the file is opened in another software");
+                return;
             }
         }
+
+        
 
         public static void Main(string[] args)
         {
@@ -123,6 +129,25 @@ namespace Iodd2AmlConverter
             new CommandLineParser()
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
+
+            if (!IsDragAndDrop)
+                return;
+
+            var path = args[1];
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"The file {path} does not exist.");
+                return;
+            }
+            
+            var outputFile = ConstructOutputFilePath(path);
+            if (!ShouldOverride(outputFile))
+                return;
+
+            var fileText = ReadFile(path);
+            var outputXml = ConversionHandler.Convert(fileText, outputFile);
+            
+            File.WriteAllText(outputFile, outputXml);
         }
 
     }
