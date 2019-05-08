@@ -4,4 +4,17 @@
         <TargetFramework>net472</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Aml.Engine" Version="1.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="WindowsBase" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\CAEX_ClassModel_V2.15.xsd" />
+      <EmbeddedResource Include="Resources\CAEX_ClassModel_V2.15.xsd" />
+    </ItemGroup>
+
 </Project>
