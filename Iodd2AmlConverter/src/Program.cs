@@ -70,23 +70,21 @@ namespace Iodd2AmlConverter
             }
 
             XElement amlRoot;
-            //try
-            //{
-            var root = XElement.Parse(fileText);
+            try
+            {
+                var root = XElement.Parse(fileText);
 
-            var device = new IODevice();
-            device.Deserialize(root);
+                var device = new IODevice();
+                device.Deserialize(root);
 
-            var amlCollection = device.ToAml();
-            amlRoot = amlCollection.First().Serialize();
-
-
-            //}
-            //catch (Exception)
-            //{
-            //    Console.WriteLine("An error occurred during conversion. The file has probably an invalid format.");
-            //    return;
-            //}
+                var amlCollection = device.ToAml();
+                amlRoot = amlCollection.First().Serialize();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An error occurred during conversion. The file has probably an invalid format.");
+                return;
+            }
 
             if (options.Output != null)
             {
