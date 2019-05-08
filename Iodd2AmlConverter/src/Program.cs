@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Cli;
 using Iodd2AmlConverter.Cli.Attributes;
@@ -76,8 +77,10 @@ namespace Iodd2AmlConverter
             var device = new IODevice();
             device.Deserialize(root);
 
-            var aml = device.ToAml();
-            amlRoot = aml.Serialize();
+            var amlCollection = device.ToAml();
+            amlRoot = amlCollection.First().Serialize();
+
+
             //}
             //catch (Exception)
             //{

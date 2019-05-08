@@ -106,9 +106,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("VendorUrl", "xs:anyURI", VendorUrl));
             element.Attributes.Add(CreateAttribute("DeviceFamily", "xs:string", DeviceFamily));
             element.Attributes.Add(CreateAttribute("DeviceName", "xs:string", DeviceName));
-            element.InternalElements.Add(ConstructVendorLogo());
 
-            return AmlCollection.Of(element);
+            return AmlCollection.Of(element, ConstructVendorLogo());
         }
 
         private InternalElement ConstructVendorLogo()

@@ -35,21 +35,25 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            var systemUnitClass = new SystemUnitClass();
-            systemUnitClass.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
-            systemUnitClass.InternalElements.Add(ProfileBody.ToAml() as InternalElement);
+            var systemUnitClass = new SystemUnitClass()
+            {
+                Name = "Device"
+            };
+            
+            systemUnitClass.InternalElements.AddRange(ProfileHeader.ToAml().Cast<InternalElement>());
+            systemUnitClass.InternalElements.AddRange(ProfileBody.ToAml().Cast<InternalElement>());
+            systemUnitClass.InternalElements.AddRange(ExternalTextCollection.ToAml().Cast<InternalElement>());
             
             var file = new CaexFile
             {
                 AdditionalInformation = DocumentInfo.ToAml().First() as AdditionalInformation,
                 SystemUnitClassLib = new SystemUnitClassLib
                 {
+                    Name = "ComponentSystemUnitClassLib",
                     SystemUnitClass = systemUnitClass
                 }
             };
 
-            file.InternalElements.AddRange(ExternalTextCollection.ToAml().Cast<InternalElement>());
-            
             return AmlCollection.Of(file);
         }
     }

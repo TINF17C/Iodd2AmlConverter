@@ -65,7 +65,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             foreach (var processDataIn in ProcessDataIns)
             {
                 var amlElement = processDataIn.ToAml().Cast<InternalElement>();
-                element.InternalElements.Add(amlElement);
+                element.InternalElements.AddRange(amlElement);
             }
 
             if (Condition != null)

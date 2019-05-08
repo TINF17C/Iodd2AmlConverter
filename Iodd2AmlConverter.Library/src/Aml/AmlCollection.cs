@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Iodd2AmlConverter.Library.Aml.Elements;
 
 namespace Iodd2AmlConverter.Library.Aml
 {
@@ -19,6 +20,11 @@ namespace Iodd2AmlConverter.Library.Aml
             AmlElements.Add(element);
         }
 
+        public void Add(IEnumerable<AmlElement> collection)
+        {
+            AmlElements.AddRange(collection);
+        }
+
         public IEnumerator<AmlElement> GetEnumerator()
         {
             return AmlElements.GetEnumerator();
@@ -34,6 +40,15 @@ namespace Iodd2AmlConverter.Library.Aml
             var collection = new AmlCollection();
             foreach (var element in elements)
                 collection.Add(element);
+
+            return collection;
+        }
+
+        public static AmlCollection Of(params IEnumerable<AmlElement>[] collections)
+        {
+            var collection = new AmlCollection();
+            foreach (var amlCollection in collections)
+                collection.Add(amlCollection);
 
             return collection;
         }

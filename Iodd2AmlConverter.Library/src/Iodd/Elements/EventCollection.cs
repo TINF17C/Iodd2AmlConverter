@@ -50,7 +50,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var stdEventRef in StdEventRefs)
             {
-                internalElement.InternalElements.Add(stdEventRef.ToAml() as InternalElement);
+                internalElement.InternalElements.AddRange(stdEventRef.ToAml().Cast<InternalElement>());
             }
 
             return AmlCollection.Of(internalElement);
