@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -70,8 +71,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             if (SupportedAccessLocks != null)
             {
-                var accessLocksElement = SupportedAccessLocks.ToAml();
-                element.InternalElements.Add(accessLocksElement as InternalElement);
+                var accessLocksElement = SupportedAccessLocks.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(accessLocksElement);
             }
 
             return AmlCollection.Of(element);

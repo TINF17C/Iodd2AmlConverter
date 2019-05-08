@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Aml;
 using Iodd2AmlConverter.Library.Aml.Elements;
@@ -60,8 +61,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var text in Texts)
             {
-                var amlElement = text.ToAml() as Attribute;
-                element.Attributes.Add(amlElement);
+                var amlElement = text.ToAml().Cast<Attribute>();
+                element.Attributes.AddRange(amlElement);
             }
 
             return AmlCollection.Of(element);

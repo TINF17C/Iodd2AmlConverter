@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -23,22 +24,10 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            var systemClass = new SystemUnitClass
-            {
-                Name = "Device"
-            };
-
-            var identityElement = DeviceIdentity.ToAml() as InternalElement;
-            systemClass.InternalElements.Add(identityElement);
-
-            var functionElement = DeviceFunction.ToAml() as InternalElement;
-            systemClass.InternalElements.Add(functionElement);
+            var identityElement = DeviceIdentity.ToAml().Cast<InternalElement>();
+            var functionElement = DeviceFunction.ToAml().Cast<InternalElement>();
             
-            return new SystemUnitClassLib
-            {
-                Name = "ComponentSystemUnitClassLib",
-                SystemUnitClass = systemClass
-            };
+            return AmlCollection.Of(identityElement, functionElement);
         }
     }
 }

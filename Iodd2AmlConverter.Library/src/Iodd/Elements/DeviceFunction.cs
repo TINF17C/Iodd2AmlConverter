@@ -49,16 +49,16 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             };
 
             if (Features != null)
-                element.InternalElements.Add(Features.ToAml() as InternalElement);
+                element.InternalElements.AddRange(Features.ToAml().Cast<InternalElement>());
 
             if (VariableCollection != null)
-                element.InternalElements.Add(VariableCollection.ToAml() as InternalElement);
+                element.InternalElements.AddRange(VariableCollection.ToAml().Cast<InternalElement>());
 
             if (DataTypeCollection != null)
                 element.InternalElements.AddRange(DataTypeCollection.ToAml().Cast<InternalElement>());
 
             if (ProcessDataCollection != null)
-                element.InternalElements.Add(ProcessDataCollection.ToAml() as InternalElement);
+                element.InternalElements.AddRange(ProcessDataCollection.ToAml().Cast<InternalElement>());
 
             return AmlCollection.Of(element);
         }
