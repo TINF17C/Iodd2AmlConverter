@@ -19,15 +19,15 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
-            var singleValueRef = new Attribute();
-            var value = new Value
+            return new Attribute
             {
-                Content = Value
+                Name = "StdSingleValueRef",
+                AttributeDataType = "xs:integer",
+                Value = new Value
+                {
+                    Content = Value
+                }
             };
-            singleValueRef.Value = value;
-            singleValueRef.AttributeDataType = "xs:integer";
-
-            return singleValueRef;
         }
     }
 }

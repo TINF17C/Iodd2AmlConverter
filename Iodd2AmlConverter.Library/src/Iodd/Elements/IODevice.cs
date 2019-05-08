@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -34,13 +35,19 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlElement ToAml()
         {
+            var systemUnitClass = new SystemUnitClass();
+            systemUnitClass.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
+            systemUnitClass.InternalElements.Add(ProfileBody.ToAml() as InternalElement);
+            
             var file = new CaexFile
             {
                 AdditionalInformation = DocumentInfo.ToAml() as AdditionalInformation,
-                SystemUnitClassLib = ProfileBody.ToAml() as SystemUnitClassLib
+                SystemUnitClassLib = new SystemUnitClassLib
+                {
+                    SystemUnitClass = systemUnitClass
+                }
             };
 
-            file.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
             file.InternalElements.Add(ExternalTextCollection.ToAml() as InternalElement);
             
             return file;
