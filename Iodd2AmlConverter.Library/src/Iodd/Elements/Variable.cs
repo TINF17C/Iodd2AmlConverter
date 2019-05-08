@@ -65,7 +65,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             if (element.HasAttribute("excludedFromDataStorage"))
                 ExcludedFromDataStorage = bool.Parse(element.GetAttributeValue("excludedFromDataStorage"));
 
-            Index = ushort.Parse(element.GetAttributeValue("index"));
+            if (element.HasAttribute("index"))
+                Index = ushort.Parse(element.GetAttributeValue("index"));
 
             if (element.HasAttribute("defaultValue"))
                 DefaultValue = element.GetAttributeValue("defaultValue");
@@ -109,7 +110,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("accessRights", "xs:string", AccessRights ?? string.Empty));
             element.Attributes.Add(CreateAttribute(Name?.TextId ?? string.Empty, "xs:string", null));
             element.Attributes.Add(CreateAttribute("Description", "xs:string", Description?.TextId ?? string.Empty));
-            
+
             if (DataType != null)
                 element.Attributes.Add(DataType.ToAml() as Attribute);
 

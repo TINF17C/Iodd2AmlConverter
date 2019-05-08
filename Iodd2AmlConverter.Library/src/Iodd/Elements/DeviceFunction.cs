@@ -18,6 +18,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
         public VariableCollection VariableCollection { get; set; }
 
         public ProcessDataCollection ProcessDataCollection { get; set; }
+        
+        public EventCollection EventCollection { get; set; }
 
         public override void Deserialize(XElement element)
         {
@@ -27,11 +29,23 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Features.Deserialize(element.SubElement("Features"));
             }
 
-            VariableCollection = new VariableCollection();
-            VariableCollection.Deserialize(element.SubElement("VariableCollection"));
+            if (element.SubElement("VariableCollection") != null)
+            {
+                VariableCollection = new VariableCollection();
+                VariableCollection.Deserialize(element.SubElement("VariableCollection"));
+            }
 
-            ProcessDataCollection = new ProcessDataCollection();
-            ProcessDataCollection.Deserialize(element.SubElement("ProcessDataCollection"));
+            if (element.SubElement("ProcessDataCollection") != null)
+            {
+                ProcessDataCollection = new ProcessDataCollection();
+                ProcessDataCollection.Deserialize(element.SubElement("ProcessDataCollection"));
+            }
+
+            if (element.SubElement("EventCollection") != null)
+            {
+                EventCollection = new EventCollection();
+                EventCollection.Deserialize(element.SubElement("EventCollection"));
+            }
 
             if (element.SubElement("DatatypeCollection") == null)
                 return;
@@ -53,7 +67,10 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             if (VariableCollection != null)
                 element.InternalElements.AddRange(VariableCollection.ToAml().Cast<InternalElement>());
-
+            
+            if(EventCollection != null)
+                element.InternalElements.AddRange(EventCollection.ToAml().Cast<InternalElement>());
+            
             if (DataTypeCollection != null)
                 element.InternalElements.AddRange(DataTypeCollection.ToAml().Cast<InternalElement>());
 

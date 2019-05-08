@@ -10,9 +10,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
     public class VariableCollection : IoddElement, IEnumerable<Variable>, IEnumerable<StdVariableRef>
     {
-        private List<Variable> Variables { get; }
+        public List<Variable> Variables { get; }
 
-        private List<StdVariableRef> StdVariableRefs { get; set; }
+        public List<StdVariableRef> StdVariableRefs { get; set; }
 
         public VariableCollection()
         {

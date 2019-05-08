@@ -72,14 +72,19 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override void Deserialize(XElement element)
         {
-            VendorId = ushort.Parse(element.GetAttributeValue("vendorId"));
-            VendorName = element.GetAttributeValue("vendorName");
-            DeviceId = element.GetAttributeValue("deviceId");
+            if(element.HasAttribute("vendorId"))
+                VendorId = ushort.Parse(element.GetAttributeValue("vendorId"));
+            
+            if(element.HasAttribute("vendorName"))
+                VendorName = element.GetAttributeValue("vendorName");
+            
+            if(element.HasAttribute("deviceId"))
+                DeviceId = element.GetAttributeValue("deviceId");
 
             // TODO: AdditionalDeviceIds
 
             VendorText = element.SubElement("VendorText")?.GetAttributeValue("textId");
-            VendorUrl = element.SubElement("VendorLogo")?.GetAttributeValue("textId");
+            VendorUrl = element.SubElement("VendorUrl")?.GetAttributeValue("textId");
 
             if (element.SubElement("VendorLogo") != null)
                 VendorLogo = element.SubElement("VendorLogo").GetAttributeValue("name");
@@ -87,6 +92,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             DeviceName = element.SubElement("DeviceName")?.GetAttributeValue("textId");
             DeviceFamily = element.SubElement("DeviceFamily")?.GetAttributeValue("textId");
 
+            if (element.SubElement("DeviceVariantCollection") == null)
+                return;
+            
             DeviceVariantCollection = new DeviceVariantCollection();
             DeviceVariantCollection.Deserialize(element.SubElement("DeviceVariantCollection"));
         }

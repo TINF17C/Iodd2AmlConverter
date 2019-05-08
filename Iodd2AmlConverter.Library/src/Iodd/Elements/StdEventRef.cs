@@ -5,26 +5,33 @@ using Iodd2AmlConverter.Library.Aml.Elements;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
+
     public class StdEventRef : IoddElement
     {
+
         public int Code { get; set; }
-        
+
         public override void Deserialize(XElement element)
         {
-            Code = int.Parse(element.GetAttributeValue("code"));
+            if (element.HasAttribute("code"))
+                Code = int.Parse(element.GetAttributeValue("code"));
         }
 
         public override AmlCollection ToAml()
         {
-            var stdEventRef = new Attribute();
-            stdEventRef.Name = Code.ToString();
-            stdEventRef.AttributeDataType = "xs:integer";
-            stdEventRef.DefaultValue = new DefaultValue
+            var stdEventRef = new Attribute
             {
-                Content = "0"
+                Name = Code.ToString(),
+                AttributeDataType = "xs:integer",
+                DefaultValue = new DefaultValue
+                {
+                    Content = "0"
+                }
             };
 
             return AmlCollection.Of(stdEventRef);
         }
+
     }
+
 }

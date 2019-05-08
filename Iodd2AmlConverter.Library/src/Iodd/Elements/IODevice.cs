@@ -35,7 +35,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            var systemUnitClass = new SystemUnitClass()
+            var systemUnitClass = new SystemUnitClass
             {
                 Name = "Device"
             };
