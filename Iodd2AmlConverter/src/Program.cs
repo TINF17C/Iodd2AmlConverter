@@ -10,8 +10,13 @@ namespace Iodd2AmlConverter
     [Verb("package", HelpText = "Creates an AMLX-package out of an IODD file and its corresponding files (e.g. an icon)")]
     public class PackageOptions
     {
+        
         [Option('f', "file", IsRequired = true, HelpText = "The IODD file to convert.")]
         public string File { get; set; }
+        
+        [Option('o', "output", IsRequired = false, HelpText = "Specifies the output file path of the AMLX package.")]
+        public string Output { get; set; }
+        
     }
     
     [Verb("convert", HelpText = "Converts an IODD file to an AML file.")]
@@ -158,7 +163,7 @@ namespace Iodd2AmlConverter
             }
 
             var packageHandler = new PackageHandler();
-            packageHandler.CreatePackage(options.File, outputFile);
+            packageHandler.CreatePackage(options.File, outputFile, options.Output);
         }
 
         public static void Main(string[] args)

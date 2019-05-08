@@ -26,12 +26,13 @@ namespace Iodd2AmlConverter.Library
             return Path.Combine(targetDir, fileName + ".amlx");
         }
         
-        public void CreatePackage(string inputPath, string outputPath)
+        public void CreatePackage(string inputPath, string outputPath, string amlxOutputPath)
         {
             PathToIodd = inputPath;
             PathToAml = outputPath;
+            
             var pathToSourceFolder = Directory.GetParent(inputPath);
-            var pathToAmlxPackage = CreateAmlxPackageName(PathToIodd);
+            var pathToAmlxPackage = amlxOutputPath ?? CreateAmlxPackageName(PathToIodd);
             
             var files = pathToSourceFolder.GetFiles();
 
