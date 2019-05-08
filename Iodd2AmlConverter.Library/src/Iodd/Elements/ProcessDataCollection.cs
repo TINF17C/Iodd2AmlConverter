@@ -12,7 +12,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
     public class ProcessDataCollection : IoddElement, IEnumerable<ProcessData>
     {
         
-        private List<ProcessData> ProcessDataList { get; }
+        public List<ProcessData> ProcessDataList { get; }
 
         public ProcessDataCollection()
         {

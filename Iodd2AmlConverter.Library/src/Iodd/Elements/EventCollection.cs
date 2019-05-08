@@ -13,12 +13,19 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
     {
 
         public List<StdEventRef> StdEventRefs { get; set; }
+
         public List<Event> Events { get; set; }
+
+        public EventCollection()
+        {
+            StdEventRefs = new List<StdEventRef>();
+            Events = new List<Event>();
+        }
 
         public override void Deserialize(XElement element)
         {
             var stdEventRefs = element.SubElements("StdEventRef");
-            var events = element.SubElements("Events");
+            var events = element.SubElements("Event");
 
             foreach (var stdEventRef in stdEventRefs)
             {
@@ -45,12 +52,12 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var @event in Events)
             {
-                internalElement.InternalElements.AddRange(@event.ToAml().Cast<InternalElement>());
+                internalElement.Attributes.AddRange(@event.ToAml().Cast<Attribute>());
             }
 
             foreach (var stdEventRef in StdEventRefs)
             {
-                internalElement.InternalElements.AddRange(stdEventRef.ToAml().Cast<InternalElement>());
+                internalElement.Attributes.AddRange(stdEventRef.ToAml().Cast<Attribute>());
             }
 
             return AmlCollection.Of(internalElement);

@@ -7,11 +7,12 @@ using Iodd2AmlConverter.Library.Extensions;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
+
     public class ExternalTextCollection : IoddElement
     {
-        
+
         public Language PrimaryLanguage { get; set; }
-        
+
         [Optional]
         public List<Language> Languages { get; set; }
 
@@ -19,17 +20,20 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
         {
             Languages = new List<Language>();
         }
-        
+
         public override void Deserialize(XElement element)
         {
-            PrimaryLanguage = new Language();
-            PrimaryLanguage.Deserialize(element.SubElement("PrimaryLanguage"));
+            if (element.SubElement("PrimaryLanguage") != null)
+            {
+                PrimaryLanguage = new Language();
+                PrimaryLanguage.Deserialize(element.SubElement("PrimaryLanguage"));
+            }
 
             foreach (var languageElement in element.SubElements("Language"))
             {
                 var language = new Language();
                 language.Deserialize(languageElement);
-                
+
                 Languages.Add(language);
             }
         }
@@ -41,8 +45,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Name = "aml-text=TI_TextCollection"
             };
 
-            var primaryLanguageAml = PrimaryLanguage.ToAml().Cast<InternalElement>();
-            element.InternalElements.AddRange(primaryLanguageAml);
+            if (PrimaryLanguage != null)
+            {
+                var primaryLanguageAml = PrimaryLanguage.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(primaryLanguageAml);
+            }
 
             foreach (var language in Languages)
             {
@@ -52,5 +59,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             return AmlCollection.Of(element);
         }
+
     }
+
 }
