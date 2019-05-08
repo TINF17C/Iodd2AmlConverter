@@ -18,7 +18,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             DisappearValue = byte.Parse(element.GetAttributeValue("disappearValue"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new System.NotImplementedException();
         }

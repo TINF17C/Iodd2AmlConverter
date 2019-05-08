@@ -32,13 +32,15 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Copyright = element.GetAttributeValue("copyright");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
-            return new AdditionalInformation
+            var element = new AdditionalInformation
             {
                 WriterVendor = Copyright,
                 LastWritingDateTime = DateTime.Now
             };
+            
+            return AmlCollection.Of(element);
         }
     }
     

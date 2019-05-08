@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Aml;
 using Iodd2AmlConverter.Library.Aml.Elements;
@@ -39,7 +40,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             DataTypeCollection.Deserialize(element.SubElement("DatatypeCollection"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -54,12 +55,12 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 element.InternalElements.Add(VariableCollection.ToAml() as InternalElement);
 
             if (DataTypeCollection != null)
-                element.InternalElements.Add(DataTypeCollection.ToAml() as InternalElement);
+                element.InternalElements.AddRange(DataTypeCollection.ToAml().Cast<InternalElement>());
 
             if (ProcessDataCollection != null)
                 element.InternalElements.Add(ProcessDataCollection.ToAml() as InternalElement);
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
     }

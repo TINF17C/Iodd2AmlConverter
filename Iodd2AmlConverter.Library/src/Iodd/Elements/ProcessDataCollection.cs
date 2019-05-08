@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -29,7 +30,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             }
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -39,11 +40,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var processData in ProcessDataList)
             {
-                var amlElement = processData.ToAml() as InternalElement;
-                element.InternalElements.Add(amlElement);
+                var amlElement = processData.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(amlElement);
             }
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
         public IEnumerator<ProcessData> GetEnumerator()

@@ -23,7 +23,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             //Test.Deserialize();
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new NotImplementedException();
         }

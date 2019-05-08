@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Aml;
 using Iodd2AmlConverter.Library.Aml.Elements;
@@ -33,23 +34,23 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             }
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
                 Name = "aml-text=TI_TextCollection"
             };
 
-            var primaryLanguageAml = PrimaryLanguage.ToAml() as InternalElement;
-            element.InternalElements.Add(primaryLanguageAml);
+            var primaryLanguageAml = PrimaryLanguage.ToAml().Cast<InternalElement>();
+            element.InternalElements.AddRange(primaryLanguageAml);
 
             foreach (var language in Languages)
             {
-                var languageAml = language.ToAml() as InternalElement;
-                element.InternalElements.Add(languageAml);
+                var languageAml = language.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(languageAml);
             }
 
-            return element;
+            return AmlCollection.Of(element);
         }
     }
 }
