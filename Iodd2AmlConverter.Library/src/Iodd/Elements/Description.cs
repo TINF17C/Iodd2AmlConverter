@@ -15,13 +15,14 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             TextId = element.GetAttributeValue("textId");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
-            // TODO: Resolve TextId from ExternalTextCollection
-            return new AmlDescription
+            var element = new AmlDescription
             {
                 Content = TextId
             };
+            
+            return AmlCollection.Of(element);
         }
         
     }

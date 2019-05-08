@@ -91,7 +91,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             DeviceVariantCollection.Deserialize(element.SubElement("DeviceVariantCollection"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -108,7 +108,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("DeviceName", "xs:string", DeviceName));
             element.InternalElements.Add(ConstructVendorLogo());
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
         private InternalElement ConstructVendorLogo()

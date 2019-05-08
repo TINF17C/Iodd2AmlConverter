@@ -33,7 +33,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             ExternalTextCollection.Deserialize(element.SubElement("ExternalTextCollection"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var systemUnitClass = new SystemUnitClass();
             systemUnitClass.InternalElements.Add(ProfileHeader.ToAml() as InternalElement);
@@ -41,16 +41,16 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             
             var file = new CaexFile
             {
-                AdditionalInformation = DocumentInfo.ToAml() as AdditionalInformation,
+                AdditionalInformation = DocumentInfo.ToAml().First() as AdditionalInformation,
                 SystemUnitClassLib = new SystemUnitClassLib
                 {
                     SystemUnitClass = systemUnitClass
                 }
             };
 
-            file.InternalElements.Add(ExternalTextCollection.ToAml() as InternalElement);
+            file.InternalElements.AddRange(ExternalTextCollection.ToAml().Cast<InternalElement>());
             
-            return file;
+            return AmlCollection.Of(file);
         }
     }
 }

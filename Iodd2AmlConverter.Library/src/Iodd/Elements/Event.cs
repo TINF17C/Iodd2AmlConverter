@@ -22,11 +22,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Description = element.SubElement("Description").GetAttributeValue("textId");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
-            // TODO
+            // TODO:
             var test = new Attribute();
-            return test;
+            return AmlCollection.Of(test);
         }
     }
 }

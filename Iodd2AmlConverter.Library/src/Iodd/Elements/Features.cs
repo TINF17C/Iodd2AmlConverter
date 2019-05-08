@@ -57,7 +57,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             SupportedAccessLocks.Deserialize(element.SubElement("SupportedAccessLocks"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -74,7 +74,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 element.InternalElements.Add(accessLocksElement as InternalElement);
             }
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
         private static Attribute CreateAttribute(string name, string type, string value)

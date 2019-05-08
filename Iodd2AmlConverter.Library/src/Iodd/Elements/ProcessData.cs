@@ -55,7 +55,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Condition.Deserialize(element.SubElement("Condition"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -64,17 +64,17 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var processDataIn in ProcessDataIns)
             {
-                var amlElement = processDataIn.ToAml() as InternalElement;
+                var amlElement = processDataIn.ToAml().Cast<InternalElement>();
                 element.InternalElements.Add(amlElement);
             }
 
             if (Condition != null)
             {
-                var amlElement = Condition.ToAml() as InternalElement;
-                element.InternalElements.Add(amlElement);
+                var amlElement = Condition.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(amlElement);
             }
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
     }

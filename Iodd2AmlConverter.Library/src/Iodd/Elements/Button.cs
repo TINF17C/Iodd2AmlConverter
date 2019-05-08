@@ -20,7 +20,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 ActionStartedMessage = element.SubElement("ActionStartedMessage").GetAttributeValue("textId");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var button = new Attribute();
             button.Name = "Button";
@@ -41,7 +41,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             actionStartedMessage.Attributes.Add(actionStartedMessageSubelement);
             button.Attributes.Add(actionStartedMessage);
 
-            return button;
+            return AmlCollection.Of(button);
         }
     }
 }
