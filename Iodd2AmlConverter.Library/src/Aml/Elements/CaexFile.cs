@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Iodd2AmlConverter.Library.Aml
+namespace Iodd2AmlConverter.Library.Aml.Elements
 {
 
     public class CaexFile : AmlElement
@@ -9,6 +9,7 @@ namespace Iodd2AmlConverter.Library.Aml
 
         private const string XsiNamespace = "http://www.w3.org/2001/XMLSchema-instance";
         private const string NoNamespaceSchemaLocation = "CAEX_ClassModel_V2.15.xsd";
+        private const string CaexVersion = "2.15";
 
         public string SchemaVersion { get; set; }
 
@@ -33,8 +34,8 @@ namespace Iodd2AmlConverter.Library.Aml
                 new XAttribute(xsiNamespace + "noNamespaceSchemaLocation", NoNamespaceSchemaLocation)
             );
 
-            element.SetAttributeValue("SchemaVersion", 282828829292899.ToString());
-            element.SetAttributeValue("FileName", FileName);
+            element.SetAttributeValue("SchemaVersion", CaexVersion);
+            element.SetAttributeValue("FileName", FileName ?? string.Empty);
 
             if (AdditionalInformation != null)
             {
