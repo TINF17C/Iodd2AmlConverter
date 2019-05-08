@@ -1,6 +1,7 @@
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
+using Iodd2AmlConverter.Library.Aml.Elements;
 
 namespace Iodd2AmlConverter.Library.Iodd.DataTypes
 {
@@ -30,7 +31,7 @@ namespace Iodd2AmlConverter.Library.Iodd.DataTypes
         {
             return new Attribute
             {
-                Name = Id
+                Name = Id ?? string.Empty
             };
         }
         

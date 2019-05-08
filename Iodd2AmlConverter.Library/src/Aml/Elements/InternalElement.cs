@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Iodd2AmlConverter.Library.Iodd.Elements;
 
-namespace Iodd2AmlConverter.Library.Aml
+namespace Iodd2AmlConverter.Library.Aml.Elements
 {
 
     public class InternalElement : AmlElement
@@ -38,12 +37,6 @@ namespace Iodd2AmlConverter.Library.Aml
             element.SetAttributeValue("Name", Name);
             element.SetAttributeValue("ID", Id ?? Guid.NewGuid().ToString());
 
-            if (SupportedRoleClass != null)
-            {
-                var roleClassElement = SupportedRoleClass.Serialize();
-                element.Add(roleClassElement);
-            }
-
             foreach (var attribute in Attributes)
             {
                 var attributeElement = attribute.Serialize();
@@ -60,6 +53,12 @@ namespace Iodd2AmlConverter.Library.Aml
             {
                 var interfaceElement = externalInterface.Serialize();
                 element.Add(interfaceElement);
+            }
+            
+            if (SupportedRoleClass != null)
+            {
+                var roleClassElement = SupportedRoleClass.Serialize();
+                element.Add(roleClassElement);
             }
 
             if (AmlName != null)

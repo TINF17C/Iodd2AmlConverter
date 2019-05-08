@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
+using Iodd2AmlConverter.Library.Aml.Elements;
 using Iodd2AmlConverter.Library.Iodd.DataTypes;
-using Attribute = Iodd2AmlConverter.Library.Aml.Attribute;
+using Attribute = Iodd2AmlConverter.Library.Aml.Elements.Attribute;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
@@ -109,7 +110,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("accessRights", "xs:string", AccessRights ?? string.Empty));
 
             if (DataType != null)
-                element.Attributes.Add(DataType.ToAml() as Aml.Attribute);
+                element.Attributes.Add(DataType.ToAml() as Attribute);
 
             if (Name != null)
                 element.AmlName = new AmlName {Content = Name.TextId};
@@ -120,9 +121,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             return element;
         }
 
-        private static Aml.Attribute CreateAttribute(string name, string type, string value)
+        private static Attribute CreateAttribute(string name, string type, string value)
         {
-            return new Aml.Attribute
+            return new Attribute
             {
                 Name = name,
                 AttributeDataType = type,

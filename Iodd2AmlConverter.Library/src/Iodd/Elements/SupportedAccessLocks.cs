@@ -2,6 +2,8 @@ using System;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
+using Iodd2AmlConverter.Library.Aml.Elements;
+using Attribute = Iodd2AmlConverter.Library.Aml.Elements.Attribute;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
@@ -52,9 +54,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             return element;
         }
         
-        private static Aml.Attribute CreateAttribute(string name, bool value)
+        private static Attribute CreateAttribute(string name, bool value)
         {
-            return new Aml.Attribute
+            return new Attribute
             {
                 Name = name,
                 AttributeDataType = "xs:boolean",

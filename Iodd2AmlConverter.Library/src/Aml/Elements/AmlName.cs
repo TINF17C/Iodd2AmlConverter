@@ -1,7 +1,7 @@
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Helpers;
 
-namespace Iodd2AmlConverter.Library.Aml
+namespace Iodd2AmlConverter.Library.Aml.Elements
 {
 
     public class AmlName : AmlElement

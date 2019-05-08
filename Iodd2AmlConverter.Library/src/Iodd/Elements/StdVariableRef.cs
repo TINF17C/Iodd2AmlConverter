@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
-using Attribute = Iodd2AmlConverter.Library.Aml.Attribute;
+using Iodd2AmlConverter.Library.Aml.Elements;
+using Attribute = Iodd2AmlConverter.Library.Aml.Elements.Attribute;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
@@ -104,7 +105,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             if (DefaultValue != null)
             {
-                var defaultValue = new Aml.Attribute
+                var defaultValue = new Attribute
                 {
                     Name = "defaultValue",
                     AttributeDataType = "xs:integer",
@@ -117,7 +118,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 stdVariableRef.Attributes.Add(defaultValue);
             }
             
-            var fixedLengthRestriction = new Aml.Attribute
+            var fixedLengthRestriction = new Attribute
             {
                 Name = "fixedLengthRestriction",
                 AttributeDataType = "xs:integer",
@@ -127,7 +128,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 }
             };
 
-            var excludeFromDataStorage = new Aml.Attribute
+            var excludeFromDataStorage = new Attribute
             {
                 Name = "excludeFromDataStorage",
                 AttributeDataType = "xs:boolean",
@@ -145,7 +146,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var singleValueRef in SingleValueRefs)
                 {
                     var amlElement = singleValueRef.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Aml.Attribute);
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
                 }
             }
 
@@ -154,7 +155,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var singleValue in SingleValues)
                 {
                     var amlElement = singleValue.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Aml.Attribute);
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
                 }
             }
 
@@ -163,12 +164,12 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 foreach (var valueRange in ValueRanges)
                 {
                     var amlElement = valueRange.ToAml();
-                    stdVariableRef.Attributes.Add(amlElement as Aml.Attribute);
+                    stdVariableRef.Attributes.Add(amlElement as Attribute);
                 }
             }
 
             if (RecordItemRef != null)
-                stdVariableRef.Attributes.Add(RecordItemRef.ToAml() as Aml.Attribute);
+                stdVariableRef.Attributes.Add(RecordItemRef.ToAml() as Attribute);
 
             return stdVariableRef;
         }

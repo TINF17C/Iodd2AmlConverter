@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace Iodd2AmlConverter.Library.Aml
+namespace Iodd2AmlConverter.Library.Aml.Elements
 {
 
     public class SupportedRoleClass : AmlElement
