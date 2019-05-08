@@ -7,7 +7,13 @@ using Iodd2AmlConverter.Library;
 
 namespace Iodd2AmlConverter
 {
-
+    [Verb("package", HelpText = "Creates an AMLX-package out of an IODD file and its corresponding files (e.g. an icon)")]
+    public class PackageOptions
+    {
+        [Option('f', "file", IsRequired = true, HelpText = "The IODD file to convert.")]
+        public string File { get; set; }
+    }
+    
     [Verb("convert", HelpText = "Converts an IODD file to an AML file.")]
     public class ConvertOptions
     {
@@ -114,7 +120,46 @@ namespace Iodd2AmlConverter
                 return;
             }
         }
+        
+        private static void OnPackageOptionsParsed(PackageOptions options)
+        {
+            HasParsedArgs = true;
+            if (!File.Exists(options.File))
+            {
+                Console.WriteLine($"The file {options.File} does not exist.");
+                return;
+            }
 
+            var fileText = ReadFile(options.File);
+            string amlRoot;
+            var outputFile = ConstructOutputFilePath(options.File);
+            try
+            {
+                amlRoot = ConversionHandler.Convert(fileText, outputFile);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An error occurred during conversion. The file has probably an invalid format.");
+                return;
+            }
+
+            try
+            {
+                if (!ShouldOverride(outputFile))
+                    return;
+
+                File.WriteAllText(outputFile, amlRoot);
+            }
+            catch (IOException)
+            {
+                Console.WriteLine(
+                    "Unable to write output file. Maybe you are missing permissions or the file is opened in another software");
+                return;
+            }
+
+            var packageHandler = new PackageHandler();
+            packageHandler.CreatePackage(options.File, outputFile);
+        }
 
         public static void Main(string[] args)
         {
@@ -122,8 +167,9 @@ namespace Iodd2AmlConverter
             Console.WriteLine("For help use the --help flag!" + Environment.NewLine);
 
             new CommandLineParser()
-                .Parse(args, typeof(ConvertOptions))
-                .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
+                .Parse(args, typeof(ConvertOptions), typeof(PackageOptions))
+                .WithParsed<ConvertOptions>(OnConvertOptionsParsed)
+                .WithParsed<PackageOptions>(OnPackageOptionsParsed);
 
             if (HasParsedArgs && args.Length > 0)
                 return;
