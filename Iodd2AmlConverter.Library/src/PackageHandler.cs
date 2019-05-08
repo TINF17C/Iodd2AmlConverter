@@ -17,13 +17,27 @@ namespace Iodd2AmlConverter.Library
         {
             PathsToImages = new List<string>();
         }
+
+        private static string CreateAmlxPackageName(string ioddPath)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(ioddPath);
+            var targetDir = Directory.GetParent(ioddPath).FullName;
+
+            return Path.Combine(targetDir, fileName + ".amlx");
+        }
+        
         public void CreatePackage(string inputPath, string outputPath)
         {
             PathToIodd = inputPath;
             PathToAml = outputPath;
             var pathToSourceFolder = Directory.GetParent(inputPath);
+            var pathToAmlxPackage = CreateAmlxPackageName(PathToIodd);
+            
             var files = pathToSourceFolder.GetFiles();
 
+            if(File.Exists(pathToAmlxPackage))
+                File.Delete(pathToAmlxPackage);
+            
             foreach (var file in files)
             {
                 if (file.Extension.Contains("jpeg") || file.Extension.Contains("jpg") || file.Extension.Contains("png"))
@@ -32,7 +46,7 @@ namespace Iodd2AmlConverter.Library
                 }
             }
             
-            using(var container = new AutomationMLContainer(@"C:\Users\ya6sc9\Downloads\Balluff-BNI_IOL-302-000-K006\Test.amlx"))
+            using(var container = new AutomationMLContainer(pathToAmlxPackage))
             {
                 var root = container.AddRoot(PathToAml, new Uri("/" + Path.GetFileName(PathToAml), UriKind.RelativeOrAbsolute));
                 container.AddCAEXSchema(Assembly.GetExecutingAssembly().GetManifestResourceStream("Iodd2AmlConverter.Library.Resources.CAEX_ClassModel_V2.15.xsd"), new Uri("/CAEX_ClassModel_V2.15.xsd", UriKind.RelativeOrAbsolute));
