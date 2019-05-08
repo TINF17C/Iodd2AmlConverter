@@ -31,7 +31,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Name.Deserialize(element.SubElement("Name"));
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new System.NotImplementedException();
         }

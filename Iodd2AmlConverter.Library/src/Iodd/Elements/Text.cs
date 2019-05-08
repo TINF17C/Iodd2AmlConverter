@@ -22,9 +22,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Value = element.GetAttributeValue("value");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
-            return new Attribute
+            var attribute = new Attribute
             {
                 Name = Id,
                 Value = new Value
@@ -32,6 +32,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                     Content = Value
                 }
             };
+            return AmlCollection.Of(attribute);
         }
     }
 }

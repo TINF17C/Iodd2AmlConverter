@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
@@ -38,7 +39,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             }
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var element = new InternalElement
             {
@@ -48,17 +49,17 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             foreach (var variable in Variables)
             {
-                var amlElement = variable.ToAml() as InternalElement;
-                element.InternalElements.Add(amlElement);
+                var amlElement = variable.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(amlElement);
             }
 
             foreach (var variableRef in StdVariableRefs)
             {
-                var amlElement = variableRef.ToAml() as InternalElement;
-                element.InternalElements.Add(amlElement);
+                var amlElement = variableRef.ToAml().Cast<InternalElement>();
+                element.InternalElements.AddRange(amlElement);
             }
 
-            return element;
+            return AmlCollection.Of(element);
         }
 
         IEnumerator<StdVariableRef> IEnumerable<StdVariableRef>.GetEnumerator()

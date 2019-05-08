@@ -34,7 +34,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             // Do nothing
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var internalElement = new InternalElement
             {
@@ -70,7 +70,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 }
             });
 
-            return internalElement;
+            return AmlCollection.Of(internalElement);
         }
 
     }

@@ -11,13 +11,13 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             var internalElement = new InternalElement();
             internalElement.Name = "UserInterface";
             internalElement.Id = "UserInterface";
 
-            return internalElement;
+            return AmlCollection.Of(internalElement);
         }
     }
 }

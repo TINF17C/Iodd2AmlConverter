@@ -21,7 +21,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             Value = element.GetAttributeValue("value");
         }
 
-        public override AmlElement ToAml()
+        public override AmlCollection ToAml()
         {
             throw new System.NotImplementedException();
         }
