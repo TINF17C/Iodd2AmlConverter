@@ -1,12 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 using Iodd2AmlConverter.Cli;
 using Iodd2AmlConverter.Cli.Attributes;
 using Iodd2AmlConverter.Cli.Extensions;
-using Iodd2AmlConverter.Library.Aml.Elements;
-using Iodd2AmlConverter.Library.Iodd.Elements;
+using Iodd2AmlConverter.Library;
 
 namespace Iodd2AmlConverter
 {
@@ -50,7 +47,7 @@ namespace Iodd2AmlConverter
             return shouldOverride;
         }
 
-        private static bool IsDragAndDrop { get; set; }
+        private static bool HasParsedArgs { get; set; }
 
         private static string ReadFile(string path)
         {
@@ -68,7 +65,7 @@ namespace Iodd2AmlConverter
 
             return fileText;
         }
-        
+
         private static string ConstructOutputFilePath(string path)
         {
             var fileName = Path.GetFileNameWithoutExtension(path);
@@ -76,14 +73,13 @@ namespace Iodd2AmlConverter
 
             return Path.Combine(targetDir, fileName + ".aml");
         }
-        
+
         private static void OnConvertOptionsParsed(ConvertOptions options)
         {
+            HasParsedArgs = true;
             if (!File.Exists(options.File))
             {
-                IsDragAndDrop = true;
                 Console.WriteLine($"The file {options.File} does not exist.");
-                
                 return;
             }
 
@@ -93,7 +89,7 @@ namespace Iodd2AmlConverter
             var outputFile = options.Output;
             if (string.IsNullOrWhiteSpace(outputFile))
                 outputFile = ConstructOutputFilePath(options.File);
-            
+
             try
             {
                 amlRoot = ConversionHandler.Convert(fileText, outputFile);
@@ -119,7 +115,6 @@ namespace Iodd2AmlConverter
             }
         }
 
-        
 
         public static void Main(string[] args)
         {
@@ -130,23 +125,23 @@ namespace Iodd2AmlConverter
                 .Parse(args, typeof(ConvertOptions))
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed);
 
-            if (!IsDragAndDrop)
+            if (HasParsedArgs && args.Length > 0)
                 return;
-
-            var path = args[1];
+            
+            var path = args[0];
             if (!File.Exists(path))
             {
                 Console.WriteLine($"The file {path} does not exist.");
                 return;
             }
-            
+
             var outputFile = ConstructOutputFilePath(path);
             if (!ShouldOverride(outputFile))
                 return;
 
             var fileText = ReadFile(path);
             var outputXml = ConversionHandler.Convert(fileText, outputFile);
-            
+
             File.WriteAllText(outputFile, outputXml);
         }
 
