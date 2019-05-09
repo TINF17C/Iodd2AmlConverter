@@ -176,7 +176,7 @@ namespace Iodd2AmlConverter
                 .WithParsed<ConvertOptions>(OnConvertOptionsParsed)
                 .WithParsed<PackageOptions>(OnPackageOptionsParsed);
 
-            if (HasParsedArgs && args.Length > 0)
+            if (HasParsedArgs || args.Length < 1)
                 return;
             
             var path = args[0];
