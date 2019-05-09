@@ -19,8 +19,8 @@ namespace Iodd2AmlConverter.Library
                 device.Deserialize(root);
 
                 var amlCollection = device.ToAml();
-                var caexFile = amlCollection.First() as CaexFile;
-                if (caexFile == null)
+                
+                if (!(amlCollection.First() is CaexFile caexFile))
                     return null;
 
                 caexFile.FileName = Path.GetFileName(filePath);

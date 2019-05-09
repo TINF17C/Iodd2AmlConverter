@@ -2,7 +2,7 @@ using System;
 using Iodd2AmlConverter.Cli.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMLRider.Cli.Test
+namespace Iodd2AmlConverter.Cli.Test
 {
     
     [TestClass]

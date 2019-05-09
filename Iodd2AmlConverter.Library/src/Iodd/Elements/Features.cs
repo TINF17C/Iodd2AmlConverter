@@ -69,11 +69,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             element.Attributes.Add(CreateAttribute("blockParameter", "xs:boolean", BlockParameter.ToString()));
             element.Attributes.Add(CreateAttribute("dataStorage", "xs:boolean", DataStorage.ToString()));
 
-            if (SupportedAccessLocks != null)
-            {
-                var accessLocksElement = SupportedAccessLocks.ToAml().Cast<InternalElement>();
-                element.InternalElements.AddRange(accessLocksElement);
-            }
+            if (SupportedAccessLocks == null) 
+                return AmlCollection.Of(element);
+            
+            var accessLocksElement = SupportedAccessLocks.ToAml().Cast<InternalElement>();
+            element.InternalElements.AddRange(accessLocksElement);
 
             return AmlCollection.Of(element);
         }

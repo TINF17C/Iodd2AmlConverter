@@ -57,11 +57,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 DataTypeRefs.Add(dataTypeRef);
             }
 
-            if (element.SubElement("Name") != null)
-            {
-                Name = new Name();
-                Name.Deserialize(element.SubElement("Name"));
-            }
+            if (element.SubElement("Name") == null) 
+                return;
+            
+            Name = new Name();
+            Name.Deserialize(element.SubElement("Name"));
         }
 
         public override AmlCollection ToAml()

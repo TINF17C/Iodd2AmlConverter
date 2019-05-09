@@ -58,12 +58,12 @@ namespace Iodd2AmlConverter.Library.Aml.Elements
                 var roleClassElement = SupportedRoleClass.Serialize();
                 element.Add(roleClassElement);
             }
+
+            if (AmlDescription == null) 
+                return element;
             
-            if (AmlDescription != null)
-            {
-                var descriptionElement = AmlDescription.Serialize();
-                element.Add(descriptionElement);
-            }
+            var descriptionElement = AmlDescription.Serialize();
+            element.Add(descriptionElement);
 
             return element;
         }

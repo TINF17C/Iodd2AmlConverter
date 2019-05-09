@@ -31,11 +31,11 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Configs.Add(config);
             }
 
-            if (element.SubElement("Config7") != null)
-            {
-                Config7 = new Config7();
-                Config7.Deserialize(element.SubElement("Config7"));
-            }
+            if (element.SubElement("Config7") == null) 
+                return;
+            
+            Config7 = new Config7();
+            Config7.Deserialize(element.SubElement("Config7"));
         }
 
         public override AmlCollection ToAml()

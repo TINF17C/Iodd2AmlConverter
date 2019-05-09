@@ -8,8 +8,10 @@ namespace Iodd2AmlConverter.Library.Iodd.DataTypes
 {
     public class ComplexDataType : DataType
     {
-        public int Id { get; set; }
+        public new int Id { get; set; }
+        
         public bool SubindexAccessSupported { get; set; }
+
         public override void Deserialize(XElement element)
         {
             Id = int.Parse(element.GetAttributeValue("id"));
