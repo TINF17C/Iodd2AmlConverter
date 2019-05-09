@@ -14,8 +14,4 @@
       <None Remove="Resources\AvengersTheme.mp3" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Include="Resources\AvengersTheme.mp3" />
-    </ItemGroup>
-
 </Project>
