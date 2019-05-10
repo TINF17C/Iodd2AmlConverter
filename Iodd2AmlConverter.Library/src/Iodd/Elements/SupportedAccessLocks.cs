@@ -44,10 +44,10 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Name = "SupportedAccessLocks"
             };
             
-            element.Attributes.Add(CreateAttribute("parameter", Parameter));
-            element.Attributes.Add(CreateAttribute("dataStorage", DataStorage));
-            element.Attributes.Add(CreateAttribute("localUserInterface", LocalUserInterface));
-            element.Attributes.Add(CreateAttribute("localParameterization", LocalParameterization));
+            element.Attributes.Add(CreateAttribute("Parameter", Parameter));
+            element.Attributes.Add(CreateAttribute("DataStorage", DataStorage));
+            element.Attributes.Add(CreateAttribute("LocalUserInterface", LocalUserInterface));
+            element.Attributes.Add(CreateAttribute("LocalParameterization", LocalParameterization));
 
             return AmlCollection.Of(element);
         }

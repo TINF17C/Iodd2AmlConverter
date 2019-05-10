@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Iodd2AmlConverter.Library.Aml
 {
-
     public class AmlCollection : IEnumerable<AmlElement>
     {
-
         private List<AmlElement> AmlElements { get; }
 
         public AmlCollection()
@@ -52,6 +50,10 @@ namespace Iodd2AmlConverter.Library.Aml
             return collection;
         }
 
+        public static AmlCollection Emtpy()
+        {
+            return new AmlCollection();
+        }
+        
     }
-
 }

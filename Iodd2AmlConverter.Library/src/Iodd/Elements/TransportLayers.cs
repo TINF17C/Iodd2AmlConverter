@@ -14,7 +14,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            throw new NotImplementedException();
+            return AmlCollection.Emtpy();
         }
     }
 }

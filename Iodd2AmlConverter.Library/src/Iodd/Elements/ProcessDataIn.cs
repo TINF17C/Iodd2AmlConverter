@@ -73,7 +73,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             element.Attributes.Add(new Attribute
             {
-                Name = "bitLength",
+                Name = "BitLength",
                 AttributeDataType = "xs:integer",
                 Value = new Value
                 {

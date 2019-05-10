@@ -28,6 +28,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                     Content = Value
                 }
             };
+            
             return AmlCollection.Of(attribute);
         }
     }

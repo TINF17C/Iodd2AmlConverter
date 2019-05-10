@@ -47,7 +47,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Name = "IODD 1.1",
                 Attribute = new Attribute
                 {
-                    Name = "refURI",
+                    Name = "RefURI",
                     AttributeDataType = "xs:anyURI",
                     Value = new Value
                     {
@@ -61,7 +61,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Name = "IODD 1.0.1",
                 Attribute = new Attribute
                 {
-                    Name = "refURI",
+                    Name = "RefURI",
                     AttributeDataType = "xs:anyURI",
                     Value = new Value
                     {

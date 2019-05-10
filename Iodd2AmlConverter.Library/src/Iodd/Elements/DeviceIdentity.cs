@@ -107,9 +107,9 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Id = "DeviceIdentity"
             };
 
-            element.Attributes.Add(CreateAttribute("vendorId", "xs:integer", VendorId.ToString()));
-            element.Attributes.Add(CreateAttribute("vendorName", "xs:string", VendorName));
-            element.Attributes.Add(CreateAttribute("deviceId", "xs:integer", DeviceId));
+            element.Attributes.Add(CreateAttribute("VendorId", "xs:integer", VendorId.ToString()));
+            element.Attributes.Add(CreateAttribute("VendorName", "xs:string", VendorName));
+            element.Attributes.Add(CreateAttribute("DeviceId", "xs:integer", DeviceId));
             element.Attributes.Add(CreateAttribute("VendorText", "xs:string", VendorText));
             element.Attributes.Add(CreateAttribute("VendorUrl", "xs:anyURI", VendorUrl));
             element.Attributes.Add(CreateAttribute("DeviceFamily", "xs:string", DeviceFamily));
@@ -135,7 +135,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 RefBaseClassPath = "AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector",
                 Attribute = new Attribute
                 {
-                    Name = "refURI",
+                    Name = "RefURI",
                     AttributeDataType = "xs:anyURI",
                     Value = new Value
                     {

@@ -103,8 +103,8 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
                 Name = Id
             };
 
-            element.Attributes.Add(CreateAttribute("index", "xs:integer", Index.ToString()));
-            element.Attributes.Add(CreateAttribute("accessRights", "xs:string", AccessRights ?? string.Empty));
+            element.Attributes.Add(CreateAttribute("Index", "xs:integer", Index.ToString()));
+            element.Attributes.Add(CreateAttribute("AccessRights", "xs:string", AccessRights ?? string.Empty));
             element.Attributes.Add(CreateAttribute(Name?.TextId ?? string.Empty, "xs:string", null));
             element.Attributes.Add(CreateAttribute("Description", "xs:string", Description?.TextId ?? string.Empty));
 

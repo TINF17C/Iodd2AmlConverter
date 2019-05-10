@@ -106,7 +106,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             {
                 var defaultValue = new Attribute
                 {
-                    Name = "defaultValue",
+                    Name = "DefaultValue",
                     AttributeDataType = "xs:integer",
                     Value = new Value
                     {
@@ -119,7 +119,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
             
             var fixedLengthRestriction = new Attribute
             {
-                Name = "fixedLengthRestriction",
+                Name = "FixedLengthRestriction",
                 AttributeDataType = "xs:integer",
                 Value = new Value
                 {
@@ -129,7 +129,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
             var excludeFromDataStorage = new Attribute
             {
-                Name = "excludeFromDataStorage",
+                Name = "ExcludeFromDataStorage",
                 AttributeDataType = "xs:boolean",
                 Value = new Value
                 {
