@@ -2,7 +2,7 @@ using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Iodd.Elements;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Iodd2AmlConverter.Library.Test
+namespace Iodd2AmlConverter.Library.Test.Iodd
 {
 
     [TestClass]

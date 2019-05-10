@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Xml.Linq;
 using Iodd2AmlConverter.Library.Aml;
@@ -25,7 +26,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
     

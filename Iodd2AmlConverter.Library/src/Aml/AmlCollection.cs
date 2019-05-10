@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Iodd2AmlConverter.Library.Aml.Elements;
 
 namespace Iodd2AmlConverter.Library.Aml
 {

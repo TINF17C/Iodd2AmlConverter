@@ -1,9 +1,7 @@
-using System;
 using System.Xml.Linq;
-using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
 using Iodd2AmlConverter.Library.Aml.Elements;
-using Attribute = Iodd2AmlConverter.Library.Aml.Elements.Attribute;
+using Iodd2AmlConverter.Library.Extensions;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {

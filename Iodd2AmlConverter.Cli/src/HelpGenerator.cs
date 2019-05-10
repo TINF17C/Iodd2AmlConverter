@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Iodd2AmlConverter.Cli.Extensions;
 using Iodd2AmlConverter.Cli.Attributes;
 using Iodd2AmlConverter.Cli.Core;
+using Iodd2AmlConverter.Cli.Extensions;
 
 namespace Iodd2AmlConverter.Cli
 {

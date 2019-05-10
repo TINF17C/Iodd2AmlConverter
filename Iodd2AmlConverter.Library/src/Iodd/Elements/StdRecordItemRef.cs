@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Aml;
+using Iodd2AmlConverter.Library.Extensions;
 
 namespace Iodd2AmlConverter.Library.Iodd.Elements
 {
@@ -71,7 +72,7 @@ namespace Iodd2AmlConverter.Library.Iodd.Elements
 
         public override AmlCollection ToAml()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
         
     }

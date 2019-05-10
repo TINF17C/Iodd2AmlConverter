@@ -4,7 +4,6 @@ using Iodd2AmlConverter.Library.Aml.Elements;
 using Iodd2AmlConverter.Library.Extensions;
 using Iodd2AmlConverter.Library.Iodd.Elements;
 
-
 namespace Iodd2AmlConverter.Library.Iodd.DataTypes
 {
 

@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
-using Iodd2AmlConverter.Cli.Extensions;
 using Iodd2AmlConverter.Cli.Attributes;
 using Iodd2AmlConverter.Cli.Core;
+using Iodd2AmlConverter.Cli.Extensions;
 using Iodd2AmlConverter.Cli.Result;
 
 namespace Iodd2AmlConverter.Cli
